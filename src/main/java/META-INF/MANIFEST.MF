@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: demo.tcyeee.SimpleProvideUserApplication
+Main-Class: demo.tcyeee.BaseApplication
 

@@ -106,10 +106,10 @@ public class LoginController {
         return creatJsonResponse(resut);
     }
 
-    //
-    @GetMapping("test")
+    // 用于测试
+    @RequestMapping("test")
     public String test() {
-        return creatJsonResponse(loginService.login(null, null));
+        return creatJsonResponse("看到这个说明你连接成功了");
     }
 
 }

@@ -10,9 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2018-11-29
  */
 @SpringBootApplication
-public class SimpleProvideUserApplication {
+public class BaseApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SimpleProvideUserApplication.class, args);
+        SpringApplication.run(BaseApplication.class, args);
     }
 
 }
