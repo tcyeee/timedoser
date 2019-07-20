@@ -13,7 +13,7 @@ import java.util.Random;
  */
 
 @SuppressWarnings("unused")
-public class CheckImageUtil {
+public class ImageChenkUtil {
     private static final String CHAR_RANGE = "ABCDEFGHJKMNPQRSTUVWXY023456789";
     private static final int SIZE = 4;
     private static final int LINES = 6;

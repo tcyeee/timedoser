@@ -1,13 +1,17 @@
 package demo.tcyeee.utils;
 
 import demo.tcyeee.entity.base.TokenDetail;
+import demo.tcyeee.entity.vo.BaseInfoVo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
@@ -147,5 +151,20 @@ public class TokenUtils {
      */
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
+    }
+
+
+    /**
+     * 获取当前登录人信息
+     *
+     * @return userInfo
+     */
+    @SuppressWarnings("all")
+    public static BaseInfoVo userInfo() {
+        //获取到当前线程绑定的请求对象
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        //已经拿到session,就可以拿到session中保存的用户信息了。
+        Object userInfo = request.getSession().getAttribute("userInfo");
+        return userInfo == null ? null : (BaseInfoVo) userInfo;
     }
 }

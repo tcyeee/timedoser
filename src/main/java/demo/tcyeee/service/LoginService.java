@@ -1,6 +1,7 @@
 package demo.tcyeee.service;
 
 import demo.tcyeee.entity.po.BaseUser;
+import demo.tcyeee.entity.vo.LoginInfoVo;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -21,4 +22,6 @@ public interface LoginService {
      * @return status
      */
     Map<String, String> login(BaseUser loginUser, HttpSession session);
+
+    LoginInfoVo getBaseInfo(String appCode, HttpSession session);
 }

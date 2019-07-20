@@ -2,7 +2,7 @@ package demo.tcyeee.config.handler;
 
 import demo.tcyeee.entity.base.ReturnInfo;
 import demo.tcyeee.entity.enums.base.ReturnCode;
-import demo.tcyeee.utils.BaseUtils;
+import demo.tcyeee.utils.ResponseUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class EntryPointUnauthorizedHandler implements AuthenticationEntryPoint {
         httpServletResponse.setContentType("application/json");
 
         ReturnInfo info = ReturnInfo.markCustom(false, ReturnCode.API_DISABLE.getCode(), ReturnCode.API_DISABLE.getMsg(), ERROR_MSG);
-        httpServletResponse.getWriter().println(BaseUtils.creatResponse(info));
+        httpServletResponse.getWriter().println(ResponseUtils.creatResponse(info));
 
         httpServletResponse.getWriter().flush();
     }

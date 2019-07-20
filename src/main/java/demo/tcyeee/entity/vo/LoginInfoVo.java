@@ -14,6 +14,4 @@ import lombok.Setter;
 public class LoginInfoVo extends BaseInfoVo {
 
     private String token;
-    private BaseInfoVo baseInfoVo;
-
 }

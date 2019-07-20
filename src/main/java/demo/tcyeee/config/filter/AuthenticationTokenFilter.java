@@ -7,7 +7,7 @@ import demo.tcyeee.entity.enums.base.ReturnCode;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
 import demo.tcyeee.service.BaseService;
-import demo.tcyeee.utils.BaseUtils;
+import demo.tcyeee.utils.ResponseUtils;
 import demo.tcyeee.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -82,7 +82,7 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
             if (!userDetails.isEnabled()) {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json;charset=UTF-8");
-                String info = BaseUtils.creatResponse(ReturnInfo.markCustom(false, ReturnCode.ACCOUNT_ERROR.getCode(), ReturnCode.ACCOUNT_ERROR.getCode(), ""));
+                String info = ResponseUtils.creatResponse(ReturnInfo.markCustom(false, ReturnCode.ACCOUNT_ERROR.getCode(), ReturnCode.ACCOUNT_ERROR.getCode(), ""));
                 response.getWriter().print(info);
                 return;
             }

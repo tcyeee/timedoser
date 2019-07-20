@@ -1,6 +1,6 @@
 package demo.tcyeee.entity.po;
 
-import demo.tcyeee.entity.vo.BaseInfoVo;
+import demo.tcyeee.utils.BaseUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -31,44 +31,67 @@ public class BaseUser {
     @Column(name = "openid", unique = true, length = 200)
     private String openid;
 
-    /** #{@link enable} 是否可用 默认为1:可用*/
-    @Column(name = "enable", nullable = false, length = 11, columnDefinition = "int(4) DEFAULT 1")
+    /** #{@link enableTypeEnum} 是否可用 默认为1*/
+    @Column(name = "enable", nullable = false, columnDefinition = "int(4) DEFAULT 1")
     private Integer enable;
 
     /** 手机号 */
-    @Column(name = "mobilephone", unique = true, nullable = false, length = 12)
+    @Column(name = "mobilephone", unique = true, length = 12)
     private Integer mobilephone;
 
     /** 创建时间 */
     @Column(name = "createdate", columnDefinition = "datetime DEFAULT current_timestamp")
     private Date createdate;
 
+    /** #{@link accountTypeEnum} 用户类型 */
+    @Column(name = "account_type", nullable = false, columnDefinition = "int(4) DEFAULT 1")
+    private Integer accountType;
+
     private String username;            // 昵称
     private String password;            // 密码
     private String signature;           // 签名
-    private Integer userType;           // 用户类型
     private Date lastPasswordReset;     // 用户上次登录时间
 
     @Transient
     private String authoritiesString;   // 验证字段
 
 
-
-
-    public BaseUser creatBaseUser(BaseInfoVo vo) {
-        BaseUser baseUser = new BaseUser();
-        baseUser.setMobilephone(vo.getMobilephone());
-        baseUser.setPassword(vo.getPassword());
-        return baseUser;
-    }
-
+    /** 账户是否删除, 默认为1 */
     @Getter
     @AllArgsConstructor
-    public enum enable {
-        zero(0, "账号已经注销,现在不可用"),
-        one(1, "可以正常使用");
+    public enum enableTypeEnum {
+        defult(1, "可以正常使用"),
+        two(2, "账号已经注销,现在不可用");
 
-        private int enable;
+        private int type;
         private String remark;
+    }
+
+    /** 账户注册类型 */
+    @Getter
+    @AllArgsConstructor
+    public enum accountTypeEnum {
+        one(1, "小程序用户, 只有openid, 没有注册"),
+        two(2, "手机号注册用户");
+
+        private int type;
+        private String remark;
+    }
+
+    /**
+     * 微信首次登录通过appcode添加一条用户记录
+     *
+     * @param openid openId
+     * @return data
+     */
+    public static BaseUser creatBaseUserForOpenId(String openid) {
+        BaseUser result = new BaseUser();
+
+        result.setOpenid(openid);
+        result.setCreatedate(new Date());
+        result.setUserId(BaseUtils.getUuid());
+        result.setEnable(enableTypeEnum.defult.type);
+        result.setAccountType(accountTypeEnum.one.type);
+        return result;
     }
 }

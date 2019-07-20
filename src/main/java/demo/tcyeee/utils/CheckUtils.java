@@ -1,5 +1,7 @@
 package demo.tcyeee.utils;
 
+import io.micrometer.core.instrument.util.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,4 +60,16 @@ public final class CheckUtils {
     public static boolean isMobileNO(String mobiles) {
         return isTrue(PHONE_UNMBER_CHECK, mobiles);
     }
+
+
+    /**
+     * 验证手机号码是否合法
+     *
+     * @param appCode mobiles
+     * @return boolean （合法：true，不合法：false）
+     */
+    public static boolean checkAppCode(String appCode) {
+        return StringUtils.isNotBlank(appCode) && appCode.length() > 20;
+    }
+
 }

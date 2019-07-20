@@ -1,26 +1,23 @@
 package demo.tcyeee.controller;
 
-import demo.tcyeee.entity.base.FixedData;
 import demo.tcyeee.entity.enums.base.ReturnCode;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
-import demo.tcyeee.entity.vo.LoginInfoVo;
 import demo.tcyeee.service.BaseService;
 import demo.tcyeee.service.LoginService;
+import demo.tcyeee.utils.CheckUtils;
 import io.micrometer.core.instrument.util.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import java.util.Map;
-
-import static demo.tcyeee.utils.BaseUtils.creatErrResponse;
-import static demo.tcyeee.utils.BaseUtils.creatJsonResponse;
+import static demo.tcyeee.utils.ResponseUtils.creatErrResponse;
+import static demo.tcyeee.utils.ResponseUtils.creatJsonResponse;
 
 /**
  * @author tcyeee
@@ -73,6 +70,7 @@ public class LoginController {
 
     /**
      * [重要接口请勿修改]通过code获取所有基础信息
+     * 注意: 使用小程序是无需登录的
      * <p>
      * 1.baseInfo {@link BaseInfoVo}
      * 2.token {@link demo.tcyeee.config.filter.AuthenticationTokenFilter}
@@ -84,26 +82,10 @@ public class LoginController {
     public String getBaseInfo(String appCode, HttpSession session) {
 
         /* 数据校验:参数不可为空 */
-        if (StringUtils.isBlank(appCode)) {
+        if (!CheckUtils.checkAppCode(appCode)) {
             return creatErrResponse(ReturnCode.PARAMS_ERROR);
         }
-
-        LoginInfoVo resut = new LoginInfoVo();
-        BaseInfoVo baseInfo = baseService.getBaseInfo(appCode);
-        Map<String, String> login = loginService.login(new BaseUser().creatBaseUser(baseInfo), session);
-
-        /* 数据校验:登录信息不可为空的 */
-        if (login == null || login.get(tokenHeader) == null) {
-            return creatErrResponse(ReturnCode.SYSTEM_ERROR, FixedData.LOGIN_EXCEPTION);
-        }
-
-        // @JsonIgnore 注解对封装返回值无效,所以这里手动删除password
-        baseInfo.setPassword(null);
-
-        resut.setBaseInfoVo(baseInfo);
-        resut.setToken(login.get(tokenHeader));
-
-        return creatJsonResponse(resut);
+        return creatJsonResponse(loginService.getBaseInfo(appCode, session));
     }
 
     // 用于测试

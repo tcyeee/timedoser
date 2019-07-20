@@ -2,11 +2,11 @@ package demo.tcyeee.service.impl;
 
 import demo.tcyeee.dao.BaseUserDao;
 import demo.tcyeee.entity.base.WXCheck;
-import demo.tcyeee.utils.BaseUtils;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
 import demo.tcyeee.service.BaseService;
-import demo.tcyeee.utils.RestTemplateUtils;
+import demo.tcyeee.utils.TokenUtils;
+import demo.tcyeee.utils.WeiXinUtils;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.BeanUtils;
@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 public class BaseServiceImpl implements BaseService {
 
     @Resource
-    private RestTemplateUtils restTemplateUtils;
+    private WeiXinUtils weiXinUtils;
 
     @Resource
     private BaseUserDao userDao;
@@ -36,13 +36,13 @@ public class BaseServiceImpl implements BaseService {
      */
     @Override
     public String getOpenId(String appCode) {
-        WXCheck openId = restTemplateUtils.getOpenId(appCode);
+        WXCheck openId = weiXinUtils.getOpenId(appCode);
         return openId.getOpenid();
     }
 
     @Override
     public BaseInfoVo getuser() {
-        return BaseUtils.userInfo();
+        return TokenUtils.userInfo();
     }
 
     /**
@@ -54,7 +54,7 @@ public class BaseServiceImpl implements BaseService {
     @Override
     public BaseInfoVo getBaseInfo(String appCode) {
 
-        WXCheck wxCheck = restTemplateUtils.getOpenId(appCode);
+        WXCheck wxCheck = weiXinUtils.getOpenId(appCode);
         if (StringUtils.isBlank(wxCheck.getOpenid())) {
             return null;
         }

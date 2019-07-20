@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  */
 @Service
 @PropertySource("classpath:base.properties")
-public class RestTemplateUtils {
+public class WeiXinUtils {
 
     /* 小程序验证相关信息勿修改 */
     @Value("${appid}")
