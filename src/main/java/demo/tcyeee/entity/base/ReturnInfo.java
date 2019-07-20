@@ -1,6 +1,6 @@
 package demo.tcyeee.entity.base;
 
-import demo.tcyeee.entity.enums.base.ReturnCode;
+import demo.tcyeee.entity.enums.base.ReturnCodeList;
 import lombok.Data;
 
 /**
@@ -15,7 +15,7 @@ public class ReturnInfo {
     /** 是否成功 */
     private boolean success;
 
-    /** 返回码 {@link ReturnCode} */
+    /** 返回码 {@link ReturnCodeList.ReturnCode} */
     private String code;
 
     /** 返回信息 */
@@ -33,8 +33,8 @@ public class ReturnInfo {
     public static ReturnInfo markSuccess(Object data) {
         ReturnInfo returnInfo = new ReturnInfo();
         returnInfo.setSuccess(true);
-        returnInfo.setCode(ReturnCode.SUCCESS.getCode());
-        returnInfo.setMsg(ReturnCode.SUCCESS.getMsg());
+        returnInfo.setCode(ReturnCodeList.ReturnCode.SUCCESS.getCode());
+        returnInfo.setMsg(ReturnCodeList.ReturnCode.SUCCESS.getMsg());
         returnInfo.setData(data);
         return returnInfo;
     }
@@ -63,8 +63,8 @@ public class ReturnInfo {
     public static ReturnInfo markError() {
         ReturnInfo returnInfo = new ReturnInfo();
         returnInfo.setSuccess(false);
-        returnInfo.setCode(ReturnCode.FEAILED.getCode());
-        returnInfo.setMsg(ReturnCode.FEAILED.getMsg());
+        returnInfo.setCode(ReturnCodeList.ReturnCode.FEAILED.getCode());
+        returnInfo.setMsg(ReturnCodeList.ReturnCode.FEAILED.getMsg());
         returnInfo.setData(null);
         return returnInfo;
     }
@@ -75,7 +75,7 @@ public class ReturnInfo {
      * @param code 错误信息码
      * @return {@link ReturnInfo}
      */
-    public static ReturnInfo markError(ReturnCode code) {
+    public static ReturnInfo markError(ReturnCodeList.ReturnCode code) {
         ReturnInfo returnInfo = new ReturnInfo();
         returnInfo.setSuccess(false);
         returnInfo.setCode(code.getCode());
@@ -91,7 +91,7 @@ public class ReturnInfo {
      * @param msg  错误信息
      * @return {@link ReturnInfo}
      */
-    public static ReturnInfo markError(ReturnCode code, String msg) {
+    public static ReturnInfo markError(ReturnCodeList.ReturnCode code, String msg) {
         ReturnInfo returnInfo = new ReturnInfo();
         returnInfo.setSuccess(false);
         returnInfo.setCode(code.getCode());
@@ -108,8 +108,8 @@ public class ReturnInfo {
     public static ReturnInfo markSuccessButNoData() {
         ReturnInfo returnInfo = new ReturnInfo();
         returnInfo.setSuccess(true);
-        returnInfo.setCode(ReturnCode.NODATA.getCode());
-        returnInfo.setMsg(ReturnCode.NODATA.getMsg());
+        returnInfo.setCode(ReturnCodeList.ReturnCode.NODATA.getCode());
+        returnInfo.setMsg(ReturnCodeList.ReturnCode.NODATA.getMsg());
         returnInfo.setData(null);
         return returnInfo;
     }

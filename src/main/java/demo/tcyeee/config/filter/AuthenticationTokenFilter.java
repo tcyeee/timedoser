@@ -3,7 +3,7 @@ package demo.tcyeee.config.filter;
 import demo.tcyeee.dao.BaseUserDao;
 import demo.tcyeee.entity.base.ReturnInfo;
 import demo.tcyeee.entity.base.TokenDetail;
-import demo.tcyeee.entity.enums.base.ReturnCode;
+import demo.tcyeee.entity.enums.base.ReturnCodeList;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
 import demo.tcyeee.service.BaseService;
@@ -82,7 +82,7 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
             if (!userDetails.isEnabled()) {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json;charset=UTF-8");
-                String info = ResponseUtils.creatResponse(ReturnInfo.markCustom(false, ReturnCode.ACCOUNT_ERROR.getCode(), ReturnCode.ACCOUNT_ERROR.getCode(), ""));
+                String info = ResponseUtils.creatResponse(ReturnInfo.markCustom(false, ReturnCodeList.ACCOUNT_ERROR.getCode(), ReturnCodeList.ACCOUNT_ERROR.getCode(), ""));
                 response.getWriter().print(info);
                 return;
             }
