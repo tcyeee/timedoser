@@ -1,7 +1,6 @@
 package demo.tcyeee.config.handler;
 
 import demo.tcyeee.entity.base.ReturnInfo;
-import demo.tcyeee.entity.enums.base.ReturnCodeList;
 import demo.tcyeee.utils.ResponseUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -11,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static demo.tcyeee.entity.enums.base.ReturnCodeList.ReturnCode.SIGN_ERROR;
 
 /**
  * 未登录或无权限时触发操作
@@ -25,11 +26,11 @@ public class EntryPointUnauthorizedHandler implements AuthenticationEntryPoint {
     static private final String ERROR_MSG = "token无效";
 
     @Override
-    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("application/json");
 
-        ReturnInfo info = ReturnInfo.markCustom(false, ReturnCodeList.API_DISABLE.getCode(), ReturnCodeList.API_DISABLE.getMsg(), ERROR_MSG);
+        ReturnInfo info = ReturnInfo.markCustom(false, SIGN_ERROR.getCode(), SIGN_ERROR.getMsg(), ERROR_MSG);
         httpServletResponse.getWriter().println(ResponseUtils.creatResponse(info));
 
         httpServletResponse.getWriter().flush();

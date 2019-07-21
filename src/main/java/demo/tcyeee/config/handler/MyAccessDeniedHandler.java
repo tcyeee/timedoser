@@ -1,7 +1,6 @@
 package demo.tcyeee.config.handler;
 
 import demo.tcyeee.entity.base.ReturnInfo;
-import demo.tcyeee.entity.enums.base.ReturnCodeList;
 import demo.tcyeee.utils.ResponseUtils;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static demo.tcyeee.entity.enums.base.ReturnCodeList.ReturnCode.API_DISABLE;
 
 /**
  * 无权限访问时触发
@@ -30,7 +31,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("application/json");
 
-        ReturnInfo info = ReturnInfo.markCustom(false, ReturnCodeList.API_DISABLE.getCode(), ReturnCodeList.API_DISABLE.getMsg(), ERROR_MSG);
+        ReturnInfo info = ReturnInfo.markCustom(false, API_DISABLE.getCode(), API_DISABLE.getMsg(), ERROR_MSG);
         httpServletResponse.getWriter().println(ResponseUtils.creatResponse(info));
         httpServletResponse.getWriter().flush();
     }

@@ -4,6 +4,8 @@ import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
 import demo.tcyeee.service.BaseService;
 import demo.tcyeee.service.LoginService;
+import demo.tcyeee.utils.CheckUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.NotEmpty;
 
 import static demo.tcyeee.entity.enums.base.ReturnCodeList.PARAMS_ERROR_INFO;
 import static demo.tcyeee.entity.enums.base.ReturnCodeList.ReturnCode.PARAMS_ERROR;
@@ -36,6 +37,7 @@ public class LoginController {
     @Value("${token.header}")
     private String tokenHeader;
 
+
     /**
      * 通过小程序登录code获取openID
      * 1.登录ID,五分钟刷新,查询一次失效
@@ -44,7 +46,10 @@ public class LoginController {
      * @return openId
      */
     @GetMapping("getOpenId")
-    public String getOpenId(@NotEmpty(message = PARAMS_ERROR_INFO + "appCode") String appCode) {
+    public String getOpenId(String appCode) {
+        if (StringUtils.isBlank(appCode)) {
+            return creatErrResponse(PARAMS_ERROR);
+        }
         return creatJsonResponse(baseService.getOpenId(appCode));
     }
 
@@ -57,7 +62,7 @@ public class LoginController {
      * @return data
      */
     @PostMapping("login")
-    public String login(@NotEmpty(message = PARAMS_ERROR_INFO + "baseUser") BaseUser baseUser, HttpSession session) {
+    public String login(BaseUser baseUser, HttpSession session) {
         if (baseUser.getMobilephone() == null || baseUser.getMobilephone() == 0 || baseUser.getPassword() == null) {
             return creatErrResponse(PARAMS_ERROR);
         }
@@ -76,14 +81,21 @@ public class LoginController {
      * @return data
      */
     @GetMapping("getBaseInfo")
-    public String getBaseInfo(@NotEmpty(message = PARAMS_ERROR_INFO + "appCode") String appCode, HttpSession session) {
+    public String getBaseInfo(String appCode, HttpSession session) {
+
+        /* 数据校验:参数不可为空 */
+        if (!CheckUtils.checkAppCode(appCode)) {
+            return creatErrResponse(PARAMS_ERROR);
+        }
         return creatJsonResponse(loginService.getBaseInfo(appCode, session));
     }
 
     // 用于测试
     @RequestMapping("test")
-    public String test() {
-        return creatJsonResponse("看到这个说明你连接成功了");
+    public String test(String test) {
+        if (StringUtils.isBlank(test)) return creatErrResponse(PARAMS_ERROR, PARAMS_ERROR_INFO + "test");
+
+        return creatJsonResponse("看到这个说明你连接成功了" + test);
     }
 
 }

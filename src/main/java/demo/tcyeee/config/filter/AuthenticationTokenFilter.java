@@ -82,7 +82,7 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
             if (!userDetails.isEnabled()) {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json;charset=UTF-8");
-                String info = ResponseUtils.creatResponse(ReturnInfo.markCustom(false, ReturnCodeList.ACCOUNT_ERROR.getCode(), ReturnCodeList.ACCOUNT_ERROR.getCode(), ""));
+                String info = ResponseUtils.creatResponse(ReturnInfo.markCustom(false, ReturnCodeList.ReturnCode.ACCOUNT_ERROR.getCode(), ReturnCodeList.ReturnCode.ACCOUNT_ERROR.getCode(), ""));
                 response.getWriter().print(info);
                 return;
             }

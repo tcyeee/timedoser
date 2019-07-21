@@ -12,8 +12,7 @@ import lombok.Getter;
 public final class ReturnCodeList {
 
     /* 固定参数数据 */
-    public static final String PARAMS_ERROR_INFO = "此参数不可为空,请检查传入的字段:";
-
+    public static final String PARAMS_ERROR_INFO = "请检查传入的字段:";
 
 
     @Getter
