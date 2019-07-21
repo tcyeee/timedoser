@@ -27,8 +27,8 @@ public class VersionServiceImpl implements VersionService {
     @Override
     public VersionInfoVo queryVersionUpdate(String verison) {
         VersionInfoVo result = new VersionInfoVo();
-        result.setThisVersion(versionDetailDao.findByVerison(verison));
-        result.setVersionDetails(versionDetailDao.findAllByVerisonIsNotOrderByIdDesc(verison));
+        result.setThisVersion(versionDetailDao.findByVersion(verison));
+        result.setVersionDetails(versionDetailDao.findAllByVersionIsNotOrderByIdDesc(verison));
         return result;
     }
 }

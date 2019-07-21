@@ -35,8 +35,8 @@ public class VersionDetail {
     private String detail;
 
     /** 版本号 */
-    @Column(name = "verison", unique = true, length = 32)
-    private String verison;
+    @Column(name = "version", unique = true, length = 32)
+    private String version;
 
     /** 图片地址 */
     @Column(name = "img_url")

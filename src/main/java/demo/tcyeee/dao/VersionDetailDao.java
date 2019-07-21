@@ -20,7 +20,7 @@ public interface VersionDetailDao extends CrudRepository<VersionDetail, Long> {
      * @param version verison
      * @return data
      */
-    VersionDetail findByVerison(String version);
+    VersionDetail findByVersion(String version);
 
     /**
      * 查看其他版本信息
@@ -28,6 +28,6 @@ public interface VersionDetailDao extends CrudRepository<VersionDetail, Long> {
      * @param version verison
      * @return data
      */
-    List<VersionDetail> findAllByVerisonIsNotOrderByIdDesc(String version);
+    List<VersionDetail> findAllByVersionIsNotOrderByIdDesc(String version);
 
 }
