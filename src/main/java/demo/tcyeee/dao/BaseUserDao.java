@@ -44,6 +44,6 @@ public interface BaseUserDao extends CrudRepository<BaseUser, Long> {
      * @return data
      */
     @Deprecated
-    @Query(value = "select * from base_user where id =?1", nativeQuery = true)
+    @Query(value = "select * from time_doser.base_user where id =?1", nativeQuery = true)
     BaseUser findByUserId(String userId);
 }

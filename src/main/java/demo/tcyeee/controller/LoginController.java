@@ -95,7 +95,7 @@ public class LoginController {
     public String test(String test) {
         if (StringUtils.isBlank(test)) return creatErrResponse(PARAMS_ERROR, PARAMS_ERROR_INFO + "test");
 
-        return creatJsonResponse("看到这个说明你连接成功了" + test);
+        return creatJsonResponse("看到这个代表你成功了");
     }
 
 }

@@ -20,15 +20,27 @@ public class PageUtils {
     /**
      * 获取PageBean对象
      *
-     * @param request 请求对象
      * @return PageBean 分页对象
      */
-    public static PageBean getPageBean(HttpServletRequest request) {
-        String currentPage = request.getParameter(CURRENT_PAGE);
-        String pageSize = request.getParameter(PAGE_SIZE);
-
-        int start = currentPage != null ? Integer.valueOf(currentPage) : 1;
-        int limit = pageSize != null ? Integer.valueOf(pageSize) : 10;
-        return new PageBean(start, limit);
+    public static PageBean getPageBean(PageBean pageBean) {
+        int size = pageBean.getPageSize() != null ? pageBean.getPageSize() : 10;
+        int temp = pageBean.getCurrentPage() != null ? pageBean.getCurrentPage() : 1;
+        int start = (temp - 1) * size;
+        return new PageBean(start, size);
     }
+
+    /**
+     * 获取PageBean对象
+     *
+     * @param currentPage 当前页面
+     * @param pageSize    页面数量
+     * @return data
+     */
+    public static PageBean getPageBean(Integer currentPage, Integer pageSize) {
+
+        int size = pageSize != null ? pageSize : 10;
+        int start = currentPage != null ? (currentPage - 1) * size : 1;
+        return new PageBean(start, size);
+    }
+
 }

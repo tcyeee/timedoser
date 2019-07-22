@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "version_detail", schema = "demo_springCloud")
+@Table(name = "version_detail")
 public class VersionDetail {
 
 

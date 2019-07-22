@@ -16,7 +16,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "base_user", schema = "demo_springCloud")
+@Table(name = "base_user")
 public class BaseUser {
 
     @Id
@@ -48,6 +48,7 @@ public class BaseUser {
     private Integer accountType;
 
     private String username;            // 昵称
+    private String avatarUrl;           // 头像地址
     private String password;            // 密码
     private String signature;           // 签名
     private Date lastPasswordReset;     // 用户上次登录时间
@@ -72,7 +73,9 @@ public class BaseUser {
     @AllArgsConstructor
     public enum accountTypeEnum {
         one(1, "小程序用户, 只有openid, 没有注册"),
-        two(2, "手机号注册用户");
+        two(2, "手机号注册用户"),
+        author(99, "作者账户"),
+        Administrator(98, "管理员账户");
 
         private int type;
         private String remark;

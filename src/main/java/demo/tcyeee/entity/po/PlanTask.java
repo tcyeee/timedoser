@@ -1,8 +1,10 @@
 package demo.tcyeee.entity.po;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -18,7 +20,8 @@ import static demo.tcyeee.entity.enums.base.ReturnCodeList.PARAMS_ERROR_INFO;
  */
 @Data
 @Entity
-@Table(name = "plan_task", schema = "demo_springCloud")
+@Builder
+@Table(name = "plan_task")
 public class PlanTask {
 
     @Id
@@ -26,9 +29,7 @@ public class PlanTask {
     @Column(name = "id", unique = true, nullable = false, length = 32, updatable = false)
     private Integer id;
 
-    /**
-     * 用户id {@link BaseUser}
-     */
+    /** 用户id {@link BaseUser} */
     @Column(name = "user_id", nullable = false, length = 50, updatable = false)
     private String userId;
 
@@ -45,9 +46,7 @@ public class PlanTask {
     @Column(name = "createdate", columnDefinition = "datetime DEFAULT current_timestamp")
     private Date createdate;
 
-    /**
-     * 是否可用 默认为1 {@link enableTypeEnum}
-     */
+    /** 是否可用 默认为1 {@link enableTypeEnum} */
     @Column(name = "enable", nullable = false, columnDefinition = "int(4) DEFAULT 1")
     private Integer enable;
 
@@ -60,4 +59,7 @@ public class PlanTask {
         private int type;
         private String remark;
     }
+
+    @Tolerate
+    PlanTask() {}
 }

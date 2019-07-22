@@ -5,13 +5,12 @@ import demo.tcyeee.entity.base.TokenDetail;
 import demo.tcyeee.entity.base.WXCheck;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.LoginInfoVo;
-import demo.tcyeee.service.BaseService;
 import demo.tcyeee.service.LoginService;
-import demo.tcyeee.utils.WeiXinUtils;
 import demo.tcyeee.utils.TokenUtils;
+import demo.tcyeee.utils.WeiXinUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -87,6 +86,4 @@ public class LoginServiceImpl implements LoginService {
         }
         return null;
     }
-
-
 }

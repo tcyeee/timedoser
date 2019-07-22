@@ -38,7 +38,7 @@ public final class ResponseUtils {
      * @param count 返回数据的总条数
      * @return resultData
      */
-    public static String creatJsonResponse(Object data, int count) {
+    public static String creatJsonResponse(Object data, Long count) {
         Map<String, Object> resultData = new HashMap<>();
         resultData.put(DATA_KEY, data);
         resultData.put(COUNT_KEY, count);

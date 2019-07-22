@@ -13,5 +13,11 @@ import java.util.List;
 @Repository
 public interface PlanTaskDao extends CrudRepository<PlanTask, Long> {
 
+    /**
+     * 获取用户创建的所有任务
+     *
+     * @param userId 用户id
+     * @return data
+     */
     List<PlanTask> findAllByUserId(String userId);
 }

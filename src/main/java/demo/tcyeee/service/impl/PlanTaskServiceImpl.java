@@ -76,9 +76,7 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean delete(Integer taskId) {
-        PlanTask task = new PlanTask();
-        task.setId(taskId);
-
+        PlanTask task = PlanTask.builder().id(taskId).build();
         planTaskDao.delete(task);
         return true;
     }
