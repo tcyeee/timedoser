@@ -39,7 +39,7 @@ public class SuggestMessageController {
      */
     @RequestMapping("queryAllMessage")
     public String queryAllMessage(PageBean pageBean) {
-        SuggestMessageVo messageVo = suggestMessageService.findAll(currentPage, pageSize);
+        SuggestMessageVo messageVo = suggestMessageService.findAll(pageBean);
         long count = suggestMessageService.countAll();
         return creatJsonResponse(messageVo,count);
     }
