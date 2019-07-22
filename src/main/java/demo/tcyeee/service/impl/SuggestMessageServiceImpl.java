@@ -6,8 +6,7 @@ import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
 import demo.tcyeee.service.SuggestMessageService;
 import demo.tcyeee.utils.BaseUtils;
-import demo.tcyeee.utils.PageUtils;
-import org.springframework.data.domain.Pageable;
+import demo.tcyeee.utils.EntityUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,10 +41,9 @@ public class SuggestMessageServiceImpl implements SuggestMessageService {
      * @return data
      */
     @Override
-    public SuggestMessageVo findAll(PageBean pageBean) {
-        pageBean = PageUtils.getPageBean(pageBean);
+    public List<SuggestMessageVo> findAll(PageBean pageBean) {
         List<Object[]> objects = suggestMessageDao.queryMessageVo(pageBean.getCurrentPage(), pageBean.getPageSize());
-        return null;
+        return EntityUtils.castEntity(objects, SuggestMessageVo.class);
     }
 
     @Override

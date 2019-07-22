@@ -5,6 +5,8 @@ import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author huxiong
  * @date 2019-07-22 11:26
@@ -25,7 +27,7 @@ public interface SuggestMessageService {
      *
      * @return data
      */
-    SuggestMessageVo findAll(PageBean pageBean);
+    List<SuggestMessageVo> findAll(PageBean pageBean);
 
     /**
      * 统计所有留言条数

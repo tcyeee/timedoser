@@ -2,8 +2,6 @@ package demo.tcyeee.utils;
 
 import demo.tcyeee.entity.base.PageBean;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * 分页工具类
  *
@@ -39,7 +37,7 @@ public class PageUtils {
     public static PageBean getPageBean(Integer currentPage, Integer pageSize) {
 
         int size = pageSize != null ? pageSize : 10;
-        int start = currentPage != null ? (currentPage - 1) * size : 1;
+        int start = currentPage != null ? (currentPage - 1) * size : 0;
         return new PageBean(start, size);
     }
 

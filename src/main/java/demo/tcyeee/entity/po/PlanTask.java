@@ -61,5 +61,5 @@ public class PlanTask {
     }
 
     @Tolerate
-    PlanTask() {}
+    public PlanTask() {}
 }

@@ -16,7 +16,6 @@ import java.util.Date;
 @Table(name = "version_detail")
 public class VersionDetail {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false, length = 32, updatable = false)

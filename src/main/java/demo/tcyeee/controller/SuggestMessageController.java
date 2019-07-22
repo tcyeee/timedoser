@@ -5,11 +5,13 @@ import demo.tcyeee.entity.base.PageBean;
 import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
 import demo.tcyeee.service.SuggestMessageService;
+import demo.tcyeee.utils.PageUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 import static demo.tcyeee.entity.enums.base.ReturnCodeList.MESSAGE_ERROR_INFO;
 import static demo.tcyeee.entity.enums.base.ReturnCodeList.PARAMS_ERROR_INFO;
@@ -38,10 +40,11 @@ public class SuggestMessageController {
      * @return data
      */
     @RequestMapping("queryAllMessage")
-    public String queryAllMessage(PageBean pageBean) {
-        SuggestMessageVo messageVo = suggestMessageService.findAll(pageBean);
+    public String queryAllMessage(Integer currentPage, Integer pageSize) {
+        PageBean pageBean = PageUtils.getPageBean(currentPage, pageSize);
+        List<SuggestMessageVo> messageVo = suggestMessageService.findAll(pageBean);
         long count = suggestMessageService.countAll();
-        return creatJsonResponse(messageVo,count);
+        return creatJsonResponse(messageVo, count);
     }
 
 
