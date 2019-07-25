@@ -17,10 +17,10 @@ public interface SuggestMessageService {
     /**
      * 添加一条留言
      *
-     * @param message 添加的留言信息
+     * @param messageContents 添加的留言信息
      * @return data
      */
-    SuggestMessage addMessage(SuggestMessage message);
+    SuggestMessage addMessage(String messageContents);
 
     /**
      * 查看所有留言信息

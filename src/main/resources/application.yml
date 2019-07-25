@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: ${url}
+    url: ${url}?useUnicode=true&characterEncoding=UTF-8
     username: ${username}
     password: ${password}
     driver-class-name: ${driver}

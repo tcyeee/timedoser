@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static demo.tcyeee.entity.enums.base.ReturnCodeList.MESSAGE_ERROR_INFO;
-import static demo.tcyeee.entity.enums.base.ReturnCodeList.PARAMS_ERROR_INFO;
-import static demo.tcyeee.entity.enums.base.ReturnCodeList.ReturnCode.PARAMS_ERROR;
-import static demo.tcyeee.entity.enums.base.ReturnCodeList.ReturnCode.SUCCESS;
+import static demo.tcyeee.entity.enums.base.ReturnCodeList.*;
+import static demo.tcyeee.entity.enums.base.ReturnCodeList.ReturnCode.*;
 import static demo.tcyeee.utils.ResponseUtils.creatErrResponse;
 import static demo.tcyeee.utils.ResponseUtils.creatJsonResponse;
 
@@ -55,11 +53,10 @@ public class SuggestMessageController {
      * @return data
      */
     @RequestMapping("addMessage")
-    public String addMessage(SuggestMessage message) {
-        if (message == null || StringUtils.isBlank(message.getContext())) {
-            return creatErrResponse(PARAMS_ERROR, MESSAGE_ERROR_INFO);
-        }
-        return creatJsonResponse(suggestMessageService.addMessage(message));
+    public String addMessage(String message) {
+        if (StringUtils.isBlank(message)) return creatErrResponse(PARAMS_ERROR, MESSAGE_ERROR_INFO);
+        SuggestMessage addMessage = suggestMessageService.addMessage(message);
+        return addMessage == null ? creatErrResponse(SYSTEM_ERROR) : creatJsonResponse(addMessage);
     }
 
 

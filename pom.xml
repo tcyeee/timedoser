@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
     <artifactId>base-project</artifactId>
-    <version>${version}</version>
+    <version>1.0.14</version>
     <packaging>jar</packaging>
     <name>base-project</name>
     <description>用户微服务</description>
@@ -105,13 +105,6 @@
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>1.8</version>
-        </dependency>
-
-        <!-- mybatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.2</version>
         </dependency>
 
         <dependency>
