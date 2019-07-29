@@ -53,9 +53,9 @@ public class SuggestMessageController {
      * @return data
      */
     @RequestMapping("addMessage")
-    public String addMessage(String message) {
+    public String addMessage(String userId, String message) {
         if (StringUtils.isBlank(message)) return creatErrResponse(PARAMS_ERROR, MESSAGE_ERROR_INFO);
-        SuggestMessage addMessage = suggestMessageService.addMessage(message);
+        SuggestMessage addMessage = suggestMessageService.addMessage(message,userId);
         return addMessage == null ? creatErrResponse(SYSTEM_ERROR) : creatJsonResponse(addMessage);
     }
 
