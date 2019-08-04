@@ -12,6 +12,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LoginInfoVo extends BaseInfoVo {
-
     private String token;
 }

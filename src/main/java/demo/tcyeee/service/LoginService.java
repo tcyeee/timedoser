@@ -2,9 +2,9 @@ package demo.tcyeee.service;
 
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.LoginInfoVo;
+import demo.tcyeee.entity.vo.WeixinUserInfoVo;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -18,10 +18,18 @@ public interface LoginService {
      * 登录接口
      *
      * @param loginUser 账号密码
-     * @param session   session
      * @return status
      */
-    Map<String, String> login(BaseUser loginUser, HttpSession session);
+    Map<String, String> login(BaseUser loginUser);
 
-    LoginInfoVo getBaseInfo(String appCode, HttpSession session);
+    /**
+     * 查看用户信息详情
+     * 1.每次页面刷新都会调用这个方法
+     * 2.如果有就返回,没有就新加一条数据
+     *
+     * @param appCode 微信临时用户id
+     * @param vo      用户信息
+     * @return data
+     */
+    LoginInfoVo getBaseInfo(String appCode, WeixinUserInfoVo vo);
 }

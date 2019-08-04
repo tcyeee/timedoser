@@ -1,9 +1,12 @@
 package demo.tcyeee.entity.po;
 
+import demo.tcyeee.entity.vo.WeixinUserInfoVo;
 import demo.tcyeee.utils.BaseUtils;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,6 +19,7 @@ import java.util.Date;
  */
 @Data
 @Entity
+@Builder
 @Table(name = "base_user")
 public class BaseUser {
 
@@ -52,6 +56,12 @@ public class BaseUser {
     private String password;            // 密码
     private String signature;           // 签名
     private Date lastPasswordReset;     // 用户上次登录时间
+    private String userToken;           // 用户存根
+
+    private Integer gender;             // 性别
+    private String country;             // 国家
+    private String province;            // 省
+    private String city;                // 市
 
     @Transient
     private String authoritiesString;   // 验证字段
@@ -81,20 +91,28 @@ public class BaseUser {
         private String remark;
     }
 
+    @Tolerate
+    public BaseUser() {}
+
     /**
      * 微信首次登录通过appcode添加一条用户记录
      *
      * @param openid openId
+     * @param vo     微信开放的用户信息
      * @return data
      */
-    public static BaseUser creatBaseUserForOpenId(String openid) {
-        BaseUser result = new BaseUser();
-
-        result.setOpenid(openid);
-        result.setCreatedate(new Date());
-        result.setUserId(BaseUtils.getUuid());
-        result.setEnable(enableTypeEnum.defult.type);
-        result.setAccountType(accountTypeEnum.one.type);
-        return result;
+    public static BaseUser creatBaseUserForOpenId(String openid, WeixinUserInfoVo vo) {
+        return BaseUser.builder()
+                .openid(openid)
+                .city(vo.getCity())
+                .createdate(new Date())
+                .gender(vo.getGender())
+                .country(vo.getCountry())
+                .province(vo.getProvince())
+                .username(vo.getNickName())
+                .userId(BaseUtils.getUuid())
+                .avatarUrl(vo.getAvatarUrl())
+                .accountType(accountTypeEnum.one.type)
+                .enable(enableTypeEnum.defult.type).build();
     }
 }

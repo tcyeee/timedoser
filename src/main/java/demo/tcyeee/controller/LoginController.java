@@ -1,7 +1,9 @@
 package demo.tcyeee.controller;
 
+import com.alibaba.fastjson.JSON;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
+import demo.tcyeee.entity.vo.WeixinUserInfoVo;
 import demo.tcyeee.service.BaseService;
 import demo.tcyeee.service.LoginService;
 import demo.tcyeee.utils.CheckUtils;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import static demo.tcyeee.entity.enums.base.ReturnCodeList.PARAMS_ERROR_INFO;
 import static demo.tcyeee.entity.enums.base.ReturnCodeList.ReturnCode.PARAMS_ERROR;
@@ -58,15 +59,14 @@ public class LoginController {
      * 账户登录接口
      *
      * @param baseUser 手机号和密码
-     * @param session  session
      * @return data
      */
     @PostMapping("login")
-    public String login(BaseUser baseUser, HttpSession session) {
+    public String login(BaseUser baseUser) {
         if (baseUser.getMobilephone() == null || baseUser.getMobilephone() == 0 || baseUser.getPassword() == null) {
             return creatErrResponse(PARAMS_ERROR);
         }
-        return creatJsonResponse(loginService.login(baseUser, session));
+        return creatJsonResponse(loginService.login(baseUser));
     }
 
 
@@ -80,14 +80,15 @@ public class LoginController {
      * @param appCode appCode
      * @return data
      */
-    @GetMapping("getBaseInfo")
-    public String getBaseInfo(String appCode, HttpSession session) {
+    @RequestMapping("getBaseInfo")
+    public String getBaseInfo(String appCode, String userInfo) {
 
         /* 数据校验:参数不可为空 */
-        if (!CheckUtils.checkAppCode(appCode)) {
+        if (!CheckUtils.checkAppCode(appCode) || "null".equals(userInfo)) {
             return creatErrResponse(PARAMS_ERROR);
         }
-        return creatJsonResponse(loginService.getBaseInfo(appCode, session));
+        WeixinUserInfoVo weixinUserInfoVo = JSON.parseObject(userInfo, WeixinUserInfoVo.class);
+        return creatJsonResponse(loginService.getBaseInfo(appCode, weixinUserInfoVo));
     }
 
     // 用于测试
@@ -97,5 +98,4 @@ public class LoginController {
 
         return creatJsonResponse("看到这个代表你成功了");
     }
-
 }

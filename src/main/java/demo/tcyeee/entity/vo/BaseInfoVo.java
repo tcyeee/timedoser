@@ -18,6 +18,5 @@ public class BaseInfoVo {
     private String userId;            // id
     private Integer enable;           // 是否可用
     private String username;          // username
-    private String password;          // [验证用]密码
     private Integer mobilephone;      // 手机号
 }
