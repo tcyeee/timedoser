@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import static demo.tcyeee.entity.enums.base.ReturnCodeList.PARAMS_ERROR_INFO;
-import static demo.tcyeee.entity.enums.base.ReturnCodeList.ReturnCode.PARAMS_ERROR;
-import static demo.tcyeee.utils.ResponseUtils.creatErrResponse;
-import static demo.tcyeee.utils.ResponseUtils.creatJsonResponse;
+import static demo.tcyeee.entity.base.ReturnInfo.ReturnCode.PARAMS_ERROR;
+import static demo.tcyeee.utils.ResponseUtils.*;
 
 /**
  * @author tcyeee

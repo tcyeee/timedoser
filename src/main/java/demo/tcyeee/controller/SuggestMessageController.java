@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static demo.tcyeee.entity.enums.base.ReturnCodeList.*;
-import static demo.tcyeee.entity.enums.base.ReturnCodeList.ReturnCode.*;
-import static demo.tcyeee.utils.ResponseUtils.creatErrResponse;
-import static demo.tcyeee.utils.ResponseUtils.creatJsonResponse;
+import static demo.tcyeee.entity.base.ReturnInfo.ReturnCode.*;
+import static demo.tcyeee.utils.ResponseUtils.*;
 
 /**
  * @author huxiong
