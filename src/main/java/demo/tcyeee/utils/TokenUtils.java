@@ -1,16 +1,14 @@
 package demo.tcyeee.utils;
 
-import demo.tcyeee.entity.base.TokenDetail;
-import demo.tcyeee.entity.vo.BaseInfoVo;
+import demo.tcyeee.dao.BaseUserDao;
+import demo.tcyeee.entity.po.BaseUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -19,11 +17,14 @@ import java.util.Map;
 
 /**
  * token 操作类
+ * 1.暂时去除springScurity
+ * 2.去除token过期时间校验
+ * 3.校验主体为openId
  *
  * @author tcyeee
  */
 @Component
-public class TokenUtils {
+public final class TokenUtils {
 
 
     @Value("${token.secret}")
@@ -32,14 +33,42 @@ public class TokenUtils {
     @Value("${token.expiration}")
     private Long expiration;
 
+    @Value("${token.header}")
+    private String tokenHeader;
+
+    @Resource
+    private HttpServletRequest request;
+
+    @Resource
+    private BaseUserDao baseUserDao;
+
+
+    /**
+     * 获取当前登录人信息
+     *
+     * @return userInfo
+     */
+    public BaseUser getUserInfo() {
+        String tokenHeadere = request.getHeader(tokenHeader);
+        String openId = this.getOpenIdFromToken(tokenHeadere);
+        return (baseUserDao.findByOpenid(openId));
+    }
+
     /**
      * 根据 TokenDetail 生成 Token
+     * 这里openID的主键设置为openID
      */
-    public String generateToken(TokenDetail tokenDetail) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("sub", tokenDetail.getMobilephone());
-        claims.put("created", this.generateCurrentDate());
-        return this.generateToken(claims);
+    public String generateToken(BaseUser user) {
+        String cacheKey = EhCacheUtils.TOKEN_INFO + DateUtils.getDayBegin() + user.getOpenid();
+        String token = (String) EhCacheUtils.get(cacheKey);
+        if (token == null) {
+            Map<String, Object> claims = new HashMap<>();
+            claims.put(Claims.ISSUER, user.getOpenid());
+            claims.put(Claims.SUBJECT, user.getMobilephone());
+            token = this.generateToken(claims);
+        }
+        EhCacheUtils.set(cacheKey, token);
+        return token;
     }
 
 
@@ -55,7 +84,7 @@ public class TokenUtils {
     }
 
     /**
-     * token 过期时间
+     * token 过期时间(秒)
      */
     private Date generateExpirationDate() {
         return new Date(System.currentTimeMillis() + this.expiration * 1000);
@@ -72,7 +101,7 @@ public class TokenUtils {
     /**
      * 从 token 中拿到 mobilephone
      */
-    public Integer getMobilephoneFromToken(String token) {
+    private Integer getMobilephoneFromToken(String token) {
         Integer mobilephone;
         try {
             final Claims claims = this.getClaimsFromToken(token);
@@ -83,6 +112,20 @@ public class TokenUtils {
         return mobilephone;
     }
 
+
+    /**
+     * 从 token 中拿到 openId
+     */
+    private String getOpenIdFromToken(String token) {
+        String openId;
+        try {
+            final Claims claims = this.getClaimsFromToken(token);
+            openId = claims.getIssuer();
+        } catch (Exception e) {
+            openId = null;
+        }
+        return openId;
+    }
 
     /**
      * 解析 token 的主体 Claims
@@ -103,11 +146,10 @@ public class TokenUtils {
     /**
      * 检查 token 是否处于有效期内
      */
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        TokenDetail user = (TokenDetail) userDetails;
-        final Integer mobilephone = this.getMobilephoneFromToken(token);
+    public Boolean validateToken(String token, BaseUser baseUser) {
         final Date created = this.getCreatedDateFromToken(token);
-        return (mobilephone.equals(user.getMobilephone()) && (this.isTokenExpired(token)) && (this.isCreatedBeforeLastPasswordReset(created, user.getLastPasswordReset())));
+        return (this.isTokenExpired(token))
+                && (this.isCreatedBeforeLastPasswordReset(created, baseUser.getLastPasswordReset()));
     }
 
     /**
@@ -151,20 +193,5 @@ public class TokenUtils {
      */
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
-    }
-
-
-    /**
-     * 获取当前登录人信息
-     *
-     * @return userInfo
-     */
-    @SuppressWarnings("all")
-    public static BaseInfoVo userInfo() {
-        //获取到当前线程绑定的请求对象
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        //已经拿到session,就可以拿到session中保存的用户信息了。
-        Object userInfo = request.getSession().getAttribute("userInfo");
-        return userInfo == null ? null : (BaseInfoVo) userInfo;
     }
 }

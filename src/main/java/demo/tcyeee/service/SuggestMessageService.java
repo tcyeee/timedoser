@@ -18,10 +18,9 @@ public interface SuggestMessageService {
      * 添加一条留言
      *
      * @param messageContents 添加的留言信息
-     * @param userId
      * @return data
      */
-    SuggestMessage addMessage(String messageContents, String userId);
+    SuggestMessage addMessage(String messageContents);
 
     /**
      * 查看所有留言信息

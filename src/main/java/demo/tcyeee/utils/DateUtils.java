@@ -2,7 +2,10 @@ package demo.tcyeee.utils;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Objects;
 
 /**
  * 日期工具类
@@ -13,7 +16,7 @@ import java.util.*;
 public class DateUtils {
 
     // 获取当天的开始时间
-    private static java.util.Date getDayBegin() {
+    public static java.util.Date getDayBegin() {
         Calendar cal = new GregorianCalendar();
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);

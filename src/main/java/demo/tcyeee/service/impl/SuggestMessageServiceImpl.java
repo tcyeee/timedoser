@@ -2,11 +2,13 @@ package demo.tcyeee.service.impl;
 
 import demo.tcyeee.dao.SuggestMessageDao;
 import demo.tcyeee.entity.base.PageBean;
+import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
 import demo.tcyeee.service.SuggestMessageService;
 import demo.tcyeee.utils.BaseUtils;
 import demo.tcyeee.utils.EntityUtils;
+import demo.tcyeee.utils.TokenUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,19 +24,23 @@ public class SuggestMessageServiceImpl implements SuggestMessageService {
     @Resource
     private SuggestMessageDao suggestMessageDao;
 
+    @Resource
+    private TokenUtils tokenUtils;
+
     /**
      * 添加一条留言
      *
      * @param messageContents 添加的留言信息
-     * @param userId          用户id
      * @return data
      */
     @Override
-    public SuggestMessage addMessage(String messageContents, String userId) {
+    public SuggestMessage addMessage(String messageContents) {
+        BaseUser userInfo = tokenUtils.getUserInfo();
+
         SuggestMessage message = SuggestMessage.builder()
                 .id(BaseUtils.getUuid())
                 .context(messageContents)
-                .userId(userId)
+                .userId(userInfo.getUserId())
                 .build();
         return suggestMessageDao.save(message);
     }

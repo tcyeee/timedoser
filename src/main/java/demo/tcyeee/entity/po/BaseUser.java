@@ -56,7 +56,6 @@ public class BaseUser {
     private String password;            // 密码
     private String signature;           // 签名
     private Date lastPasswordReset;     // 用户上次登录时间
-    private String userToken;           // 用户存根
 
     private Integer gender;             // 性别
     private String country;             // 国家
@@ -112,6 +111,7 @@ public class BaseUser {
                 .username(vo.getNickName())
                 .userId(BaseUtils.getUuid())
                 .avatarUrl(vo.getAvatarUrl())
+                .signature(BaseUtils.getSignature())
                 .accountType(accountTypeEnum.one.type)
                 .enable(enableTypeEnum.defult.type).build();
     }

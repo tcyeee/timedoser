@@ -8,8 +8,8 @@ import demo.tcyeee.service.BaseService;
 import demo.tcyeee.utils.TokenUtils;
 import demo.tcyeee.utils.WeiXinUtils;
 import io.micrometer.core.instrument.util.StringUtils;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -27,6 +27,8 @@ public class BaseServiceImpl implements BaseService {
     @Resource
     private BaseUserDao userDao;
 
+    @Resource
+    private TokenUtils tokenUtils;
 
     /**
      * 获取用户唯一ID
@@ -41,8 +43,8 @@ public class BaseServiceImpl implements BaseService {
     }
 
     @Override
-    public BaseInfoVo getuser() {
-        return TokenUtils.userInfo();
+    public BaseUser getuser() {
+        return tokenUtils.getUserInfo();
     }
 
     /**

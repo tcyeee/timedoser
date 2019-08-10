@@ -1,5 +1,6 @@
 package demo.tcyeee.service;
 
+import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public interface BaseService {
      *
      * @return data
      */
-    BaseInfoVo getuser();
+    BaseUser getuser();
 
     /**
      * 通过appcode获到对应的UserInfo

@@ -14,8 +14,9 @@ import java.util.regex.Pattern;
 @SuppressWarnings("unused")
 public final class CheckUtils {
 
-    private final static String E_MAIL_CHECK = "^([a-z0-9A-Z]+[-|.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
-    private final static String PHONE_UNMBER_CHECK = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    private final static String E_MAIL_CHECK = "\\w+(\\.\\w)*@\\w+(\\.\\w{2,3}){1,3}";
+    private final static String PHONE_UNMBER_CHECK = "1[0-9]{10}";
+    private final static String NAME_CHECK = "[a-z0-9A-Z_\u4E00-\u9FA5]{2,16}";
 
     /* 校验提示类 */
     public static final String NULL_POINTE = "请检查参数是否存在";
@@ -63,7 +64,17 @@ public final class CheckUtils {
 
 
     /**
-     * 验证手机号码是否合法
+     * 验证用户名是否合法
+     *
+     * @param userName userName
+     * @return boolean （合法：true，不合法：false）
+     */
+    public static boolean CheckUserName(String userName) {
+        return isTrue(NAME_CHECK, userName);
+    }
+
+    /**
+     * 验证appCode是否合法
      *
      * @param appCode mobiles
      * @return boolean （合法：true，不合法：false）
@@ -71,5 +82,14 @@ public final class CheckUtils {
     public static boolean checkAppCode(String appCode) {
         return StringUtils.isNotBlank(appCode) && appCode.length() > 20;
     }
+
+    // 手机号中间加密
+    public static String dealPhoneNum(String phone) {
+        if (phone.length() == 11) {
+            return phone.substring(0, 3) + "****" + phone.substring(7);
+        }
+        return phone;
+    }
+
 
 }

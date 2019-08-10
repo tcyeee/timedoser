@@ -1,8 +1,8 @@
 package demo.tcyeee.service.impl;
 
 import demo.tcyeee.dao.PlanTaskDao;
+import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.PlanTask;
-import demo.tcyeee.entity.vo.BaseInfoVo;
 import demo.tcyeee.service.PlanTaskService;
 import demo.tcyeee.utils.TokenUtils;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,9 @@ public class PlanTaskServiceImpl implements PlanTaskService {
     @Resource
     private PlanTaskDao planTaskDao;
 
+    @Resource
+    private TokenUtils tokenUtils;
+
     /**
      * 新增一个待办任务
      *
@@ -28,10 +31,8 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean creatTask(PlanTask task) {
-        BaseInfoVo baseInfoVo = TokenUtils.userInfo();
-        if (baseInfoVo == null) {
-            return false;
-        }
+        BaseUser baseInfoVo = tokenUtils.getUserInfo();
+        if (baseInfoVo == null) return false;
 
         // 新加数据
         task.setUserId(baseInfoVo.getUserId());
@@ -47,10 +48,8 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public List<PlanTask> findAllByUser() {
-        BaseInfoVo baseInfoVo = TokenUtils.userInfo();
-        if (baseInfoVo == null) {
-            return null;
-        }
+        BaseUser baseInfoVo = tokenUtils.getUserInfo();
+        if (baseInfoVo == null) return null;
         return planTaskDao.findAllByUserId(baseInfoVo.getUserId());
     }
 

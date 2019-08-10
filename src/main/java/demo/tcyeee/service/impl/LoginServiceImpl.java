@@ -1,7 +1,6 @@
 package demo.tcyeee.service.impl;
 
 import demo.tcyeee.dao.BaseUserDao;
-import demo.tcyeee.entity.base.TokenDetail;
 import demo.tcyeee.entity.base.WXCheck;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.LoginInfoVo;
@@ -48,9 +47,8 @@ public class LoginServiceImpl implements LoginService {
         Map<String, String> result = new HashMap<>();
 
         // 获取并加工返回
-        BaseUser login = baseUserDao.findByMobilephoneAndPassword(loginUser.getMobilephone(), loginUser.getPassword());
-        TokenDetail detail = new TokenDetail(login);
-        result.put(tokenHeader, tokenUtils.generateToken(detail));
+        BaseUser baseUser = baseUserDao.findByMobilephoneAndPassword(loginUser.getMobilephone(), loginUser.getPassword());
+        result.put(tokenHeader, tokenUtils.generateToken(baseUser));
         return result;
     }
 
@@ -82,7 +80,7 @@ public class LoginServiceImpl implements LoginService {
         }
 
         BeanUtils.copyProperties(baseUser, result);
-        result.setToken(tokenUtils.generateToken(new TokenDetail(baseUser)));
+        result.setToken(tokenUtils.generateToken(baseUser));
         return result;
     }
 }
