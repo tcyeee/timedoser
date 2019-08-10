@@ -2,7 +2,6 @@ package demo.tcyeee.utils;
 
 import com.alibaba.fastjson.JSON;
 import demo.tcyeee.entity.base.ReturnInfo;
-import demo.tcyeee.entity.enums.base.ReturnCodeList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +18,9 @@ public final class ResponseUtils {
     private static final String DATA_KEY = "Data";
     private static final String COUNT_KEY = "Count";
 
+    /* 固定参数数据 */
+    public static final String PARAMS_ERROR_INFO = "请检查传入的字段:";
+    public static final String MESSAGE_ERROR_INFO = "留言信息不可为空";
 
     /**
      * 返回自定义信息
@@ -66,7 +68,7 @@ public final class ResponseUtils {
      * @param msg  错误信息
      * @return data
      */
-    public static String creatErrResponse(ReturnCodeList.ReturnCode code, String msg) {
+    public static String creatErrResponse(ReturnInfo.ReturnCode code, String msg) {
         return JSON.toJSONString(ReturnInfo.markError(code, msg));
     }
 
@@ -76,7 +78,7 @@ public final class ResponseUtils {
      * @param code 状态信息
      * @return data
      */
-    public static String creatErrResponse(ReturnCodeList.ReturnCode code) {
+    public static String creatErrResponse(ReturnInfo.ReturnCode code) {
         return JSON.toJSONString(ReturnInfo.markError(code));
     }
 
