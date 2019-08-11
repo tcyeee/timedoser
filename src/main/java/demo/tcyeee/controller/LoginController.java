@@ -1,9 +1,7 @@
 package demo.tcyeee.controller;
 
-import com.alibaba.fastjson.JSON;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
-import demo.tcyeee.entity.vo.WeixinUserInfoVo;
 import demo.tcyeee.service.BaseService;
 import demo.tcyeee.service.LoginService;
 import demo.tcyeee.utils.CheckUtils;
@@ -73,20 +71,19 @@ public class LoginController {
      * 注意: 使用小程序是无需登录的
      * <p>
      * 1.baseInfo {@link BaseInfoVo}
-     * 2.token {@link demo.tcyeee.config.filter.AuthenticationTokenFilter}
      *
      * @param appCode appCode
      * @return data
      */
     @RequestMapping("getBaseInfo")
-    public String getBaseInfo(String appCode, String userInfo) {
+    public String getBaseInfo(String appCode) {
 
         /* 数据校验:参数不可为空 */
-        if (!CheckUtils.checkAppCode(appCode) || "null".equals(userInfo)) {
+        if (!CheckUtils.checkAppCode(appCode)) {
             return creatErrResponse(PARAMS_ERROR);
         }
-        WeixinUserInfoVo weixinUserInfoVo = JSON.parseObject(userInfo, WeixinUserInfoVo.class);
-        return creatJsonResponse(loginService.getBaseInfo(appCode, weixinUserInfoVo));
+//        WeixinUserInfoVo weixinUserInfoVo = JSON.parseObject(userInfo, WeixinUserInfoVo.class);
+        return creatJsonResponse(loginService.getBaseInfo(appCode));
     }
 
     // 用于测试

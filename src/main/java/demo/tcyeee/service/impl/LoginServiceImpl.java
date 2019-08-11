@@ -4,7 +4,6 @@ import demo.tcyeee.dao.BaseUserDao;
 import demo.tcyeee.entity.base.WXCheck;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.LoginInfoVo;
-import demo.tcyeee.entity.vo.WeixinUserInfoVo;
 import demo.tcyeee.service.LoginService;
 import demo.tcyeee.utils.TokenUtils;
 import demo.tcyeee.utils.WeiXinUtils;
@@ -59,11 +58,10 @@ public class LoginServiceImpl implements LoginService {
      * 2.如果有就返回,没有就新加一条数据
      *
      * @param appCode  微信临时用户id
-     * @param userInfo 用户信息
      * @return data
      */
     @Override
-    public LoginInfoVo getBaseInfo(String appCode, WeixinUserInfoVo userInfo) {
+    public LoginInfoVo getBaseInfo(String appCode) {
         LoginInfoVo result = new LoginInfoVo();
 
         // 获取openid
@@ -75,7 +73,7 @@ public class LoginServiceImpl implements LoginService {
         // 对比数据库有没有openid,如果有的话获取基础信息和token , 没有就添加一条
         BaseUser baseUser = baseUserDao.findByOpenid(openId.getOpenid());
         if (baseUser == null) {
-            BaseUser user = BaseUser.creatBaseUserForOpenId(openId.getOpenid(), userInfo);
+            BaseUser user = BaseUser.creatBaseUserForOpenId(openId.getOpenid());
             baseUser = baseUserDao.save(user);
         }
 

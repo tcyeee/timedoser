@@ -10,7 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
-import static demo.tcyeee.entity.enums.base.ReturnCodeList.PARAMS_ERROR_INFO;
+import static demo.tcyeee.utils.ResponseUtils.PARAMS_ERROR_INFO;
+
 
 /**
  * 任务列表

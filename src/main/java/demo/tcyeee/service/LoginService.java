@@ -2,7 +2,6 @@ package demo.tcyeee.service;
 
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.LoginInfoVo;
-import demo.tcyeee.entity.vo.WeixinUserInfoVo;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -28,8 +27,7 @@ public interface LoginService {
      * 2.如果有就返回,没有就新加一条数据
      *
      * @param appCode 微信临时用户id
-     * @param vo      用户信息
      * @return data
      */
-    LoginInfoVo getBaseInfo(String appCode, WeixinUserInfoVo vo);
+    LoginInfoVo getBaseInfo(String appCode);
 }

@@ -1,6 +1,5 @@
 package demo.tcyeee.entity.po;
 
-import demo.tcyeee.entity.vo.WeixinUserInfoVo;
 import demo.tcyeee.utils.BaseUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -97,20 +96,13 @@ public class BaseUser {
      * 微信首次登录通过appcode添加一条用户记录
      *
      * @param openid openId
-     * @param vo     微信开放的用户信息
      * @return data
      */
-    public static BaseUser creatBaseUserForOpenId(String openid, WeixinUserInfoVo vo) {
+    public static BaseUser creatBaseUserForOpenId(String openid) {
         return BaseUser.builder()
                 .openid(openid)
-                .city(vo.getCity())
                 .createdate(new Date())
-                .gender(vo.getGender())
-                .country(vo.getCountry())
-                .province(vo.getProvince())
-                .username(vo.getNickName())
                 .userId(BaseUtils.getUuid())
-                .avatarUrl(vo.getAvatarUrl())
                 .signature(BaseUtils.getSignature())
                 .accountType(accountTypeEnum.one.type)
                 .enable(enableTypeEnum.defult.type).build();
