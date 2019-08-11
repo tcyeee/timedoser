@@ -79,10 +79,8 @@ public class LoginController {
     public String getBaseInfo(String appCode) {
 
         /* 数据校验:参数不可为空 */
-        if (!CheckUtils.checkAppCode(appCode)) {
-            return creatErrResponse(PARAMS_ERROR);
-        }
-//        WeixinUserInfoVo weixinUserInfoVo = JSON.parseObject(userInfo, WeixinUserInfoVo.class);
+        if (!CheckUtils.checkAppCode(appCode)) return creatErrResponse(PARAMS_ERROR);
+
         return creatJsonResponse(loginService.getBaseInfo(appCode));
     }
 

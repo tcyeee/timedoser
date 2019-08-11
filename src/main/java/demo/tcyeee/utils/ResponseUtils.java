@@ -21,6 +21,7 @@ public final class ResponseUtils {
     /* 固定参数数据 */
     public static final String PARAMS_ERROR_INFO = "请检查传入的字段:";
     public static final String MESSAGE_ERROR_INFO = "留言信息不可为空";
+    public static final String UPDATA_SUCCESS_INFO = "更新成功";
 
     /**
      * 返回自定义信息
