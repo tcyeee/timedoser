@@ -14,10 +14,11 @@ import java.util.List;
 public interface PlanTaskDao extends CrudRepository<PlanTask, Long> {
 
     /**
-     * 获取用户创建的所有任务
+     * 获取用户创建的所有未删除的任务
      *
-     * @param userId 用户id
+     * @param userId userId
+     * @param type   不等于9 / 没有被删除
      * @return data
      */
-    List<PlanTask> findAllByUserId(String userId);
+    List<PlanTask> findAllByUserIdAndTypeIsNot(String userId, int type);
 }

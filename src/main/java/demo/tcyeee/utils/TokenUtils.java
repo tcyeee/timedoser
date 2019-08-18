@@ -51,6 +51,10 @@ public final class TokenUtils {
     public BaseUser getUserInfo() {
         String tokenHeadere = request.getHeader(tokenHeader);
         String openId = this.getOpenIdFromToken(tokenHeadere);
+        if (openId == null) {
+            System.out.println("获取基础信息时token获取失败");
+            return null;
+        }
         return (baseUserDao.findByOpenid(openId));
     }
 

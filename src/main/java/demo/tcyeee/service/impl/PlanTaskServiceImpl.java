@@ -48,9 +48,20 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public List<PlanTask> findAllByUser() {
-        BaseUser baseInfoVo = tokenUtils.getUserInfo();
-        if (baseInfoVo == null) return null;
-        return planTaskDao.findAllByUserId(baseInfoVo.getUserId());
+        BaseUser baseUser = tokenUtils.getUserInfo();
+        if (baseUser == null) return null;
+
+        // 如果没有任务的话就去创建一个示例项目
+        List<PlanTask> allPlanTask = planTaskDao.findAllByUserIdAndTypeIsNot(baseUser.getUserId(), 9);
+        if (allPlanTask.size() <= 0) {
+            PlanTask planTask = PlanTask.builder()
+                    .userId(baseUser.getUserId())
+                    .name("示例任务")
+                    .type(1).build();
+            PlanTask save = planTaskDao.save(planTask);
+            allPlanTask.add(save);
+        }
+        return allPlanTask;
     }
 
 
