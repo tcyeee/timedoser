@@ -2,7 +2,6 @@ package demo.tcyeee.controller.planTask;
 
 import demo.tcyeee.entity.po.PlanTask;
 import demo.tcyeee.service.PlanTaskService;
-import io.micrometer.core.instrument.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,17 +28,17 @@ public class PlanTaskController {
     /**
      * 创建任务
      *
-     * @param task 添加的任务信息
      * @return status
      */
-    @RequestMapping("creatTask")
-    public String creatTask(PlanTask task) {
-        if (task == null || StringUtils.isBlank(task.getName())) {
-            return creatErrResponse(PARAMS_ERROR);
-        }
+    @RequestMapping("addOne")
+    public String addOne(PlanTask planTask) {
+//        if (task == null || StringUtils.isBlank(task.getName())) {
+//            return creatErrResponse(PARAMS_ERROR);
+//        }
 
-        boolean creatTask = planTaskService.creatTask(task);
-        return creatTask ? creatJsonResponse(SUCCESS) : creatErrResponse(SYSTEM_ERROR);
+//        boolean creatTask = planTaskService.creatTask(task);
+//        return creatTask ? creatJsonResponse(SUCCESS) : creatErrResponse(SYSTEM_ERROR);
+        return null;
     }
 
 

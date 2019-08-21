@@ -56,8 +56,11 @@ public class PlanTaskServiceImpl implements PlanTaskService {
         if (allPlanTask.size() <= 0) {
             PlanTask planTask = PlanTask.builder()
                     .userId(baseUser.getUserId())
+                    .tomatoWorkTime(25)
+                    .tomatoRistTime(5)
                     .name("示例任务")
-                    .type(1).build();
+                    .type(1)
+                    .build();
             PlanTask save = planTaskDao.save(planTask);
             allPlanTask.add(save);
         }
