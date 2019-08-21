@@ -1,6 +1,7 @@
 package demo.tcyeee.service;
 
 import demo.tcyeee.entity.po.PlanTask;
+import demo.tcyeee.entity.vo.addPlanTaskVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +16,10 @@ public interface PlanTaskService {
     /**
      * 新增一个待办任务
      *
-     * @param task 任务信息
+     * @param vo 任务信息
      * @return status
      */
-    boolean creatTask(PlanTask task);
+    boolean creatTask(addPlanTaskVo vo);
 
     /**
      * 获取用户创建的所有任务
@@ -42,5 +43,5 @@ public interface PlanTaskService {
      * @param taskId 任务id
      * @return status
      */
-    boolean delete(Integer taskId);
+    boolean deleteOne(String taskId);
 }
