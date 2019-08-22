@@ -56,13 +56,47 @@ public class PlanTaskController {
 
 
     /**
+     * 完成一个任务
+     *
+     * @return status
+     */
+    @RequestMapping("finishOne")
+    public String finishOne(String taskId) {
+        if (StringUtils.isBlank(taskId)) return creatErrResponse(PARAMS_ERROR);
+        return planTaskService.finishOne(taskId) ? creatJsonResponse(SUCCESS) : creatErrResponse(SYSTEM_ERROR);
+    }
+
+    /**
+     * 重新开始一个任务
+     *
+     * @return status
+     */
+    @RequestMapping("restartOne")
+    public String restartOne(String taskId) {
+        if (StringUtils.isBlank(taskId)) return creatErrResponse(PARAMS_ERROR);
+        return planTaskService.restartOne(taskId) ? creatJsonResponse(SUCCESS) : creatErrResponse(SYSTEM_ERROR);
+    }
+
+    /**
      * 获取当前用户所有的任务
      *
      * @return data
+     * @since version_1.1.00
      */
     @RequestMapping("getAllTask")
     public String getAllTask() {
         return creatJsonResponse(planTaskService.findAllByUser());
+    }
+
+    /**
+     * 获取当前用户所有的任务
+     *
+     * @return data
+     * @since version_1.1.01
+     */
+    @RequestMapping("getAllTask_12")
+    public String getAllTask_12() {
+        return creatJsonResponse(planTaskService.findAllByUser_12());
     }
 
 

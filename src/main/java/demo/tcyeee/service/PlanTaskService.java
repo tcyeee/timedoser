@@ -1,6 +1,7 @@
 package demo.tcyeee.service;
 
 import demo.tcyeee.entity.po.PlanTask;
+import demo.tcyeee.entity.vo.PlantaskList_12;
 import demo.tcyeee.entity.vo.addPlanTaskVo;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,22 @@ public interface PlanTaskService {
     boolean creatTask(addPlanTaskVo vo);
 
     /**
-     * 获取用户创建的所有任务
+     * 获取当前用户所有的任务
      *
-     * @return task list
+     * @return data
+     * @since version_1.1.00
      */
+    @Deprecated
     List<PlanTask> findAllByUser();
+
+
+    /**
+     * 获取当前用户所有的任务
+     *
+     * @return data
+     * @since version_1.1.01
+     */
+    PlantaskList_12 findAllByUser_12();
 
 
     /**
@@ -44,4 +56,18 @@ public interface PlanTaskService {
      * @return status
      */
     boolean deleteOne(String taskId);
+
+    /**
+     * 完成一个任务
+     *
+     * @return status
+     */
+    boolean finishOne(String taskId);
+
+    /**
+     * 重新开始一个任务
+     *
+     * @return status
+     */
+    boolean restartOne(String taskId);
 }

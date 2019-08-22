@@ -20,10 +20,10 @@ public interface PlanTaskDao extends CrudRepository<PlanTask, Integer> {
      * 获取用户创建的所有未删除的任务
      *
      * @param userId userId
-     * @param type   不等于9 / 没有被删除
+     * @param type   t
      * @return data
      */
-    List<PlanTask> findAllByUserIdAndTypeIsNotOrderByCreatedateAsc(String userId, int type);
+    List<PlanTask> findAllByUserIdAndTypeOrderByCreatedateDesc(String userId, int type);
 
     /**
      * 统计用户创建的任务数量
@@ -33,15 +33,25 @@ public interface PlanTaskDao extends CrudRepository<PlanTask, Integer> {
      */
     int countByUserId(String userId);
 
+    /**
+     * 统计
+     *
+     * @param userId userId
+     * @param type   type
+     * @return count
+     */
+    int countByUserIdAndType(String userId, int type);
 
     /**
-     * 假删除一条任务数据
+     * 修改任务状态
+     * 1. 如果是把任务状态修改为1(默认),则同时修改创建时间
      *
      * @param taskId taskId
+     * @param type   {@link PlanTask.typeEnum}
      * @return status
      */
     @Modifying
     @Transactional
-    @Query(nativeQuery = true, value = "UPDATE time_doser.plan_task SET type = 9 WHERE id = ?1 ")
-    int diyDeleteOne(String taskId);
+    @Query(value = "UPDATE time_doser.plan_task SET type = ?2, createdate = if(?2=1,current_timestamp,createdate) WHERE id = ?1", nativeQuery = true)
+    int diyUpdataTask(String taskId, int type);
 }

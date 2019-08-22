@@ -3,6 +3,7 @@ package demo.tcyeee.service.impl;
 import demo.tcyeee.dao.PlanTaskDao;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.PlanTask;
+import demo.tcyeee.entity.vo.PlantaskList_12;
 import demo.tcyeee.entity.vo.addPlanTaskVo;
 import demo.tcyeee.service.PlanTaskService;
 import demo.tcyeee.utils.TokenUtils;
@@ -57,18 +58,55 @@ public class PlanTaskServiceImpl implements PlanTaskService {
 
         // 如果是第一次查询则创建一条任务
         if (planTaskDao.countByUserId(baseUser.getUserId()) == 0) {
-            PlanTask planTask = PlanTask.builder()
-                    .userId(baseUser.getUserId())
-                    .tomatoWorkTime(25)
-                    .tomatoRistTime(5)
-                    .name("示例任务")
-                    .type(1)
-                    .build();
-            planTaskDao.save(planTask);
+            this.creatDemoTask(baseUser);
         }
 
         // 如果没有任务的话就去创建一个示例项目
-        return planTaskDao.findAllByUserIdAndTypeIsNotOrderByCreatedateAsc(baseUser.getUserId(), 9);
+        return planTaskDao.findAllByUserIdAndTypeOrderByCreatedateDesc(baseUser.getUserId(), 1);
+    }
+
+
+    /**
+     * 获取当前用户所有的任务
+     * 1.已完成任务只查询10条
+     * 2.数据库无任何数据则添加一条示例任务
+     *
+     * @return data
+     * @since version_1.1.01
+     */
+    @Override
+    public PlantaskList_12 findAllByUser_12() {
+        PlantaskList_12 result = new PlantaskList_12();
+        BaseUser baseUser = tokenUtils.getUserInfo();
+        int finishTaskCount = planTaskDao.countByUserIdAndType(baseUser.getUserId(), PlanTask.typeEnum.clean.getType());
+        int waitTaskCount = planTaskDao.countByUserIdAndType(baseUser.getUserId(), PlanTask.typeEnum.defult.getType());
+
+        // 如果是第一次查询则创建一条任务
+        if (planTaskDao.countByUserId(baseUser.getUserId()) == 0) {
+            this.creatDemoTask(baseUser);
+        }
+
+        List<PlanTask> waitTask = planTaskDao.findAllByUserIdAndTypeOrderByCreatedateDesc(baseUser.getUserId(), 1);
+        List<PlanTask> clenTask = planTaskDao.findAllByUserIdAndTypeOrderByCreatedateDesc(baseUser.getUserId(), 2);
+
+        result.setWaitTask(waitTask);
+        result.setFinishTask(clenTask);
+        result.setWaitTaskCount(waitTaskCount);
+        result.setFinishTaskCount(finishTaskCount);
+
+        return result;
+    }
+
+    // 创建一个示例项目
+    private void creatDemoTask(BaseUser baseUser) {
+        PlanTask planTask = PlanTask.builder()
+                .userId(baseUser.getUserId())
+                .tomatoWorkTime(25)
+                .tomatoRistTime(5)
+                .name("示例任务")
+                .type(1)
+                .build();
+        planTaskDao.save(planTask);
     }
 
 
@@ -93,6 +131,28 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean deleteOne(String taskId) {
-        return planTaskDao.diyDeleteOne(taskId) >= 1;
+        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.delele.getType()) >= 1;
+    }
+
+
+    /**
+     * 完成一个任务
+     *
+     * @return status
+     */
+    @Override
+    public boolean finishOne(String taskId) {
+        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.clean.getType()) >= 1;
+    }
+
+
+    /**
+     * 重新开始一个任务
+     *
+     * @return status
+     */
+    @Override
+    public boolean restartOne(String taskId) {
+        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.defult.getType()) >= 1;
     }
 }
