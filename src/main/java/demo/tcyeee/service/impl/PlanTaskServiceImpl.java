@@ -39,32 +39,12 @@ public class PlanTaskServiceImpl implements PlanTaskService {
         PlanTask task = PlanTask.builder()
                 .type(1)
                 .name(vo.getName())
-                .userId(baseInfoVo.getUserId())
+                .baseUser(baseInfoVo)
                 .tomatoWorkTime(Integer.valueOf(vo.getMinute()))
+                .tomatoRistTime(5)
                 .build();
         return planTaskDao.save(task) != null;
     }
-
-
-    /**
-     * 获取用户创建的所有任务
-     *
-     * @return task list
-     */
-    @Override
-    public List<PlanTask> findAllByUser() {
-        BaseUser baseUser = tokenUtils.getUserInfo();
-        if (baseUser == null) return null;
-
-        // 如果是第一次查询则创建一条任务
-        if (planTaskDao.countByUserId(baseUser.getUserId()) == 0) {
-            this.creatDemoTask(baseUser);
-        }
-
-        // 如果没有任务的话就去创建一个示例项目
-        return planTaskDao.findAllByUserIdAndTypeOrderByCreatedateDesc(baseUser.getUserId(), 1);
-    }
-
 
     /**
      * 获取当前用户所有的任务
@@ -78,16 +58,16 @@ public class PlanTaskServiceImpl implements PlanTaskService {
     public PlantaskList_12 findAllByUser_12() {
         PlantaskList_12 result = new PlantaskList_12();
         BaseUser baseUser = tokenUtils.getUserInfo();
-        int finishTaskCount = planTaskDao.countByUserIdAndType(baseUser.getUserId(), PlanTask.typeEnum.clean.getType());
-        int waitTaskCount = planTaskDao.countByUserIdAndType(baseUser.getUserId(), PlanTask.typeEnum.defult.getType());
+        int finishTaskCount = planTaskDao.countByBaseUserAndType(baseUser, PlanTask.typeEnum.clean.getType());
+        int waitTaskCount = planTaskDao.countByBaseUserAndType(baseUser, PlanTask.typeEnum.defult.getType());
 
         // 如果是第一次查询则创建一条任务
-        if (planTaskDao.countByUserId(baseUser.getUserId()) == 0) {
+        if (planTaskDao.countByBaseUser(baseUser) == 0) {
             this.creatDemoTask(baseUser);
         }
 
-        List<PlanTask> waitTask = planTaskDao.findAllByUserIdAndTypeOrderByCreatedateDesc(baseUser.getUserId(), 1);
-        List<PlanTask> clenTask = planTaskDao.findAllByUserIdAndTypeOrderByCreatedateDesc(baseUser.getUserId(), 2);
+        List<PlanTask> waitTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, 1);
+        List<PlanTask> clenTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, 2);
 
         result.setWaitTask(waitTask);
         result.setFinishTask(clenTask);
@@ -100,7 +80,7 @@ public class PlanTaskServiceImpl implements PlanTaskService {
     // 创建一个示例项目
     private void creatDemoTask(BaseUser baseUser) {
         PlanTask planTask = PlanTask.builder()
-                .userId(baseUser.getUserId())
+                .baseUser(baseUser)
                 .tomatoWorkTime(25)
                 .tomatoRistTime(5)
                 .name("示例任务")

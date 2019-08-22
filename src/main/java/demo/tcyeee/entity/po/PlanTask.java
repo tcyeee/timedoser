@@ -27,40 +27,37 @@ public class PlanTask {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false, length = 32, updatable = false)
+    @Column(unique = true, nullable = false, length = 32, updatable = false)
     private Integer id;
 
-    /**
-     * 用户id {@link BaseUser}
-     */
-    @Column(name = "user_id", nullable = false, length = 50, updatable = false)
-    private String userId;
+    // 用户id
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BaseUser baseUser;
 
     // 任务名称
     @NotEmpty(message = PARAMS_ERROR_INFO + "name")
-    @Column(name = "name", nullable = false, length = 120)
+    @Column(nullable = false, length = 120)
     private String name;
 
     // 备注
-    @Column(name = "remark")
     private String remark;
 
     // 创建时间
-    @Column(name = "createdate", columnDefinition = "datetime DEFAULT current_timestamp")
+    @Column(columnDefinition = "datetime DEFAULT current_timestamp")
     private Date createdate;
 
     /**
      * 是否可用 默认为1 {@link typeEnum}
      */
-    @Column(name = "type", nullable = false, columnDefinition = "int(4) DEFAULT 1")
+    @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
     private Integer type;
 
     // 番茄时长(工作时长)
-    @Column(name = "tomato_work_time", nullable = false, columnDefinition = "int(4) DEFAULT 25")
+    @Column(nullable = false, columnDefinition = "int(4) DEFAULT 25")
     private Integer tomatoWorkTime;
 
     // 番茄时长(工作时长)
-    @Column(name = "tomato_rist_time", nullable = false, columnDefinition = "int(4) DEFAULT 5")
+    @Column(nullable = false, columnDefinition = "int(4) DEFAULT 5")
     private Integer tomatoRistTime;
 
 

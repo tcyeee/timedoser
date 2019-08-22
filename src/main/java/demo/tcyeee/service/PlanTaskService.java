@@ -5,8 +5,6 @@ import demo.tcyeee.entity.vo.PlantaskList_12;
 import demo.tcyeee.entity.vo.addPlanTaskVo;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * @author chenyueee
  * @since 2019-07-20 16:35
@@ -21,16 +19,6 @@ public interface PlanTaskService {
      * @return status
      */
     boolean creatTask(addPlanTaskVo vo);
-
-    /**
-     * 获取当前用户所有的任务
-     *
-     * @return data
-     * @since version_1.1.00
-     */
-    @Deprecated
-    List<PlanTask> findAllByUser();
-
 
     /**
      * 获取当前用户所有的任务

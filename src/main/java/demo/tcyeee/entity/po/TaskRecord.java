@@ -24,12 +24,10 @@ public class TaskRecord {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private BaseUser userId;
+    private BaseUser baseUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private PlanTask taskId;
+    private PlanTask planTask;
 
     private Date creatTime;      // 创建时间
     private int tomatoWorkTime;  // 学习时长

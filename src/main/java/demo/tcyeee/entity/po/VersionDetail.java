@@ -18,26 +18,24 @@ public class VersionDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false, length = 32, updatable = false)
+    @Column(unique = true, nullable = false, length = 32, updatable = false)
     private int id;
 
     /** 创建时间 */
-    @Column(name = "createdate", columnDefinition = "datetime DEFAULT current_timestamp")
+    @Column(columnDefinition = "datetime DEFAULT current_timestamp")
     private Date createdate;
 
     /** 更新内容 */
-    @Column(name = "context", length = 64)
+    @Column(length = 64)
     private String context;
 
     /** 更新细节 */
-    @Column(name = "detail", length = 500)
     private String detail;
 
     /** 版本号 */
-    @Column(name = "version", unique = true, length = 32)
+    @Column(unique = true, length = 32)
     private String version;
 
     /** 图片地址 */
-    @Column(name = "img_url")
     private String imgUrl;
 }

@@ -23,31 +23,35 @@ import java.util.Date;
 public class BaseUser {
 
     @Id
-    @Column(name = "id", unique = true, nullable = false, length = 200, updatable = false)
-    private String userId;
+    @Column(unique = true, nullable = false, length = 100, updatable = false)
+    private String id;
 
-    /** 邮箱 */
-    @Column(name = "email", unique = true, length = 200)
+    // 邮箱
+    @Column(unique = true, length = 30)
     private String email;
 
-    /** [小程序]唯一id */
-    @Column(name = "openid", unique = true, length = 200)
+    // [小程序]唯一id
+    @Column(unique = true, length = 100)
     private String openid;
 
-    /** #{@link enableTypeEnum} 是否可用 默认为1*/
-    @Column(name = "enable", nullable = false, columnDefinition = "int(4) DEFAULT 1")
+    /**
+     * #{@link enableTypeEnum} 是否可用 默认为1
+     */
+    @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
     private Integer enable;
 
-    /** 手机号 */
-    @Column(name = "mobilephone", unique = true, length = 12)
+    // 手机号
+    @Column(unique = true, length = 12)
     private Integer mobilephone;
 
-    /** 创建时间 */
-    @Column(name = "createdate", columnDefinition = "datetime DEFAULT current_timestamp")
+    // 创建时间
+    @Column(columnDefinition = "datetime DEFAULT current_timestamp")
     private Date createdate;
 
-    /** #{@link accountTypeEnum} 用户类型 */
-    @Column(name = "account_type", nullable = false, columnDefinition = "int(4) DEFAULT 1")
+    /**
+     * #{@link accountTypeEnum} 用户类型
+     */
+    @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
     private Integer accountType;
 
     private String username;            // 昵称
@@ -65,7 +69,9 @@ public class BaseUser {
     private String authoritiesString;   // 验证字段
 
 
-    /** 账户是否删除, 默认为1 */
+    /**
+     * 账户是否删除, 默认为1
+     */
     @Getter
     @AllArgsConstructor
     public enum enableTypeEnum {
@@ -76,7 +82,9 @@ public class BaseUser {
         private String remark;
     }
 
-    /** 账户注册类型 */
+    /**
+     * 账户注册类型
+     */
     @Getter
     @AllArgsConstructor
     public enum accountTypeEnum {
@@ -90,7 +98,8 @@ public class BaseUser {
     }
 
     @Tolerate
-    public BaseUser() {}
+    public BaseUser() {
+    }
 
     /**
      * 微信首次登录通过appcode添加一条用户记录
@@ -102,7 +111,7 @@ public class BaseUser {
         return BaseUser.builder()
                 .openid(openid)
                 .createdate(new Date())
-                .userId(BaseUtils.getUuid())
+                .id(BaseUtils.getUuid())
                 .signature(BaseUtils.getSignature())
                 .accountType(accountTypeEnum.one.type)
                 .enable(enableTypeEnum.defult.type).build();

@@ -40,7 +40,7 @@ public class SuggestMessageServiceImpl implements SuggestMessageService {
         SuggestMessage message = SuggestMessage.builder()
                 .id(BaseUtils.getUuid())
                 .context(messageContents)
-                .userId(userInfo.getUserId())
+                .baseUser(userInfo)
                 .build();
         return suggestMessageDao.save(message);
     }

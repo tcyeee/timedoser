@@ -1,5 +1,6 @@
 package demo.tcyeee.dao;
 
+import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.PlanTask;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,28 +20,28 @@ public interface PlanTaskDao extends CrudRepository<PlanTask, Integer> {
     /**
      * 获取用户创建的所有未删除的任务
      *
-     * @param userId userId
-     * @param type   t
+     * @param baseUser baseUser
+     * @param type   type
      * @return data
      */
-    List<PlanTask> findAllByUserIdAndTypeOrderByCreatedateDesc(String userId, int type);
+    List<PlanTask> findAllByBaseUserAndTypeOrderByCreatedateDesc(BaseUser baseUser, int type);
 
     /**
      * 统计用户创建的任务数量
      *
-     * @param userId userId
+     * @param baseUser baseUser
      * @return count
      */
-    int countByUserId(String userId);
+    int countByBaseUser(BaseUser baseUser);
 
     /**
      * 统计
      *
-     * @param userId userId
+     * @param baseUser baseUser
      * @param type   type
      * @return count
      */
-    int countByUserIdAndType(String userId, int type);
+    int countByBaseUserAndType(BaseUser baseUser, int type);
 
     /**
      * 修改任务状态

@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.experimental.Tolerate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -23,21 +20,20 @@ import java.util.Date;
 public class SuggestMessage {
 
     @Id
-    @Column(name = "id", unique = true, nullable = false, length = 200, updatable = false)
     private String id;
 
-    @Column(name = "user_id", nullable = false, length = 200)
-    private String userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BaseUser baseUser;
 
-    @Column(name = "context", nullable = false)
+    @Column(nullable = false)
     private String context;
 
     /** 创建时间 */
-    @Column(name = "createdate", columnDefinition = "datetime DEFAULT current_timestamp")
+    @Column(columnDefinition = "datetime DEFAULT current_timestamp")
     private Date createdate;
 
     /** #{@link messageTypeEnum} 留言类型 */
-    @Column(name = "message_type", nullable = false, columnDefinition = "int(4) DEFAULT 1")
+    @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
     private Integer messageType;
 
     /** 用户留言类型 */
