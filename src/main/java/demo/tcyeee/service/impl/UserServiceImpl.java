@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
         BaseUser userInfo = tokenUtils.getUserInfo();
         WeixinUserInfoVo weixinUserInfoVo = JSON.parseObject(userinfo, WeixinUserInfoVo.class);
         BeanUtils.copyProperties(weixinUserInfoVo, userInfo);
+        userInfo.setUsername(weixinUserInfoVo.getNickName());
         userDao.save(userInfo);
     }
 }

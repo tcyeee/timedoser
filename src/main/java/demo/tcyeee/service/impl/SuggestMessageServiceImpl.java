@@ -36,12 +36,10 @@ public class SuggestMessageServiceImpl implements SuggestMessageService {
     @Override
     public SuggestMessage addMessage(String messageContents) {
         BaseUser userInfo = tokenUtils.getUserInfo();
-
-        SuggestMessage message = SuggestMessage.builder()
-                .id(BaseUtils.getUuid())
-                .context(messageContents)
-                .baseUser(userInfo)
-                .build();
+        SuggestMessage message = new SuggestMessage();
+        message.setId(BaseUtils.getUuid());
+        message.setContext(messageContents);
+        message.setBaseUser(userInfo);
         return suggestMessageDao.save(message);
     }
 

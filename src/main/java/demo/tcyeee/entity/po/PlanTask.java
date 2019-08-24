@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -22,6 +24,8 @@ import static demo.tcyeee.utils.ResponseUtils.PARAMS_ERROR_INFO;
 @Data
 @Entity
 @Builder
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "plan_task")
 public class PlanTask {
 
@@ -46,11 +50,9 @@ public class PlanTask {
     @Column(columnDefinition = "datetime DEFAULT current_timestamp")
     private Date createdate;
 
-    /**
-     * 是否可用 默认为1 {@link typeEnum}
-     */
+    // 是否可用
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
-    private Integer type;
+    private typeEnum type;
 
     // 番茄时长(工作时长)
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 25")
@@ -64,11 +66,12 @@ public class PlanTask {
     @Getter
     @AllArgsConstructor
     public enum typeEnum {
+        err(0, "弃用位置"),
         defult(1, "未完成"),
         clean(2, "已完成"),
-        delele(9, "已经删除");
+        delele(3, "已经删除");
 
-        private int type;
+        private int index;
         private String remark;
     }
 

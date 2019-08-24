@@ -15,7 +15,7 @@ import lombok.Data;
 public class BaseInfoVo {
 
     /* 用户信息 */
-    private String userId;            // id
+    private String id;            // id
     private Integer enable;           // 是否可用
     private String username;          // username
     private Integer mobilephone;      // 手机号

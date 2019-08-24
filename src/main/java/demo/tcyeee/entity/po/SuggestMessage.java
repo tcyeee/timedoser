@@ -1,10 +1,10 @@
 package demo.tcyeee.entity.po;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
-import lombok.experimental.Tolerate;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +15,8 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Builder
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "suggest_message")
 public class SuggestMessage {
 
@@ -28,26 +29,21 @@ public class SuggestMessage {
     @Column(nullable = false)
     private String context;
 
-    /** 创建时间 */
+    // 创建时间
     @Column(columnDefinition = "datetime DEFAULT current_timestamp")
     private Date createdate;
 
-    /** #{@link messageTypeEnum} 留言类型 */
+    // 用户留言类型
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
-    private Integer messageType;
+    private messageTypeEnum messageType;
 
-    /** 用户留言类型 */
     @Getter
     @AllArgsConstructor
     public enum messageTypeEnum {
-        one(1, "普通留言"),
-        two(2, "星标留言");
-
-        private int type;
+        err(0, "错误"),
+        defule(1, "普通留言"),
+        tag(2, "星标留言");
+        private int index;
         private String remark;
     }
-
-    @Tolerate
-    public SuggestMessage() {}
-
 }

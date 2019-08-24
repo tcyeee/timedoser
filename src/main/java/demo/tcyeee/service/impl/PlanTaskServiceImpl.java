@@ -37,11 +37,11 @@ public class PlanTaskServiceImpl implements PlanTaskService {
         if (baseInfoVo == null) return false;
 
         PlanTask task = PlanTask.builder()
-                .type(1)
                 .name(vo.getName())
                 .baseUser(baseInfoVo)
-                .tomatoWorkTime(Integer.valueOf(vo.getMinute()))
+                .type(PlanTask.typeEnum.defult)
                 .tomatoRistTime(5)
+                .tomatoWorkTime(Integer.valueOf(vo.getMinute()))
                 .build();
         return planTaskDao.save(task) != null;
     }
@@ -58,16 +58,16 @@ public class PlanTaskServiceImpl implements PlanTaskService {
     public PlantaskList_12 findAllByUser_12() {
         PlantaskList_12 result = new PlantaskList_12();
         BaseUser baseUser = tokenUtils.getUserInfo();
-        int finishTaskCount = planTaskDao.countByBaseUserAndType(baseUser, PlanTask.typeEnum.clean.getType());
-        int waitTaskCount = planTaskDao.countByBaseUserAndType(baseUser, PlanTask.typeEnum.defult.getType());
+        int finishTaskCount = planTaskDao.countByBaseUserAndType(baseUser, PlanTask.typeEnum.clean);
+        int waitTaskCount = planTaskDao.countByBaseUserAndType(baseUser, PlanTask.typeEnum.defult);
 
         // 如果是第一次查询则创建一条任务
         if (planTaskDao.countByBaseUser(baseUser) == 0) {
             this.creatDemoTask(baseUser);
         }
 
-        List<PlanTask> waitTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, 1);
-        List<PlanTask> clenTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, 2);
+        List<PlanTask> waitTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, PlanTask.typeEnum.defult);
+        List<PlanTask> clenTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, PlanTask.typeEnum.clean);
 
         result.setWaitTask(waitTask);
         result.setFinishTask(clenTask);
@@ -84,7 +84,7 @@ public class PlanTaskServiceImpl implements PlanTaskService {
                 .tomatoWorkTime(25)
                 .tomatoRistTime(5)
                 .name("示例任务")
-                .type(1)
+                .type(PlanTask.typeEnum.defult)
                 .build();
         planTaskDao.save(planTask);
     }
@@ -111,7 +111,7 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean deleteOne(String taskId) {
-        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.delele.getType()) >= 1;
+        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.delele.getIndex()) >= 1;
     }
 
 
@@ -122,7 +122,7 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean finishOne(String taskId) {
-        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.clean.getType()) >= 1;
+        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.clean.getIndex()) >= 1;
     }
 
 
@@ -133,6 +133,6 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean restartOne(String taskId) {
-        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.defult.getType()) >= 1;
+        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.defult.getIndex()) >= 1;
     }
 }

@@ -3,6 +3,8 @@ package demo.tcyeee.entity.po;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,6 +18,8 @@ import java.util.Date;
 @Data
 @Entity
 @Builder
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "task_record")
 public class TaskRecord {
 

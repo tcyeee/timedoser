@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.experimental.Tolerate;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,6 +21,8 @@ import java.util.Date;
 @Data
 @Entity
 @Builder
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "base_user")
 public class BaseUser {
 
@@ -34,11 +38,9 @@ public class BaseUser {
     @Column(unique = true, length = 100)
     private String openid;
 
-    /**
-     * #{@link enableTypeEnum} 是否可用 默认为1
-     */
+    // 账户状态
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
-    private Integer enable;
+    private enableTypeEnum enable;
 
     // 手机号
     @Column(unique = true, length = 12)
@@ -48,11 +50,9 @@ public class BaseUser {
     @Column(columnDefinition = "datetime DEFAULT current_timestamp")
     private Date createdate;
 
-    /**
-     * #{@link accountTypeEnum} 用户类型
-     */
+    // 用户类型
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
-    private Integer accountType;
+    private accountTypeEnum accountType;
 
     private String username;            // 昵称
     private String avatarUrl;           // 头像地址
@@ -69,37 +69,36 @@ public class BaseUser {
     private String authoritiesString;   // 验证字段
 
 
-    /**
-     * 账户是否删除, 默认为1
-     */
+    // 账户状态
     @Getter
     @AllArgsConstructor
     public enum enableTypeEnum {
+        err(0, "弃用位置"),
         defult(1, "可以正常使用"),
         two(2, "账号已经注销,现在不可用");
 
-        private int type;
+        private int index;
         private String remark;
     }
 
-    /**
-     * 账户注册类型
-     */
+    // 账户注册类型
     @Getter
     @AllArgsConstructor
     public enum accountTypeEnum {
-        one(1, "小程序用户, 只有openid, 没有注册"),
+        err(0, "弃用位置"),
+        defult(1, "小程序用户, 只有openid, 没有注册"),
         two(2, "手机号注册用户"),
         author(99, "作者账户"),
         Administrator(98, "管理员账户");
 
-        private int type;
+        private int index;
         private String remark;
     }
 
     @Tolerate
     public BaseUser() {
     }
+
 
     /**
      * 微信首次登录通过appcode添加一条用户记录
@@ -113,7 +112,7 @@ public class BaseUser {
                 .createdate(new Date())
                 .id(BaseUtils.getUuid())
                 .signature(BaseUtils.getSignature())
-                .accountType(accountTypeEnum.one.type)
-                .enable(enableTypeEnum.defult.type).build();
+                .accountType(accountTypeEnum.defult)
+                .enable(enableTypeEnum.defult).build();
     }
 }

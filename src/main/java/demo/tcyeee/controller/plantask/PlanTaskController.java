@@ -81,17 +81,6 @@ public class PlanTaskController {
      * 获取当前用户所有的任务
      *
      * @return data
-     * @since version_1.1.00
-     */
-    @RequestMapping("getAllTask")
-    public String getAllTask() {
-        return creatJsonResponse(planTaskService.findAllByUser());
-    }
-
-    /**
-     * 获取当前用户所有的任务
-     *
-     * @return data
      * @since version_1.1.01
      */
     @RequestMapping("getAllTask_12")

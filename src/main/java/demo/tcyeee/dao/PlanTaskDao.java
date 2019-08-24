@@ -21,10 +21,10 @@ public interface PlanTaskDao extends CrudRepository<PlanTask, Integer> {
      * 获取用户创建的所有未删除的任务
      *
      * @param baseUser baseUser
-     * @param type   type
+     * @param type     type
      * @return data
      */
-    List<PlanTask> findAllByBaseUserAndTypeOrderByCreatedateDesc(BaseUser baseUser, int type);
+    List<PlanTask> findAllByBaseUserAndTypeOrderByCreatedateDesc(BaseUser baseUser, PlanTask.typeEnum type);
 
     /**
      * 统计用户创建的任务数量
@@ -38,10 +38,10 @@ public interface PlanTaskDao extends CrudRepository<PlanTask, Integer> {
      * 统计
      *
      * @param baseUser baseUser
-     * @param type   type
+     * @param type     type
      * @return count
      */
-    int countByBaseUserAndType(BaseUser baseUser, int type);
+    int countByBaseUserAndType(BaseUser baseUser, PlanTask.typeEnum type);
 
     /**
      * 修改任务状态
