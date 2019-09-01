@@ -1,5 +1,6 @@
 package demo.tcyeee.entity.vo;
 
+import demo.tcyeee.entity.po.BaseUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class LoginInfoVo extends BaseInfoVo {
+public class LoginInfoVo extends BaseUser {
     private String token;
 }
