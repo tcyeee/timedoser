@@ -10,10 +10,10 @@ import java.util.UUID;
 /**
  * 自定义的一些基础类
  *
- * @author chenyueee
+ * @author tcyeee
  * @since 2019-07-20 13:35
  */
-@SuppressWarnings("unused")
+@SuppressWarnings("all")
 public final class BaseUtils {
 
     /**

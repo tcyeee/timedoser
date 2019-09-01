@@ -4,7 +4,7 @@ import demo.tcyeee.entity.vo.VersionInfoVo;
 import org.springframework.stereotype.Service;
 
 /**
- * @author chenyueee
+ * @author tcyeee
  * @since 2019-07-21 12:14
  */
 @Service

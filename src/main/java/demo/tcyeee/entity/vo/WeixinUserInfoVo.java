@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 微信获取的基础用户信息
  *
- * @author chenyueee
+ * @author tcyeee
  * @since 2019-07-25 23:41
  */
 @Data

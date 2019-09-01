@@ -5,7 +5,7 @@ import demo.tcyeee.entity.base.PageBean;
 /**
  * 分页工具类
  *
- * @author chenyueee
+ * @author tcyeee
  * @since 2019-07-20 13:29
  */
 public class PageUtils {

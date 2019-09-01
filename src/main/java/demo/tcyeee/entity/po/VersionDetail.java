@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 版本升级信息
  *
- * @author chenyueee
+ * @author tcyeee
  * @since 2019-07-21 10:36
  */
 @Data

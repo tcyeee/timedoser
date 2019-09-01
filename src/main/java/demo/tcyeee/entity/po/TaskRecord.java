@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 任务历史
  *
- * @author chenyueee
+ * @author tcyeee
  * @since 2019-08-22 23:31
  */
 @Data
@@ -33,8 +33,13 @@ public class TaskRecord {
     @ManyToOne(fetch = FetchType.LAZY)
     private PlanTask planTask;
 
-    private Date creatTime;      // 创建时间
-    private int tomatoWorkTime;  // 学习时长
+    private Date creatTime;              // 创建时间
+    private int tomatoWorkTime;          // 学习时长
+
+
+
+
+
 
     @Tolerate
     public TaskRecord() {
