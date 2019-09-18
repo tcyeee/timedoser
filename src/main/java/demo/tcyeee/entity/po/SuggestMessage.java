@@ -43,6 +43,7 @@ public class SuggestMessage {
         err(0, "错误"),
         defule(1, "普通留言"),
         tag(2, "星标留言");
+
         private int index;
         private String remark;
     }

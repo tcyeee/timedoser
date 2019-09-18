@@ -1,7 +1,9 @@
 package demo.tcyeee.entity.po;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.experimental.Tolerate;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,8 +22,8 @@ import java.util.Date;
 @Builder
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "task_record")
-public class TaskRecord {
+@Table(name = "plan_task_history")
+public class PlanTaskHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,15 +36,26 @@ public class TaskRecord {
     private PlanTask planTask;
 
     private Date creatTime;              // 创建时间
-    private int tomatoWorkTime;          // 学习时长
+
+    @Column(nullable = false)
+    private recordStatus status;         // 数据状态
 
 
+    @Getter
+    @AllArgsConstructor
+    public enum recordStatus {
 
+        err(0, "错误"),
+        defule(1, "默认状态"),
+        delete(2, "已经删除");
 
+        private int index;
+        private String remark;
+    }
 
 
     @Tolerate
-    public TaskRecord() {
+    public PlanTaskHistory() {
     }
 
 }

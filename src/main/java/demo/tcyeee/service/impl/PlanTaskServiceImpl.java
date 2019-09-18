@@ -3,6 +3,7 @@ package demo.tcyeee.service.impl;
 import demo.tcyeee.dao.PlanTaskDao;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.PlanTask;
+import demo.tcyeee.entity.po.PlanTaskHistory;
 import demo.tcyeee.entity.vo.PlantaskList_12;
 import demo.tcyeee.entity.vo.addPlanTaskVo;
 import demo.tcyeee.service.PlanTaskService;
@@ -122,6 +123,13 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean finishOne(String taskId) {
+        // 1.添加一条任务历史
+        PlanTaskHistory.builder()
+                .baseUser(null).build();
+
+
+
+        // 2.修改当前任务状态
         return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.clean.getIndex()) >= 1;
     }
 
