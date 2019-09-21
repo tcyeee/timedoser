@@ -47,7 +47,7 @@ public class BaseUser {
     private String mobilephone;
 
     // 创建时间
-    @Column(columnDefinition = "datetime DEFAULT current_timestamp")
+    @Column(columnDefinition = "timestamp DEFAULT current_timestamp")
     private Date createdate;
 
     // 用户类型

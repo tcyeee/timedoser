@@ -60,16 +60,12 @@ public final class TokenUtils {
      * 这里openID的主键设置为openID
      */
     public String generateToken(BaseUser user) {
-        String cacheKey = EhCacheUtils.TOKEN_INFO + DateUtils.getDayBegin() + user.getOpenid();
-        String token = (String) EhCacheUtils.get(cacheKey);
-        if (token == null) {
-            Map<String, Object> claims = new HashMap<>();
-            claims.put(Claims.ISSUER, user.getOpenid());
-            claims.put(Claims.SUBJECT, user.getMobilephone());
-            token = this.generateToken(claims);
-        }
-        EhCacheUtils.set(cacheKey, token);
-        return token;
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(Claims.ISSUER, user.getOpenid());
+        claims.put(Claims.SUBJECT, user.getMobilephone());
+        claims.put("created", new Date());
+
+        return this.generateToken(claims);
     }
 
 
@@ -117,7 +113,7 @@ public final class TokenUtils {
     /**
      * 从 token 中拿到 openId
      */
-    private String getOpenIdFromToken(String token) {
+    public String getOpenIdFromToken(String token) {
         String openId;
         try {
             final Claims claims = this.getClaimsFromToken(token);
@@ -193,6 +189,6 @@ public final class TokenUtils {
      * 检查 token 是否是在最后一次修改密码之前创建的（账号修改密码之后之前生成的 token 即使没过期也判断为无效）
      */
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
-        return (lastPasswordReset != null && created.before(lastPasswordReset));
+        return (lastPasswordReset != null && created.after(lastPasswordReset));
     }
 }

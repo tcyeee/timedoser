@@ -1,7 +1,10 @@
 package demo.tcyeee.utils;
 
+import demo.tcyeee.entity.po.BaseUser;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
@@ -15,6 +18,20 @@ import java.util.UUID;
  */
 @SuppressWarnings("all")
 public final class BaseUtils {
+
+    /**
+     * 获取当前登录人信息
+     *
+     * @return userInfo
+     */
+    @SuppressWarnings("all")
+    public static BaseUser userInfo() {
+        //获取到当前线程绑定的请求对象
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        //已经拿到session,就可以拿到session中保存的用户信息了。
+        Object userInfo = request.getSession().getAttribute("userInfo");
+        return userInfo == null ? null : (BaseUser) userInfo;
+    }
 
     /**
      * 获取一个32位的UUID

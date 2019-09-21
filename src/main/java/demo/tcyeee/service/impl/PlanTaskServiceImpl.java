@@ -1,12 +1,14 @@
 package demo.tcyeee.service.impl;
 
 import demo.tcyeee.dao.PlanTaskDao;
+import demo.tcyeee.dao.PlanTaskHistoryDao;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.PlanTask;
 import demo.tcyeee.entity.po.PlanTaskHistory;
 import demo.tcyeee.entity.vo.PlantaskList_12;
 import demo.tcyeee.entity.vo.addPlanTaskVo;
 import demo.tcyeee.service.PlanTaskService;
+import demo.tcyeee.utils.BaseUtils;
 import demo.tcyeee.utils.TokenUtils;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,9 @@ public class PlanTaskServiceImpl implements PlanTaskService {
     @Resource
     private TokenUtils tokenUtils;
 
+    @Resource
+    private PlanTaskHistoryDao historyDao;
+
     /**
      * 新增一个待办任务
      *
@@ -37,13 +42,12 @@ public class PlanTaskServiceImpl implements PlanTaskService {
         BaseUser baseInfoVo = tokenUtils.getUserInfo();
         if (baseInfoVo == null) return false;
 
-        PlanTask task = PlanTask.builder()
-                .name(vo.getName())
-                .baseUser(baseInfoVo)
-                .type(PlanTask.typeEnum.defult)
-                .tomatoRistTime(5)
-                .tomatoWorkTime(Integer.valueOf(vo.getMinute()))
-                .build();
+        PlanTask task = new PlanTask();
+        task.setName(vo.getName());
+        task.setBaseUser(baseInfoVo);
+        task.setType(PlanTask.typeEnum.defult);
+        task.setTomatoRistTime(5);
+        task.setTomatoWorkTime(Integer.valueOf(vo.getMinute()));
         return planTaskDao.save(task) != null;
     }
 
@@ -80,13 +84,12 @@ public class PlanTaskServiceImpl implements PlanTaskService {
 
     // 创建一个示例项目
     private void creatDemoTask(BaseUser baseUser) {
-        PlanTask planTask = PlanTask.builder()
-                .baseUser(baseUser)
-                .tomatoWorkTime(25)
-                .tomatoRistTime(5)
-                .name("示例任务")
-                .type(PlanTask.typeEnum.defult)
-                .build();
+        PlanTask planTask = new PlanTask();
+        planTask.setBaseUser(baseUser);
+        planTask.setTomatoWorkTime(25);
+        planTask.setTomatoRistTime(5);
+        planTask.setName("示例任务");
+        planTask.setType(PlanTask.typeEnum.defult);
         planTaskDao.save(planTask);
     }
 
@@ -123,13 +126,15 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean finishOne(String taskId) {
+        BaseUser baseUser = BaseUtils.userInfo();
+        PlanTask planTask = planTaskDao.getOne(Integer.parseInt(taskId));
 
         // 1.添加一条任务历史
-        PlanTaskHistory.builder()
-                .baseUser(null)
-                .build();
-
-
+        PlanTaskHistory history = new PlanTaskHistory();
+        history.setBaseUser(baseUser);
+        history.setPlanTask(planTask);
+        history.setTomatoWorkTime(planTask.getTomatoWorkTime());
+        historyDao.save(history);
 
         // 2.修改当前任务状态
         return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.clean.getIndex()) >= 1;

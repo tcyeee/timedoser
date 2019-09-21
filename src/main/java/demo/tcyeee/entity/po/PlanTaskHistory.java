@@ -35,6 +35,7 @@ public class PlanTaskHistory {
     @ManyToOne(fetch = FetchType.LAZY)
     private PlanTask planTask;
 
+    private int tomatoWorkTime;          // 学习时长(因为关联的任务是可以被修改的,所以这里直接记录下学习的时长)
     private Date creatTime;              // 创建时间
 
     @Column(nullable = false)

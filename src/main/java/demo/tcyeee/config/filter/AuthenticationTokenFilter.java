@@ -47,13 +47,13 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
         String authToken = httpRequest.getHeader(this.tokenHeader);
         // 尝试拿 token 中的 userinfo
         // 若是没有 token 或者拿 username 时出现异常，那么 username 为 null
-        String mobilephone = tokenUtils.getMobilephoneFromToken(authToken);
+        String openId = tokenUtils.getOpenIdFromToken(authToken);
 
         // 如果上面解析 token 成功并且拿到了 username 并且本次会话的权限还未被写入
-        if (mobilephone != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (openId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             // UserDetails 类是 Spring Security 用于保存用户权限的实体类
-            BaseUser userInfo = userDao.findByMobilephone(mobilephone);
+            BaseUser userInfo = userDao.findByOpenid(openId);
 
             // userInfo存入session
             ((HttpServletRequest) request).getSession().setAttribute("userInfo", userInfo);

@@ -2,9 +2,9 @@ package demo.tcyeee.dao;
 
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.PlanTask;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2019-07-20 19:17
  */
 @Repository
-public interface PlanTaskDao extends CrudRepository<PlanTask, Integer> {
+public interface PlanTaskDao extends JpaRepository<PlanTask, Integer> {
 
     /**
      * 获取用户创建的所有未删除的任务
