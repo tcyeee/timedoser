@@ -93,11 +93,11 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!--        &lt;!&ndash; 权限管理 &ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-security</artifactId>-->
-        <!--        </dependency>-->
+        <!-- 权限管理 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
         <!-- token生成 -->
         <dependency>

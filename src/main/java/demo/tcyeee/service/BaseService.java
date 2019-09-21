@@ -40,7 +40,7 @@ public interface BaseService {
      * @param mobilephone 手机号
      * @return baseData
      */
-    BaseInfoVo findByPhone(Integer mobilephone);
+    BaseInfoVo findByPhone(String mobilephone);
 
     /**
      * 测试接口

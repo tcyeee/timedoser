@@ -1,4 +1,4 @@
-package demo.tcyeee.controller;
+package demo.tcyeee.controller.version;
 
 import demo.tcyeee.service.VersionService;
 import org.springframework.beans.factory.annotation.Value;

@@ -123,9 +123,11 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean finishOne(String taskId) {
+
         // 1.添加一条任务历史
         PlanTaskHistory.builder()
-                .baseUser(null).build();
+                .baseUser(null)
+                .build();
 
 
 

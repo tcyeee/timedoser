@@ -102,11 +102,11 @@ public final class TokenUtils {
     /**
      * 从 token 中拿到 mobilephone
      */
-    private Integer getMobilephoneFromToken(String token) {
-        Integer mobilephone;
+    public String getMobilephoneFromToken(String token) {
+        String mobilephone;
         try {
             final Claims claims = this.getClaimsFromToken(token);
-            mobilephone = Integer.valueOf(claims.getSubject());
+            mobilephone = claims.getSubject();
         } catch (Exception e) {
             mobilephone = null;
         }

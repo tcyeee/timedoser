@@ -76,7 +76,7 @@ public class BaseServiceImpl implements BaseService {
      * @return baseData
      */
     @Override
-    public BaseInfoVo findByPhone(Integer mobilephone) {
+    public BaseInfoVo findByPhone(String mobilephone) {
         BaseInfoVo result = new BaseInfoVo();
         BaseUser user = userDao.findByMobilephone(mobilephone);
 

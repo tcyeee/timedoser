@@ -1,4 +1,4 @@
-package demo.tcyeee.controller;
+package demo.tcyeee.controller.message;
 
 import demo.tcyeee.dao.SuggestMessageDao;
 import demo.tcyeee.entity.base.PageBean;

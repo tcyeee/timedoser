@@ -19,7 +19,7 @@ public interface BaseUserDao extends CrudRepository<BaseUser, Long> {
      * @param password    password
      * @return login info
      */
-    BaseUser findByMobilephoneAndPassword(Integer mobilephone, String password);
+    BaseUser findByMobilephoneAndPassword(String mobilephone, String password);
 
     /**
      * 通过手机号查询用户
@@ -27,7 +27,7 @@ public interface BaseUserDao extends CrudRepository<BaseUser, Long> {
      * @param mobilephone mobilephone
      * @return data
      */
-    BaseUser findByMobilephone(Integer mobilephone);
+    BaseUser findByMobilephone(String mobilephone);
 
     /**
      * 通过openID查找用户基本信息

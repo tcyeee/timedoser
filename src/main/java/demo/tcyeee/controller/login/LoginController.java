@@ -1,4 +1,4 @@
-package demo.tcyeee.controller;
+package demo.tcyeee.controller.login;
 
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
@@ -59,7 +59,7 @@ public class LoginController {
      */
     @PostMapping("login")
     public String login(BaseUser baseUser) {
-        if (baseUser.getMobilephone() == null || baseUser.getMobilephone() == 0 || baseUser.getPassword() == null) {
+        if (StringUtils.isBlank(baseUser.getMobilephone())|| baseUser.getPassword() == null) {
             return creatErrResponse(PARAMS_ERROR);
         }
         return creatJsonResponse(loginService.login(baseUser));

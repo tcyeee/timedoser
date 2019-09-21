@@ -10,6 +10,7 @@ import demo.tcyeee.utils.WeiXinUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -44,9 +45,10 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Map<String, String> login(BaseUser loginUser) {
         Map<String, String> result = new HashMap<>();
+        String password = DigestUtils.md5DigestAsHex(loginUser.getPassword().getBytes()).toUpperCase();
 
         // 获取并加工返回
-        BaseUser baseUser = baseUserDao.findByMobilephoneAndPassword(loginUser.getMobilephone(), loginUser.getPassword());
+        BaseUser baseUser = baseUserDao.findByMobilephoneAndPassword(loginUser.getMobilephone(), password);
         result.put(tokenHeader, tokenUtils.generateToken(baseUser));
         return result;
     }

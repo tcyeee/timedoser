@@ -43,8 +43,8 @@ public class BaseUser {
     private enableTypeEnum enable;
 
     // 手机号
-    @Column(unique = true, length = 12)
-    private Integer mobilephone;
+    @Column(unique = true, length = 11)
+    private String mobilephone;
 
     // 创建时间
     @Column(columnDefinition = "datetime DEFAULT current_timestamp")

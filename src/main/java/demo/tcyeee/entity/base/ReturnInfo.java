@@ -51,7 +51,6 @@ public class ReturnInfo {
         ReturnInfo returnInfo = new ReturnInfo();
         returnInfo.setSuccess(true);
         returnInfo.setCode(ReturnCode.SUCCESS.getCode());
-        returnInfo.setMsg(ReturnCode.SUCCESS.getMsg());
         returnInfo.setData(data);
         return returnInfo;
     }
