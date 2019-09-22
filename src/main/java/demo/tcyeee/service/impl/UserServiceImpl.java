@@ -25,11 +25,11 @@ public class UserServiceImpl implements UserService {
     private TokenUtils tokenUtils;
 
     @Override
-    public void updataUserInfo(String userinfo) {
+    public BaseUser updataUserInfo(String userinfo) {
         BaseUser userInfo = tokenUtils.getUserInfo();
         WeixinUserInfoVo weixinUserInfoVo = JSON.parseObject(userinfo, WeixinUserInfoVo.class);
         BeanUtils.copyProperties(weixinUserInfoVo, userInfo);
         userInfo.setUsername(weixinUserInfoVo.getNickName());
-        userDao.save(userInfo);
+        return userDao.save(userInfo);
     }
 }

@@ -1,5 +1,6 @@
 package demo.tcyeee.service;
 
+import demo.tcyeee.entity.po.BaseUser;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,5 +11,5 @@ import org.springframework.stereotype.Service;
 public interface UserService {
 
 
-    void updataUserInfo(String userinfo);
+    BaseUser updataUserInfo(String userinfo);
 }

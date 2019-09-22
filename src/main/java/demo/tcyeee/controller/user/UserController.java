@@ -28,8 +28,7 @@ public class UserController {
      */
     @RequestMapping("updateUserInfo")
     public String updateUserInfo(String userInfo) {
-        if (StringUtils.isBlank(userInfo)) return creatErrResponse(PARAMS_ERROR);
-        userService.updataUserInfo(userInfo);
-        return creatJsonResponse(UPDATA_SUCCESS_INFO);
+        if (StringUtils.isBlank(userInfo) || "null".equals(userInfo)) return creatErrResponse(PARAMS_ERROR);
+        return creatJsonResponse(userService.updataUserInfo(userInfo));
     }
 }

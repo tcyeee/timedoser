@@ -30,7 +30,7 @@ public final class BaseUtils {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //已经拿到session,就可以拿到session中保存的用户信息了。
         Object userInfo = request.getSession().getAttribute("userInfo");
-        return userInfo == null ? null : (BaseUser) userInfo;
+        return (BaseUser) userInfo;
     }
 
     /**
