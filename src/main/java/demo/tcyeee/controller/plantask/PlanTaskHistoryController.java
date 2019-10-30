@@ -1,4 +1,4 @@
-package demo.tcyeee.controller.planTask;
+package demo.tcyeee.controller.plantask;
 
 import demo.tcyeee.service.PlanTaskHistoryService;
 import org.springframework.web.bind.annotation.RequestMapping;

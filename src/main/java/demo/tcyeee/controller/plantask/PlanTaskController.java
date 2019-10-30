@@ -1,4 +1,4 @@
-package demo.tcyeee.controller.planTask;
+package demo.tcyeee.controller.plantask;
 
 import demo.tcyeee.entity.po.PlanTask;
 import demo.tcyeee.entity.vo.addPlanTaskVo;
