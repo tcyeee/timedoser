@@ -1,6 +1,5 @@
 package demo.tcyeee.entity.vo;
 
-import demo.tcyeee.controller.planTask.PlanTaskController;
 import demo.tcyeee.entity.po.PlanTask;
 import lombok.Data;
 
@@ -11,7 +10,6 @@ import java.util.List;
  *
  * @author tcyeee
  * @date 2019-08-22 10:28
- * @see PlanTaskController#getAllTask_12()
  */
 @Data
 public class PlantaskList_12 {
