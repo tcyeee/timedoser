@@ -17,4 +17,5 @@ public class SettingController {
     public String test() {
         return FixedInfo.linkTest;
     }
+
 }
