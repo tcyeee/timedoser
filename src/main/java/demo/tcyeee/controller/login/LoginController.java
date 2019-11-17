@@ -87,6 +87,6 @@ public class LoginController {
     // 用于测试
     @GetMapping("test")
     public String test() {
-        return creatJsonResponse("看到这个代表你成功了!!!");
+        return creatJsonResponse("看到这个代表你成功了!!!:githook￿");
     }
 }
