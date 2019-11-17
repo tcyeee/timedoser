@@ -1,5 +1,6 @@
 package demo.tcyeee.controller.login;
 
+import demo.tcyeee.entity.base.FixedInfo;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.BaseInfoVo;
 import demo.tcyeee.service.BaseService;
@@ -87,6 +88,6 @@ public class LoginController {
     // 用于测试
     @GetMapping("test")
     public String test() {
-        return creatJsonResponse("试一下githook构建2￿");
+        return creatJsonResponse(FixedInfo.linkTest);
     }
 }
