@@ -59,7 +59,7 @@ public class LoginController {
      */
     @PostMapping("login")
     public String login(BaseUser baseUser) {
-        if (StringUtils.isBlank(baseUser.getMobilephone())|| baseUser.getPassword() == null) {
+        if (StringUtils.isBlank(baseUser.getMobilephone()) || baseUser.getPassword() == null) {
             return creatErrResponse(PARAMS_ERROR);
         }
         return creatJsonResponse(loginService.login(baseUser));
@@ -85,10 +85,8 @@ public class LoginController {
     }
 
     // 用于测试
-    @RequestMapping("test")
-    public String test(String test) {
-        if (StringUtils.isBlank(test)) return creatErrResponse(PARAMS_ERROR, PARAMS_ERROR_INFO + "test");
-
-        return creatJsonResponse("看到这个代表你成功了");
+    @GetMapping("test")
+    public String test() {
+        return creatJsonResponse("看到这个代表你成功了!");
     }
 }
