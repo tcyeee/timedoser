@@ -18,4 +18,9 @@ public class SettingController {
         return FixedInfo.linkTest;
     }
 
+    @GetMapping("test2")
+    public String test2() {
+        return FixedInfo.linkTest + "wode";
+    }
+
 }
