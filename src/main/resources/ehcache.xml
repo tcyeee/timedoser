@@ -1,32 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache updateCheck="false" name="defaultCache">
-    <!-- 	参数说明：
-            （0）diskStore： 临时缓存存放路径
-            （1）name：Cache的唯一标识。
-            （2）maxElementsInMemory：内存中最大缓存对象数。
-            （3）eternal：Element是否永久有效，一旦设置true，timeout将不起作用。
-            （4）timeToIdleSeconds：设置Element在失效前的允许闲置时间。仅当element不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大。
-            （5）timeToLiveSeconds：设置Element在失效前允许存活时间。最大时间介于创建时间和失效时间之间。仅当element不是永久有效时使用，默认是0.，也就是element存活时间无穷大。
-            （6）overflowToDisk：配置此属性，当内存中Element数量达到maxElementsInMemory时，Ehcache将会Element写到磁盘中。
-            （7）maxElementsOnDisk：磁盘中最大缓存对象数，若是0表示无穷大。
-            （8） memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略 去清理缓存中的内容。默认策略是LRU（最近最少使用），你也可以设置为FIFO（先进先出）或是LFU（较少使用）
-     -->
+    <!--参数说明：
+        name                [必填]Cache的唯一标识
+        clearOnFlush        [选填]内存数量最大时是否清除
+        maxElementsInMemory [选填]内存中允许存储的最大的元素个数，0:无限
+        eternal             [选填]Element是否永久有效，一旦设置true，timeout将不起作用。
+        timeToIdleSeconds   [选填]Element闲置x秒以后失效,仅当eternal=false时使用 默认0:无限闲置
+        timeToLiveSeconds   [选填]Element存在x秒以后失效,仅当eternal=false时使用 默认0:无限存活
+        overflowToDisk      [选填]内存不足时，是否启用磁盘缓存
+        maxEntriesLocalDisk [选填]内存中对象数量达到maxElementsInMemory时，Ehcache将会对象写到磁盘中
+        maxElementsOnDisk   [选填]磁盘中最大缓存对象数, 0:无限
+        diskPersistent      [选填]是否在VM重启时存储硬盘的缓存数据    默认:false
+        diskSpoolBufferSizeMB             [选填]设置磁盘缓存的缓存区大小 默认:30MB
+        diskExpiryThreadIntervalSeconds   [选填]磁盘失效线程运行时间间隔，默认:120s
+        memoryStoreEvictionPolicy         [选填]内存中对象达到上限时,Ehcache将会根据指定的策略去清理缓存,默认:LRU(最近最少使用  可选 FIFO:先进先出  LFU较少使用
+        maxEntriesLocalHeap               [必填]堆内存上最大对象数量 maxBytesLocalHeap和maxEntriesLocalHeap不可同时出现
+         -->
 
-    <!-- 默认缓存 -->
-    <cache name="defultCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
+    <!-- 默认缓存配置 -->
+    <defaultCache
+            eternal="false"
+            clearOnFlush="true"
+            maxEntriesLocalHeap="500"
+            timeToIdleSeconds="3000"
+            timeToLiveSeconds="30000"
+            overflowToDisk="true"
+            diskPersistent="true"
+            maxEntriesLocalDisk="100000"
+    />
 
-    <!-- 方法缓存 -->
-    <cache name="functionCache" maxEntriesLocalHeap="10000" overflowToDisk="true"
-           eternal="true" timeToLiveSeconds="0" timeToIdleSeconds="0"
-           diskPersistent="true" diskExpiryThreadIntervalSeconds="600"/>
-
-
-    <!-- 临时缓存存放路径 -->
+    <!-- 实体化存放路径 -->
     <diskStore path="../ehcache"/>
 
-    <!-- 默认缓存配置. -->
-    <defaultCache maxEntriesLocalHeap="100" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
-                  overflowToDisk="true" maxEntriesLocalDisk="100000"/>
+    <!-- 默认缓存 -->
+    <cache name="defultCache"/>
 
+    <!-- 永不失效缓存 -->
+    <cache name="permanentCache"
+           eternal="true"
+           maxEntriesLocalHeap="10000"
+           maxEntriesLocalDisk="100000"
+           diskExpiryThreadIntervalSeconds="600"
+    />
 
 </ehcache>

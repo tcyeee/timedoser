@@ -16,7 +16,6 @@ public final class EhCacheUtils {
 
     private static CacheManager cacheManager = CacheManager.create();
     private static final String DEFULT_CACHE = "defultCache";
-    private static final String FUNCTION_CACHE = "functionCache";
 
     // 用户登录时候存入的数据
     public static final String LOGIN_USER_INFO = "loginUserInfo";
