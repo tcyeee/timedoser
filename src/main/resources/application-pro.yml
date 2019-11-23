@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    show-sql: false
+---
+logging:
+  path: ../logs/TimeDoser
+  level:
+    root: info

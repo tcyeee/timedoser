@@ -2,7 +2,7 @@ server:
   port: 1901  # 服务器访问端口
   servlet:
     context-path: /timeDoser # 现在有多个项目,用于区分, 则加上名称空间
-
+---
 spring:
   datasource:
     url: ${url}?useUnicode=true&characterEncoding=UTF-8
@@ -13,13 +13,6 @@ spring:
     allow-bean-definition-overriding: true
   jpa:
     database: MYSQL
-    show-sql: true                 # 是否显示后台处理的SQL语句
-#    hibernate.ddl-auto: update     # 自动检查实体和数据库表是否一致，如果不一致则会进行更新数据库表(只有创建新表的时候启用这个,否则每次启动都会检查外键)
-
-# 调整日志级别
-logging:
-  level:
-    root: warn
 ---
 # Mybatis配置
 mybatis:
@@ -45,4 +38,6 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 ---
-
+logging:
+  level:
+    root: error

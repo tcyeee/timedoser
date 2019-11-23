@@ -7,7 +7,7 @@ import demo.tcyeee.entity.vo.BaseInfoVo;
 import demo.tcyeee.service.BaseService;
 import demo.tcyeee.utils.TokenUtils;
 import demo.tcyeee.utils.WeiXinUtils;
-import io.micrometer.core.instrument.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

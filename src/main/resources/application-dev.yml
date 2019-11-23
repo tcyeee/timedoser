@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    show-sql: true                 # 是否显示后台处理的SQL语句
+    #    hibernate.ddl-auto: update     # 自动检查实体和数据库表是否一致，如果不一致则会进行更新数据库表(只有创建新表的时候启用这个,否则每次启动都会检查外键)
+---
+logging:
+  level:
+    root: warn

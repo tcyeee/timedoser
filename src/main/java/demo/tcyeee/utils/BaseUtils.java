@@ -1,7 +1,7 @@
 package demo.tcyeee.utils;
 
 import demo.tcyeee.entity.po.BaseUser;
-import io.micrometer.core.instrument.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
