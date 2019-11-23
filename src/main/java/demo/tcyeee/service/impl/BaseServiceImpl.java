@@ -30,6 +30,7 @@ public class BaseServiceImpl implements BaseService {
     @Resource
     private TokenUtils tokenUtils;
 
+
     /**
      * 获取用户唯一ID
      *
