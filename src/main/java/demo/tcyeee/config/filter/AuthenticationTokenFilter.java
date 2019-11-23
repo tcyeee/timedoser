@@ -1,7 +1,6 @@
 package demo.tcyeee.config.filter;
 
 import demo.tcyeee.dao.BaseUserDao;
-import demo.tcyeee.entity.base.ReturnInfo;
 import demo.tcyeee.entity.base.TokenDetail;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.utils.ResponseUtils;
@@ -20,6 +19,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+
+import static demo.tcyeee.utils.ResponseUtils.ACCESS_ERROR_MSG;
 
 /**
  * 配置在 Spring Security 的配置类中
@@ -74,12 +75,11 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
             if (!userDetails.isEnabled()) {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json;charset=UTF-8");
-                String info = ResponseUtils.creatResponse(ReturnInfo.markCustom(false, ReturnInfo.ReturnCode.ACCOUNT_ERROR.getCode(), ReturnInfo.ReturnCode.ACCOUNT_ERROR.getMsg(), ""));
+                String info = ResponseUtils.creatErrResponse(ResponseUtils.ReturnCode.PERMISSION_DISABLE, ACCESS_ERROR_MSG);
                 response.getWriter().print(info);
                 return;
             }
         }
-
         chain.doFilter(request, response);
     }
 

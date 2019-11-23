@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import static demo.tcyeee.entity.base.ReturnInfo.ReturnCode.*;
-import static demo.tcyeee.utils.ResponseUtils.creatErrResponse;
-import static demo.tcyeee.utils.ResponseUtils.creatJsonResponse;
+import static demo.tcyeee.utils.ResponseUtils.*;
 
 
 /**
@@ -35,11 +33,11 @@ public class PlanTaskController {
     @RequestMapping("addOne")
     public String addOne(addPlanTaskVo vo) {
         if (StringUtils.isBlank(vo.getMinute()) || StringUtils.isBlank(vo.getName())) {
-            return creatErrResponse(PARAMS_ERROR);
+            return creatErrResponse(PARAMS_ERROR_INFO);
         }
 
         boolean creatTask = planTaskService.creatTask(vo);
-        return creatTask ? creatJsonResponse(SUCCESS) : creatErrResponse(SYSTEM_ERROR);
+        return creatTask ? creatSuccessResponse() : creatErrResponse();
     }
 
 
@@ -50,8 +48,8 @@ public class PlanTaskController {
      */
     @RequestMapping("deleteOne")
     public String deleteOne(String taskId) {
-        if (StringUtils.isBlank(taskId)) return creatErrResponse(PARAMS_ERROR);
-        return planTaskService.deleteOne(taskId) ? creatJsonResponse(SUCCESS) : creatErrResponse(SYSTEM_ERROR);
+        if (StringUtils.isBlank(taskId)) return creatErrResponse(PARAMS_ERROR_INFO);
+        return planTaskService.deleteOne(taskId) ? creatSuccessResponse() : creatErrResponse();
     }
 
 
@@ -62,8 +60,8 @@ public class PlanTaskController {
      */
     @RequestMapping("finishOne")
     public String finishOne(String taskId) {
-        if (StringUtils.isBlank(taskId)) return creatErrResponse(PARAMS_ERROR);
-        return planTaskService.finishOne(taskId) ? creatJsonResponse(SUCCESS) : creatErrResponse(SYSTEM_ERROR);
+        if (StringUtils.isBlank(taskId)) return creatErrResponse(PARAMS_ERROR_INFO);
+        return planTaskService.finishOne(taskId) ? creatSuccessResponse() : creatErrResponse();
     }
 
     /**
@@ -73,8 +71,8 @@ public class PlanTaskController {
      */
     @RequestMapping("restartOne")
     public String restartOne(String taskId) {
-        if (StringUtils.isBlank(taskId)) return creatErrResponse(PARAMS_ERROR);
-        return planTaskService.restartOne(taskId) ? creatJsonResponse(SUCCESS) : creatErrResponse(SYSTEM_ERROR);
+        if (StringUtils.isBlank(taskId)) return creatErrResponse(PARAMS_ERROR_INFO);
+        return planTaskService.restartOne(taskId) ? creatSuccessResponse() : creatErrResponse();
     }
 
     /**
@@ -98,10 +96,10 @@ public class PlanTaskController {
     @RequestMapping("updateTask")
     public String updateTask(PlanTask task) {
         if (task == null || task.getId() == null) {
-            return creatErrResponse(PARAMS_ERROR);
+            return creatErrResponse(PARAMS_ERROR_INFO);
         }
 
         boolean update = planTaskService.update(task);
-        return update ? creatJsonResponse(SUCCESS) : creatErrResponse(SYSTEM_ERROR);
+        return update ? creatSuccessResponse() : creatErrResponse();
     }
 }

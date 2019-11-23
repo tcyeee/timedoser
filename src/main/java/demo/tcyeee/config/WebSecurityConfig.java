@@ -15,17 +15,22 @@ import javax.annotation.Resource;
 
 /**
  * Spring Security 的配置类
+ *
  * @author tcyeee
  */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /** 注册 401 处理器 */
+    /**
+     * 注册 401 处理器
+     */
     @Resource
     private EntryPointUnauthorizedHandler unauthorizedHandler;
 
-    /** 注册 403 处理器 */
+    /**
+     * 注册 403 处理器
+     */
     @Resource
     private MyAccessDeniedHandler accessDeniedHandler;
 
@@ -47,9 +52,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/auth").authenticated()         // 需携带有效 token
-//                .antMatchers("/admin").hasAuthority("admin")  // 需拥有 admin 这个权限
-//                .antMatchers("/ADMIN").hasRole("ADMIN")       // 需拥有 ADMIN 这个身份
+//                .antMatchers("/admin").hasAuthority("admin")           // 需拥有 admin 这个权限
+//                .antMatchers("/ADMIN").hasRole("ADMIN")                // 需拥有 ADMIN 这个身份
                 .antMatchers("/login/**").permitAll()         // login目录下可以访问
+                .antMatchers("/temp/**").permitAll()          // temp目录下可以访问
                 .antMatchers("/version/**").permitAll()
                 .antMatchers("/message/**").permitAll()
                 .anyRequest().authenticated()                            // 允许所有认证请求通过

@@ -1,7 +1,6 @@
 package demo.tcyeee.service.impl;
 
 import demo.tcyeee.dao.SuggestMessageDao;
-import demo.tcyeee.entity.base.PageBean;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
@@ -50,8 +49,8 @@ public class SuggestMessageServiceImpl implements SuggestMessageService {
      * @return data
      */
     @Override
-    public List<SuggestMessageVo> findAll(PageBean pageBean) {
-        List<Object[]> objects = suggestMessageDao.queryMessageVo(pageBean.getCurrentPage(), pageBean.getPageSize());
+    public List<SuggestMessageVo> findAll(Integer currentPage, Integer pageSize) {
+        List<Object[]> objects = suggestMessageDao.queryMessageVo(currentPage, pageSize);
         return EntityUtils.castEntity(objects, SuggestMessageVo.class);
     }
 

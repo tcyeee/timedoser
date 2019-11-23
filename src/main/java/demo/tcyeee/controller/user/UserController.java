@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import static demo.tcyeee.entity.base.ReturnInfo.ReturnCode.PARAMS_ERROR;
 import static demo.tcyeee.utils.ResponseUtils.*;
 
 /**
@@ -28,7 +27,7 @@ public class UserController {
      */
     @RequestMapping("updateUserInfo")
     public String updateUserInfo(String userInfo) {
-        if (StringUtils.isBlank(userInfo) || "null".equals(userInfo)) return creatErrResponse(PARAMS_ERROR);
+        if (StringUtils.isBlank(userInfo) || "null".equals(userInfo)) return creatErrResponse(PARAMS_ERROR_INFO);
         return creatJsonResponse(userService.updataUserInfo(userInfo));
     }
 }

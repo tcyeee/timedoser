@@ -1,6 +1,5 @@
 package demo.tcyeee.service;
 
-import demo.tcyeee.entity.base.PageBean;
 import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public interface SuggestMessageService {
      *
      * @return data
      */
-    List<SuggestMessageVo> findAll(PageBean pageBean);
+    List<SuggestMessageVo> findAll(Integer currentPage, Integer pageSize);
 
     /**
      * 统计所有留言条数

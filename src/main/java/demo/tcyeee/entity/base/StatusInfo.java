@@ -10,8 +10,6 @@ import lombok.Data;
  */
 @Data
 public class StatusInfo {
-
     private boolean status;
     private String message;
-
 }

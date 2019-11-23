@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import static demo.tcyeee.entity.base.ReturnInfo.ReturnCode.PARAMS_ERROR;
+import static demo.tcyeee.utils.ResponseUtils.PARAMS_ERROR_INFO;
 import static demo.tcyeee.utils.ResponseUtils.creatErrResponse;
 
 /**
@@ -30,7 +30,7 @@ public class PlanTaskHistoryController {
      */
     @RequestMapping("addOne")
     public String addOne(Integer planTaskId) {
-        if (planTaskId == null) return creatErrResponse(PARAMS_ERROR);
+        if (planTaskId == null) return creatErrResponse(PARAMS_ERROR_INFO);
 
         return planTaskHistoryService.addOne(planTaskId);
     }

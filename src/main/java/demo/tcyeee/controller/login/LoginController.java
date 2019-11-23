@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import static demo.tcyeee.entity.base.ReturnInfo.ReturnCode.PARAMS_ERROR;
 import static demo.tcyeee.utils.ResponseUtils.*;
 
 /**
@@ -46,7 +45,7 @@ public class LoginController {
     @GetMapping("getOpenId")
     public String getOpenId(String appCode) {
         if (StringUtils.isBlank(appCode)) {
-            return creatErrResponse(PARAMS_ERROR);
+            return creatErrResponse(PARAMS_ERROR_INFO);
         }
         return creatJsonResponse(baseService.getOpenId(appCode));
     }
@@ -61,7 +60,7 @@ public class LoginController {
     @PostMapping("login")
     public String login(BaseUser baseUser) {
         if (StringUtils.isBlank(baseUser.getMobilephone()) || baseUser.getPassword() == null) {
-            return creatErrResponse(PARAMS_ERROR);
+            return creatErrResponse(PARAMS_ERROR_INFO);
         }
         return creatJsonResponse(loginService.login(baseUser));
     }
@@ -80,8 +79,7 @@ public class LoginController {
     public String getBaseInfo(String appCode) {
 
         /* 数据校验:参数不可为空 */
-        if (!CheckUtils.checkAppCode(appCode)) return creatErrResponse(PARAMS_ERROR);
-
+        if (!CheckUtils.checkAppCode(appCode)) return creatErrResponse(PARAMS_ERROR_INFO);
         return creatJsonResponse(loginService.getBaseInfo(appCode));
     }
 
