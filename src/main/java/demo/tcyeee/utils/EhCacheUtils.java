@@ -11,16 +11,15 @@ import net.sf.ehcache.Element;
  * @author huxiong
  * @date 2019-07-30 18:34
  */
-@SuppressWarnings("unused")
 public final class EhCacheUtils {
 
     private static CacheManager cacheManager = CacheManager.create();
     private static final String DEFULT_CACHE = "defultCache";
+    private static final String PERPETUAL_CACHE = "perpetualCache";
 
     // 用户登录时候存入的数据
-    public static final String LOGIN_USER_INFO = "loginUserInfo";
-    public static final String TOKEN_INFO = "TokenInfo";
-
+    public static final String LOGIN_USER_INFO = "userInfo";
+    public static final String TOKEN_INFO = "tokenInfo";
 
     /**
      * 获取默认缓存
@@ -33,12 +32,31 @@ public final class EhCacheUtils {
     }
 
     /**
+     * 获取永久缓存
+     *
+     * @param key key
+     * @return data
+     */
+    public static Object getPer(String key) {
+        return get(PERPETUAL_CACHE, key);
+    }
+
+    /**
      * 写入默认缓存
      *
      * @param key key
      */
     public static void set(String key, Object value) {
         put(DEFULT_CACHE, key, value);
+    }
+
+    /**
+     * 写入永久缓存
+     *
+     * @param key key
+     */
+    public static void setPer(String key, Object value) {
+        put(PERPETUAL_CACHE, key, value);
     }
 
     /**
@@ -50,6 +68,10 @@ public final class EhCacheUtils {
         remove(DEFULT_CACHE, key);
     }
 
+    public static void removePer(String key) {
+        remove(PERPETUAL_CACHE, key);
+    }
+
 
     /**
      * 获取缓存
@@ -58,7 +80,7 @@ public final class EhCacheUtils {
      * @param key       key
      * @return data
      */
-    public static Object get(String cacheName, String key) {
+    private static Object get(String cacheName, String key) {
         Element element = getCache(cacheName).get(key);
         return element == null ? null : element.getObjectValue();
     }
@@ -70,7 +92,7 @@ public final class EhCacheUtils {
      * @param key       key
      * @param value     value
      */
-    public static void put(String cacheName, String key, Object value) {
+    private static void put(String cacheName, String key, Object value) {
         Element element = new Element(key, value);
         getCache(cacheName).put(element);
     }
@@ -81,7 +103,7 @@ public final class EhCacheUtils {
      * @param cacheName cacheName
      * @param key       key
      */
-    public static void remove(String cacheName, String key) {
+    private static void remove(String cacheName, String key) {
         getCache(cacheName).remove(key);
     }
 
