@@ -41,3 +41,9 @@ pagehelper:
 logging:
   level:
     root: error
+---
+# 设置这个单纯只是不想看到spring scurity自动生成的密码提示
+spring:
+  security:
+    user:
+      password: temp

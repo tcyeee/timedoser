@@ -55,9 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/admin").hasAuthority("admin")           // 需拥有 admin 这个权限
 //                .antMatchers("/ADMIN").hasRole("ADMIN")                // 需拥有 ADMIN 这个身份
                 .antMatchers("/login/**").permitAll()         // login目录下可以访问
-                .antMatchers("/temp/**").permitAll()          // temp目录下可以访问
-                .antMatchers("/version/**").permitAll()
-                .antMatchers("/message/**").permitAll()
+                .antMatchers("/version/**").permitAll()       // version目录下可以访问
                 .anyRequest().authenticated()                            // 允许所有认证请求通过
                 .and().exceptionHandling()                               // 配置被拦截时的处理
                 .authenticationEntryPoint(this.unauthorizedHandler)      // 添加 token 无效或者没有携带 token 时的处理

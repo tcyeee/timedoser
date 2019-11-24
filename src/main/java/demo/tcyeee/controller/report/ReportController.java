@@ -1,5 +1,6 @@
 package demo.tcyeee.controller.report;
 
+import demo.tcyeee.entity.base.FixedInfo;
 import demo.tcyeee.service.ReportService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +30,10 @@ public class ReportController {
     @RequestMapping("pageData")
     public String pageData() {
         return creatJsonResponse(reportService.pageData());
+    }
+
+    @RequestMapping("test")
+    public String test() {
+        return creatJsonResponse(FixedInfo.linkTest);
     }
 }
