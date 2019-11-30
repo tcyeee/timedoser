@@ -1,10 +1,15 @@
 package demo.tcyeee.service.impl;
 
+import cn.hutool.core.codec.Base64;
+import com.alibaba.fastjson.JSON;
 import demo.tcyeee.dao.BaseUserDao;
+import demo.tcyeee.entity.base.FixedInfo;
+import demo.tcyeee.entity.base.StatusResult;
 import demo.tcyeee.entity.base.WXCheck;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.LoginInfoVo;
 import demo.tcyeee.service.LoginService;
+import demo.tcyeee.utils.ResponseUtils;
 import demo.tcyeee.utils.TokenUtils;
 import demo.tcyeee.utils.WeiXinUtils;
 import org.springframework.beans.BeanUtils;
@@ -43,14 +48,18 @@ public class LoginServiceImpl implements LoginService {
      * @return status
      */
     @Override
-    public Map<String, String> login(BaseUser loginUser) {
-        Map<String, String> result = new HashMap<>();
-        String password = DigestUtils.md5DigestAsHex(loginUser.getPassword().getBytes()).toUpperCase();
+    public String login(BaseUser loginUser) {
+        String basePassword = Base64.decodeStr(loginUser.getPassword());
+        String password = DigestUtils.md5DigestAsHex(basePassword.getBytes()).toUpperCase();
+        BaseUser baseUser = baseUserDao.findByMobilephoneAndPassword(loginUser.getMobilephone(), password);
+        if (baseUser == null) {
+            return ResponseUtils.creatStatusResponse(StatusResult.creatErrorInfo(FixedInfo.loginFail));
+        }
 
         // 获取并加工返回
-        BaseUser baseUser = baseUserDao.findByMobilephoneAndPassword(loginUser.getMobilephone(), password);
+        Map<String, String> result = new HashMap<>();
         result.put(tokenHeader, tokenUtils.generateToken(baseUser));
-        return result;
+        return JSON.toJSONString(result);
     }
 
 
@@ -59,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
      * 1.每次页面刷新都会调用这个方法
      * 2.如果有就返回,没有就新加一条数据
      *
-     * @param appCode  微信临时用户id
+     * @param appCode 微信临时用户id
      * @return data
      */
     @Override

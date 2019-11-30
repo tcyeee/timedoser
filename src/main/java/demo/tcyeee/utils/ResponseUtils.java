@@ -38,7 +38,7 @@ public final class ResponseUtils {
     private static final String DATA_KEY = "data";
     private static final String COUNT_KEY = "count";
     private static final String MSG_KEY = "msg";
-    private static final String SUCCESS_KEY = "success";
+    private static final String STATUS_KEY = "status";
 
     /* 固定参数数据 */
     public static final String PARAMS_ERROR_INFO = "请检查传入的字段:";
@@ -66,7 +66,7 @@ public final class ResponseUtils {
      */
     public static String creatStatusResponse(StatusResult status) {
         Map<String, Object> result = new HashMap<>();
-        result.put(SUCCESS_KEY, status.isStatus());
+        result.put(STATUS_KEY, status.isStatus());
         result.put(CODE_KEY, status.isStatus() ? ReturnCode.SUCCESS.code : ReturnCode.FEAILED.code);
         result.put(MSG_KEY, status.getMessage());
         return JSON.toJSONString(result);
@@ -80,7 +80,7 @@ public final class ResponseUtils {
      */
     public static String creatPageResponse(PageInfo<Object> data) {
         Map<String, Object> result = new HashMap<>();
-        result.put(SUCCESS_KEY, true);
+        result.put(STATUS_KEY, true);
         result.put(CODE_KEY, ReturnCode.SUCCESS.code);
         result.put(COUNT_KEY, data.getTotal());
         result.put(DATA_KEY, data.getList());
@@ -144,7 +144,7 @@ public final class ResponseUtils {
     // 错误模板
     private static Map<String, Object> markError() {
         Map<String, Object> result = new HashMap<>();
-        result.put(SUCCESS_KEY, false);
+        result.put(STATUS_KEY, false);
         return result;
     }
 
@@ -153,7 +153,7 @@ public final class ResponseUtils {
         Map<String, Object> result = new HashMap<>();
         result.put(CODE_KEY, ReturnCode.NODATA.code);
         result.put(MSG_KEY, ReturnCode.NODATA.msg);
-        result.put(SUCCESS_KEY, true);
+        result.put(STATUS_KEY, true);
         return result;
     }
 
@@ -162,7 +162,7 @@ public final class ResponseUtils {
         Map<String, Object> result = new HashMap<>();
         result.put(CODE_KEY, ReturnCode.SUCCESS.code);
         result.put(MSG_KEY, ReturnCode.SUCCESS.msg);
-        result.put(SUCCESS_KEY, true);
+        result.put(STATUS_KEY, true);
         result.put(DATA_KEY, data);
         return result;
     }

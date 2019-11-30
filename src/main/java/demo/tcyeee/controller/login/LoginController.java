@@ -62,7 +62,7 @@ public class LoginController {
         if (StringUtils.isBlank(baseUser.getMobilephone()) || baseUser.getPassword() == null) {
             return creatErrResponse(PARAMS_ERROR_INFO);
         }
-        return creatJsonResponse(loginService.login(baseUser));
+        return loginService.login(baseUser);
     }
 
 

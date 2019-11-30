@@ -19,7 +19,7 @@ public interface LoginService {
      * @param loginUser 账号密码
      * @return status
      */
-    Map<String, String> login(BaseUser loginUser);
+    String login(BaseUser loginUser);
 
     /**
      * 查看用户信息详情
