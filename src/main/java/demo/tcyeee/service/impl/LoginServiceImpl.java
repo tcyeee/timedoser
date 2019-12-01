@@ -1,13 +1,19 @@
 package demo.tcyeee.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.lang.Dict;
+import demo.tcyeee.dao.AclRoleDao;
+import demo.tcyeee.dao.AclUserRoleDao;
 import demo.tcyeee.dao.BaseUserDao;
 import demo.tcyeee.entity.base.FixedInfo;
 import demo.tcyeee.entity.base.StatusResult;
 import demo.tcyeee.entity.base.WXCheck;
+import demo.tcyeee.entity.po.AclUserRole;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.LoginInfoVo;
+import demo.tcyeee.entity.vo.WebUserInfoVo;
+import demo.tcyeee.mapper.AclUserRoleMapper;
 import demo.tcyeee.service.LoginService;
 import demo.tcyeee.utils.ResponseUtils;
 import demo.tcyeee.utils.TokenUtils;
@@ -18,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author tcyeee
@@ -35,6 +42,9 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private TokenUtils tokenUtils;
 
+    @Resource
+    private AclUserRoleMapper aclUserRoleMapper;
+
     @Value("${token.header}")
     private String tokenHeader;
 
@@ -50,9 +60,17 @@ public class LoginServiceImpl implements LoginService {
         String basePassword = Base64.decodeStr(loginUser.getPassword());
         String password = DigestUtils.md5DigestAsHex(basePassword.getBytes()).toUpperCase();
         BaseUser baseUser = baseUserDao.findByMobilephoneAndPassword(loginUser.getMobilephone(), password);
-        return baseUser == null
-                ? ResponseUtils.creatStatusResponse(StatusResult.creatErrorInfo(FixedInfo.loginFail))
-                : ResponseUtils.creatJsonResponse(Dict.create().set(tokenHeader, tokenUtils.generateToken(baseUser)));
+
+        if (baseUser != null && baseUser.getEnable() == BaseUser.enableTypeEnum.defult) {
+            WebUserInfoVo result = new WebUserInfoVo();
+            BeanUtil.copyProperties(baseUser, result);
+
+            result.setToken(tokenUtils.generateToken(baseUser));
+            result.setRoles(aclUserRoleMapper.findAllByBaseUser(baseUser.getId()));
+            return ResponseUtils.creatJsonResponse(result);
+        } else {
+            return ResponseUtils.creatStatusResponse(StatusResult.creatErrorInfo(FixedInfo.loginFail));
+        }
     }
 
 
