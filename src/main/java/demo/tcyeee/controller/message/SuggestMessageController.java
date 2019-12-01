@@ -6,6 +6,7 @@ import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
 import demo.tcyeee.service.SuggestMessageService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +38,7 @@ public class SuggestMessageController {
      * @return data
      */
     @RequestMapping("queryAllMessage")
+    @PreAuthorize("hasRole('admin')")
     public String queryAllMessage(Integer currentPage, Integer pageSize) {
         List<SuggestMessageVo> messageVo = suggestMessageService.findAll(currentPage, pageSize);
         long count = suggestMessageService.countAll();

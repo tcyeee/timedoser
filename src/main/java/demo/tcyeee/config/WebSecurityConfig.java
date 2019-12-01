@@ -5,8 +5,8 @@ import demo.tcyeee.config.handler.EntryPointUnauthorizedHandler;
 import demo.tcyeee.config.handler.MyAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  * @author tcyeee
  */
 @Configuration
-@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -52,8 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/auth").authenticated()         // 需携带有效 token
-//                .antMatchers("/admin").hasAuthority("admin")           // 需拥有 admin 这个权限
-//                .antMatchers("/ADMIN").hasRole("ADMIN")                // 需拥有 ADMIN 这个身份
+//                .antMatchers("/message").hasAuthority("admin")           // 需拥有 admin 这个权限
+//                .antMatchers("/message").hasRole("admin")              // 需拥有 ADMIN 这个身份
                 .antMatchers("/login/**").permitAll()         // login目录下可以访问
                 .antMatchers("/version/**").permitAll()       // version目录下可以访问
                 .anyRequest().authenticated()                            // 允许所有认证请求通过

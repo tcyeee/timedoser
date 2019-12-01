@@ -3,6 +3,7 @@ package demo.tcyeee.config.filter;
 import demo.tcyeee.dao.BaseUserDao;
 import demo.tcyeee.entity.base.TokenDetail;
 import demo.tcyeee.entity.po.BaseUser;
+import demo.tcyeee.mapper.UserMapper;
 import demo.tcyeee.utils.ResponseUtils;
 import demo.tcyeee.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,36 +40,28 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
     @Resource
     private BaseUserDao userDao;
 
+    @Resource
+    private UserMapper userMapper;
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
-        // 将 ServletRequest 转换为 HttpServletRequest 才能拿到请求头中的 token
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        // 尝试获取请求头的 token
         String authToken = httpRequest.getHeader(this.tokenHeader);
-        // 尝试拿 token 中的 userinfo
-        // 若是没有 token 或者拿 username 时出现异常，那么 username 为 null
-        String openId = tokenUtils.getOpenIdFromToken(authToken);
+        String userId = tokenUtils.getIdFromToken(authToken);
 
         // 如果上面解析 token 成功并且拿到了 username 并且本次会话的权限还未被写入
-        if (openId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            // UserDetails 类是 Spring Security 用于保存用户权限的实体类
-            BaseUser userInfo = userDao.findByOpenid(openId);
-
-            // userInfo存入session
+            BaseUser userInfo = userDao.findByUserId(userId);
+            userInfo.setAuthoritiesString(userMapper.getRoles(userId));
             ((HttpServletRequest) request).getSession().setAttribute("userInfo", userInfo);
 
             UserDetails userDetails = new TokenDetail(userInfo);
 
-            // 检查用户带来的 token 是否有效
-            // 包括 token 和 userDetails 中用户名是否一样， token 是否过期， token 生成时间是否在最后一次密码修改时间之前
-            // 若是检查通过
+            // token校验无误则将权限写入本次会话
             if (tokenUtils.validateToken(authToken, userInfo)) {
-                // 生成通过认证
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
-                // 将权限写入本次会话
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
 

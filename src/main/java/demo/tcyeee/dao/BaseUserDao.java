@@ -1,6 +1,7 @@
 package demo.tcyeee.dao;
 
 import demo.tcyeee.entity.po.BaseUser;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @date 2019-05-07 19:39
  */
 @Repository
-public interface BaseUserDao extends CrudRepository<BaseUser, Long> {
+public interface BaseUserDao extends JpaRepository<BaseUser, String> {
 
     /**
      * 登录方法
@@ -43,7 +44,6 @@ public interface BaseUserDao extends CrudRepository<BaseUser, Long> {
      * @param userId 用户信息
      * @return data
      */
-    @Deprecated
     @Query(value = "select * from time_doser.base_user where id =?1", nativeQuery = true)
     BaseUser findByUserId(String userId);
 }

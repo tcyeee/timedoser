@@ -50,9 +50,9 @@ public final class TokenUtils {
      */
     public BaseUser getUserInfo() {
         String tokenHeadere = request.getHeader(tokenHeader);
-        String openId = this.getOpenIdFromToken(tokenHeadere);
-        if (openId == null) throw new NullPointerException("获取基础信息时token获取失败");
-        return (baseUserDao.findByOpenid(openId));
+        String userId = this.getIdFromToken(tokenHeadere);
+        if (userId == null) throw new NullPointerException("获取基础信息时token获取失败");
+        return (baseUserDao.getOne(userId));
     }
 
     /**
@@ -61,7 +61,7 @@ public final class TokenUtils {
      */
     public String generateToken(BaseUser user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(Claims.ISSUER, user.getOpenid());
+        claims.put(Claims.ID, user.getId());
         claims.put(Claims.SUBJECT, user.getMobilephone());
         claims.put("created", new Date());
 
@@ -96,32 +96,17 @@ public final class TokenUtils {
 
 
     /**
-     * 从 token 中拿到 mobilephone
+     * 从 token 中拿到 userId
      */
-    public String getMobilephoneFromToken(String token) {
-        String mobilephone;
+    public String getIdFromToken(String token) {
+        String userId;
         try {
             final Claims claims = this.getClaimsFromToken(token);
-            mobilephone = claims.getSubject();
+            userId = claims.getId();
         } catch (Exception e) {
-            mobilephone = null;
+            userId = null;
         }
-        return mobilephone;
-    }
-
-
-    /**
-     * 从 token 中拿到 openId
-     */
-    public String getOpenIdFromToken(String token) {
-        String openId;
-        try {
-            final Claims claims = this.getClaimsFromToken(token);
-            openId = claims.getIssuer();
-        } catch (Exception e) {
-            openId = null;
-        }
-        return openId;
+        return userId;
     }
 
     /**

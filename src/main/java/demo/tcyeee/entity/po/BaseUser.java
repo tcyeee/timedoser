@@ -10,6 +10,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -24,7 +25,8 @@ import java.util.Date;
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "base_user")
-public class BaseUser {
+public class BaseUser implements Serializable {
+    private static final long serialVersionUID = 7080456749403365766L;
 
     @Id
     @Column(unique = true, nullable = false, length = 100, updatable = false)
@@ -66,7 +68,7 @@ public class BaseUser {
     private String city;                // 市
 
     @Transient
-    private String authoritiesString;   // 验证字段
+    private String authoritiesString;   // 角色列表
 
 
     // 账户状态
