@@ -1,7 +1,7 @@
 package demo.tcyeee.service.impl;
 
 import cn.hutool.core.codec.Base64;
-import com.alibaba.fastjson.JSON;
+import cn.hutool.core.lang.Dict;
 import demo.tcyeee.dao.BaseUserDao;
 import demo.tcyeee.entity.base.FixedInfo;
 import demo.tcyeee.entity.base.StatusResult;
@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author tcyeee
@@ -52,14 +50,9 @@ public class LoginServiceImpl implements LoginService {
         String basePassword = Base64.decodeStr(loginUser.getPassword());
         String password = DigestUtils.md5DigestAsHex(basePassword.getBytes()).toUpperCase();
         BaseUser baseUser = baseUserDao.findByMobilephoneAndPassword(loginUser.getMobilephone(), password);
-        if (baseUser == null) {
-            return ResponseUtils.creatStatusResponse(StatusResult.creatErrorInfo(FixedInfo.loginFail));
-        }
-
-        // 获取并加工返回
-        Map<String, String> result = new HashMap<>();
-        result.put(tokenHeader, tokenUtils.generateToken(baseUser));
-        return JSON.toJSONString(result);
+        return baseUser == null
+                ? ResponseUtils.creatStatusResponse(StatusResult.creatErrorInfo(FixedInfo.loginFail))
+                : ResponseUtils.creatJsonResponse(Dict.create().set(tokenHeader, tokenUtils.generateToken(baseUser)));
     }
 
 
