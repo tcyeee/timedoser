@@ -9,6 +9,18 @@ spring:
     username: ${username}
     password: ${password}
     driver-class-name: ${driver}
+  redis:
+    database: 0
+    host: ${redis_host}
+    port: ${redis_port}
+    password: ${redis_password}
+    timeout: 6000ms
+    jedis:
+      pool:
+        max-active: -1
+        max-idle: 64
+        min-idle: 1
+        max-wait: -1ms
   main:
     allow-bean-definition-overriding: true
   jpa:
