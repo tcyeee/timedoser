@@ -6,7 +6,9 @@ import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
 import demo.tcyeee.service.SuggestMessageService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -77,6 +79,14 @@ public class SuggestMessageController {
 
         suggestMessageDao.deleteById(id);
         return creatSuccessResponse();
+    }
+
+    @Value("${version_time}")
+    private String versionTime;
+
+    @GetMapping("test")
+    public String test() {
+        return creatJsonResponse(versionTime);
     }
 }
 
