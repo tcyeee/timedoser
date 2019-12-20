@@ -1,15 +1,13 @@
 package demo.tcyeee.service.impl;
 
-import demo.tcyeee.dao.PlanTaskHistoryDao;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.vo.ReportPageDataVo;
+import demo.tcyeee.mapper.PlanTaskHistoryMapper;
 import demo.tcyeee.service.ReportService;
 import demo.tcyeee.utils.BaseUtils;
-import demo.tcyeee.utils.EntityUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author chenyueee
@@ -17,9 +15,8 @@ import java.util.List;
  */
 @Service
 public class ReportServiceImpl implements ReportService {
-
     @Resource
-    private PlanTaskHistoryDao planTaskHistoryDao;
+    private PlanTaskHistoryMapper planTaskHistoryMapper;
 
     /**
      * report页面初始化需要的数据
@@ -29,7 +26,6 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public ReportPageDataVo pageData() {
         BaseUser baseUser = BaseUtils.userInfo();
-        List<Object[]> objects = planTaskHistoryDao.diyPageData(baseUser.getId());
-        return EntityUtils.castEntity(objects, ReportPageDataVo.class).get(0);
+        return planTaskHistoryMapper.pageData(baseUser.getId());
     }
 }
