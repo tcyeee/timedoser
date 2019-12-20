@@ -1,10 +1,9 @@
 package demo.tcyeee.service;
 
+import com.github.pagehelper.PageInfo;
+import demo.tcyeee.entity.base.PageBean;
 import demo.tcyeee.entity.po.SuggestMessage;
-import demo.tcyeee.entity.vo.SuggestMessageVo;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author huxiong
@@ -24,14 +23,8 @@ public interface SuggestMessageService {
     /**
      * 查看所有留言信息
      *
-     * @return data
+     * @param pageBean pageBean
+     * @return msg list
      */
-    List<SuggestMessageVo> findAll(Integer currentPage, Integer pageSize);
-
-    /**
-     * 统计所有留言条数
-     *
-     * @return count
-     */
-    long countAll();
+    PageInfo<Object> findAll(PageBean pageBean);
 }

@@ -3,7 +3,6 @@ package demo.tcyeee.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.pagehelper.PageInfo;
-import demo.tcyeee.entity.base.StatusResult;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -64,11 +63,11 @@ public final class ResponseUtils {
      * @param status 状态信息
      * @return data
      */
-    public static String creatStatusResponse(StatusResult status) {
+    public static String creatStatusResponse(boolean status, String message) {
         Map<String, Object> result = new HashMap<>();
-        result.put(STATUS_KEY, status.isStatus());
-        result.put(CODE_KEY, status.isStatus() ? ReturnCode.SUCCESS.code : ReturnCode.FEAILED.code);
-        result.put(MSG_KEY, status.getMessage());
+        result.put(STATUS_KEY, status);
+        result.put(CODE_KEY, status ? ReturnCode.SUCCESS.code : ReturnCode.FEAILED.code);
+        result.put(MSG_KEY, message);
         return JSON.toJSONString(result);
     }
 

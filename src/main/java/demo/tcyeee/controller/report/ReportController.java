@@ -34,6 +34,6 @@ public class ReportController {
 
     @RequestMapping("test")
     public String test() {
-        return creatJsonResponse(FixedInfo.linkTest);
+        return creatJsonResponse(FixedInfo.LINK_TEST);
     }
 }

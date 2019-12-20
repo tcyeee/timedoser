@@ -2,11 +2,13 @@ package demo.tcyeee.controller.message;
 
 import com.alibaba.fastjson.JSON;
 import demo.tcyeee.dao.SuggestMessageDao;
+import demo.tcyeee.entity.base.PageBean;
 import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
 import demo.tcyeee.service.SuggestMessageService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,17 +39,9 @@ public class SuggestMessageController {
      *
      * @return data
      */
-    @RequestMapping("queryAllMessage")
-    @PreAuthorize("hasRole('admin')")
-    public String queryAllMessage(Integer currentPage, Integer pageSize) {
-        List<SuggestMessageVo> messageVo = suggestMessageService.findAll(currentPage, pageSize);
-        long count = suggestMessageService.countAll();
-
-        Map<String, Object> resultData = new HashMap<>();
-        resultData.put("data", messageVo);
-        resultData.put("count", count);
-        return JSON.toJSONString(resultData);
-
+    @PostMapping("queryAllMessage")
+    public String queryAllMessage(PageBean pageBean) {
+        return creatPageResponse(suggestMessageService.findAll(pageBean));
     }
 
 

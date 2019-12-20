@@ -1,9 +1,13 @@
 package demo.tcyeee.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import demo.tcyeee.dao.SuggestMessageDao;
+import demo.tcyeee.entity.base.PageBean;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.SuggestMessage;
 import demo.tcyeee.entity.vo.SuggestMessageVo;
+import demo.tcyeee.mapper.SuggestMessageMapper;
 import demo.tcyeee.service.SuggestMessageService;
 import demo.tcyeee.utils.BaseUtils;
 import demo.tcyeee.utils.EntityUtils;
@@ -22,6 +26,9 @@ public class SuggestMessageServiceImpl implements SuggestMessageService {
 
     @Resource
     private SuggestMessageDao suggestMessageDao;
+
+    @Resource
+    private SuggestMessageMapper suggestMessageMapper;
 
     @Resource
     private TokenUtils tokenUtils;
@@ -49,13 +56,7 @@ public class SuggestMessageServiceImpl implements SuggestMessageService {
      * @return data
      */
     @Override
-    public List<SuggestMessageVo> findAll(Integer currentPage, Integer pageSize) {
-        List<Object[]> objects = suggestMessageDao.queryMessageVo(currentPage, pageSize);
-        return EntityUtils.castEntity(objects, SuggestMessageVo.class);
-    }
-
-    @Override
-    public long countAll() {
-        return suggestMessageDao.count();
+    public PageInfo<Object> findAll(PageBean pageBean) {
+        return PageHelper.startPage(pageBean).doSelectPageInfo(() -> suggestMessageMapper.findAll());
     }
 }

@@ -2,15 +2,12 @@ package demo.tcyeee.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.codec.Base64;
-import cn.hutool.core.lang.Dict;
-import demo.tcyeee.dao.AclRoleDao;
-import demo.tcyeee.dao.AclUserRoleDao;
 import demo.tcyeee.dao.BaseUserDao;
+import demo.tcyeee.dao.PlanTaskDao;
 import demo.tcyeee.entity.base.FixedInfo;
-import demo.tcyeee.entity.base.StatusResult;
 import demo.tcyeee.entity.base.WXCheck;
-import demo.tcyeee.entity.po.AclUserRole;
 import demo.tcyeee.entity.po.BaseUser;
+import demo.tcyeee.entity.po.PlanTask;
 import demo.tcyeee.entity.vo.LoginInfoVo;
 import demo.tcyeee.entity.vo.WebUserInfoVo;
 import demo.tcyeee.mapper.AclUserRoleMapper;
@@ -24,7 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author tcyeee
@@ -48,6 +44,8 @@ public class LoginServiceImpl implements LoginService {
     @Value("${token.header}")
     private String tokenHeader;
 
+    @Resource
+    private PlanTaskDao planTaskDao;
 
     /**
      * 登录接口
@@ -69,7 +67,7 @@ public class LoginServiceImpl implements LoginService {
             result.setRoles(aclUserRoleMapper.findAllByBaseUser(baseUser.getId()));
             return ResponseUtils.creatJsonResponse(result);
         } else {
-            return ResponseUtils.creatStatusResponse(StatusResult.creatErrorInfo(FixedInfo.loginFail));
+            return ResponseUtils.creatStatusResponse(false, FixedInfo.LOGIN_FAIL);
         }
     }
 
@@ -97,10 +95,25 @@ public class LoginServiceImpl implements LoginService {
         if (baseUser == null) {
             BaseUser user = BaseUser.creatBaseUserForOpenId(openId.getOpenid());
             baseUser = baseUserDao.save(user);
+
+            // 新建用户的时候新建一条示例任务
+            this.creatDemoTask(baseUser);
         }
 
         BeanUtils.copyProperties(baseUser, result);
         result.setToken(tokenUtils.generateToken(baseUser));
         return result;
+    }
+
+
+    // 创建一个示例任务
+    private void creatDemoTask(BaseUser baseUser) {
+        PlanTask planTask = new PlanTask();
+        planTask.setBaseUser(baseUser);
+        planTask.setTomatoWorkTime(25);
+        planTask.setTomatoRistTime(5);
+        planTask.setName("示例任务");
+        planTask.setType(PlanTask.typeEnum.defult);
+        planTaskDao.save(planTask);
     }
 }

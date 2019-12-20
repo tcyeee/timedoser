@@ -35,15 +35,6 @@ public interface PlanTaskDao extends JpaRepository<PlanTask, Integer> {
     int countByBaseUser(BaseUser baseUser);
 
     /**
-     * 统计
-     *
-     * @param baseUser baseUser
-     * @param type     type
-     * @return count
-     */
-    int countByBaseUserAndType(BaseUser baseUser, PlanTask.typeEnum type);
-
-    /**
      * 修改任务状态
      * 1. 如果是把任务状态修改为1(默认),则同时修改创建时间
      *

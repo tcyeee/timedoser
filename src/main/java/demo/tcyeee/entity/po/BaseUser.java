@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.experimental.Tolerate;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,6 +25,7 @@ import java.util.Date;
 @Builder
 @DynamicInsert
 @DynamicUpdate
+@Proxy(lazy = false)
 @Table(name = "base_user")
 public class BaseUser implements Serializable {
     private static final long serialVersionUID = 7080456749403365766L;

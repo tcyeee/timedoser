@@ -4,6 +4,7 @@ import demo.tcyeee.entity.po.PlanTask;
 import demo.tcyeee.entity.vo.addPlanTaskVo;
 import demo.tcyeee.service.PlanTaskService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -81,9 +82,9 @@ public class PlanTaskController {
      * @return data
      * @since version_1.1.01
      */
-    @RequestMapping("getAllTask_12")
-    public String getAllTask_12() {
-        return creatJsonResponse(planTaskService.findAllByUser_12());
+    @GetMapping("getAll")
+    public String getAll() {
+        return creatJsonResponse(planTaskService.findAllByUser());
     }
 
 

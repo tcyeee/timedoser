@@ -5,8 +5,9 @@ import demo.tcyeee.dao.PlanTaskHistoryDao;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.PlanTask;
 import demo.tcyeee.entity.po.PlanTaskHistory;
-import demo.tcyeee.entity.vo.PlantaskList_12;
+import demo.tcyeee.entity.vo.PlantaskList;
 import demo.tcyeee.entity.vo.addPlanTaskVo;
+import demo.tcyeee.mapper.PlanTaskMapper;
 import demo.tcyeee.service.PlanTaskService;
 import demo.tcyeee.utils.BaseUtils;
 import demo.tcyeee.utils.TokenUtils;
@@ -24,6 +25,9 @@ public class PlanTaskServiceImpl implements PlanTaskService {
 
     @Resource
     private PlanTaskDao planTaskDao;
+
+    @Resource
+    private PlanTaskMapper planTaskMapper;
 
     @Resource
     private TokenUtils tokenUtils;
@@ -60,37 +64,16 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      * @since version_1.1.01
      */
     @Override
-    public PlantaskList_12 findAllByUser_12() {
-        PlantaskList_12 result = new PlantaskList_12();
+    public PlantaskList findAllByUser() {
         BaseUser baseUser = tokenUtils.getUserInfo();
-        int finishTaskCount = planTaskDao.countByBaseUserAndType(baseUser, PlanTask.typeEnum.clean);
-        int waitTaskCount = planTaskDao.countByBaseUserAndType(baseUser, PlanTask.typeEnum.defult);
-
-        // 如果是第一次查询则创建一条任务
-        if (planTaskDao.countByBaseUser(baseUser) == 0) {
-            this.creatDemoTask(baseUser);
-        }
+        PlantaskList result = planTaskMapper.getTaskCount(baseUser.getId());
 
         List<PlanTask> waitTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, PlanTask.typeEnum.defult);
         List<PlanTask> clenTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, PlanTask.typeEnum.clean);
 
         result.setWaitTask(waitTask);
         result.setFinishTask(clenTask);
-        result.setWaitTaskCount(waitTaskCount);
-        result.setFinishTaskCount(finishTaskCount);
-
         return result;
-    }
-
-    // 创建一个示例项目
-    private void creatDemoTask(BaseUser baseUser) {
-        PlanTask planTask = new PlanTask();
-        planTask.setBaseUser(baseUser);
-        planTask.setTomatoWorkTime(25);
-        planTask.setTomatoRistTime(5);
-        planTask.setName("示例任务");
-        planTask.setType(PlanTask.typeEnum.defult);
-        planTaskDao.save(planTask);
     }
 
 

@@ -1,7 +1,7 @@
 package demo.tcyeee.service;
 
 import demo.tcyeee.entity.po.PlanTask;
-import demo.tcyeee.entity.vo.PlantaskList_12;
+import demo.tcyeee.entity.vo.PlantaskList;
 import demo.tcyeee.entity.vo.addPlanTaskVo;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public interface PlanTaskService {
      * @return data
      * @since version_1.1.01
      */
-    PlantaskList_12 findAllByUser_12();
+    PlantaskList findAllByUser();
 
 
     /**

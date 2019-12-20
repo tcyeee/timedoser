@@ -75,7 +75,7 @@ public class LoginController {
      * @param appCode appCode
      * @return data
      */
-    @RequestMapping("getBaseInfo")
+    @PostMapping("getBaseInfo")
     public String getBaseInfo(String appCode) {
 
         /* 数据校验:参数不可为空 */
@@ -86,6 +86,6 @@ public class LoginController {
     // 用于测试
     @GetMapping("test")
     public String test() {
-        return creatJsonResponse(FixedInfo.linkTest);
+        return creatJsonResponse(FixedInfo.LINK_TEST);
     }
 }
