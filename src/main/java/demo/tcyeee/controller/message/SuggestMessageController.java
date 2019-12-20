@@ -65,7 +65,7 @@ public class SuggestMessageController {
      * @param id 留言id
      * @return status
      */
-    @RequestMapping("deleteMessage")
+    @PostMapping("deleteMessage")
     public String deleteMessage(String id) {
         if (StringUtils.isBlank(id)) return creatErrResponse(PARAMS_ERROR, PARAMS_ERROR_INFO + "id");
 

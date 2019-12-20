@@ -94,8 +94,8 @@ public final class ResponseUtils {
      */
     public static String creatSuccessResponse() {
         Map<String, Object> result = markError();
-        result.put(CODE_KEY, ReturnCode.FEAILED.code);
-        result.put(MSG_KEY, ReturnCode.FEAILED.msg);
+        result.put(CODE_KEY, ReturnCode.SUCCESS.code);
+        result.put(MSG_KEY, ReturnCode.SUCCESS.msg);
         return JSON.toJSONString(result);
     }
 
