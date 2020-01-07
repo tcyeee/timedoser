@@ -10,6 +10,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
+ * 用户留言
+ *
  * @author tcyeee@outlook.com
  * @date 2019-07-22 10:28
  */

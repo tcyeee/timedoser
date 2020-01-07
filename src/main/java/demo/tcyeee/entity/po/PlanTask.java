@@ -55,7 +55,7 @@ public class PlanTask {
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 25")
     private Integer tomatoWorkTime;
 
-    // 番茄时长(工作时长)
+    // 番茄时长(休息时长)
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 5")
     private Integer tomatoRistTime;
 

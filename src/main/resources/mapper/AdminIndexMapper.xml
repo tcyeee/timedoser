@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.tcyeee.mapper.AdminIndexMapper">
+    <select id="getCount" resultType="demo.tcyeee.entity.vo.AdminIndexCountVo">
+        select (select count(*) from time_doser.base_user)                                           as allUserCount,
+               (select count(*) from time_doser.base_user
+                where createdate between DATE_ADD(current_date, INTERVAL -1 DAY) and current_date)   as yesterdayCount,
+               (select count(distinct base_user_id) from time_doser.plan_task_history a
+                         left join time_doser.base_user b on a.base_user_id = b.id
+                where b.createdate between DATE_ADD(current_date, INTERVAL -1 DAY) and current_date) as yesterdayUsedCount,
+               (select sum(tomato_work_time) from time_doser.plan_task_history
+                where creat_time between DATE_ADD(current_date, INTERVAL -1 DAY) and current_date)   as yesterdayCreatTimeCount
+    </select>
+</mapper>
