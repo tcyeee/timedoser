@@ -8,8 +8,15 @@ import lombok.Data;
  */
 @Data
 public class AdminIndexCountVo {
-    private int allUserCount;               // 总用户数量
-    private int yesterdayCount;             // 昨日新增用户数量
-    private int yesterdayUsedCount;         // 昨日活跃账号统计
-    private int yesterdayCreatTimeCount;    // 昨日学习时间统计
+    private int allUserSum;            // 总用户数量
+
+    private int userAdd;               // 昨日新增用户
+    private int exUserAdd;             // 前天新增用户
+
+    private int yesUsedSum;            // 昨日活跃账号统计
+    private int exYesUsedSum;          // 前天活跃账号统计
+
+    private int workSum;               // 昨日学习时间统计
+    private int exWorkSum;             // 前天学习时间统计
+
 }
