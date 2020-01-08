@@ -5,4 +5,4 @@ spring:
 logging:
   path: ../logs/TimeDoser
   level:
-    root: warn
+    root: error
