@@ -1,9 +1,11 @@
 package demo.tcyeee.controller.version;
 
 import demo.tcyeee.service.VersionService;
+import demo.tcyeee.utils.OssUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 
@@ -44,5 +46,12 @@ public class VersionController {
     @RequestMapping("queryVersionUpdate")
     public String queryVersionUpdate() {
         return creatJsonResponse(versionService.queryVersionUpdate(verison));
+    }
+
+    @RequestMapping("upload")
+    public String upload(MultipartFile file) {
+        String fileName = OssUtils.putFile(file);
+        String url = OssUtils.getUrl(fileName);
+        return creatJsonResponse(url);
     }
 }

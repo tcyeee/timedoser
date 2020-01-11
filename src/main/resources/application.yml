@@ -59,3 +59,9 @@ spring:
   security:
     user:
       password: temp
+---
+spring:
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 20MB
