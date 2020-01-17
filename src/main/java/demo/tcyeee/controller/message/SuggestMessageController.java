@@ -21,7 +21,7 @@ import static demo.tcyeee.utils.ResponseUtils.*;
 import static demo.tcyeee.utils.ResponseUtils.ReturnCode.PARAMS_ERROR;
 
 /**
- * @author huxiong
+ * @author tcyeee
  * @date 2019-07-22 10:55
  */
 @RestController

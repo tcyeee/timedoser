@@ -8,7 +8,7 @@ import net.sf.ehcache.Element;
  * ehCache工具类
  * cacheName在ehcache.xml中配置
  *
- * @author huxiong
+ * @author tcyeee
  * @date 2019-07-30 18:34
  */
 public final class EhCacheUtils {

@@ -3,7 +3,7 @@ package demo.tcyeee.entity.vo;
 import lombok.Data;
 
 /**
- * @author huxiong
+ * @author tcyeee
  * @date 2020/1/7 16:53
  */
 @Data

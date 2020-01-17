@@ -1,14 +1,11 @@
 package demo.tcyeee.dao;
 
 import demo.tcyeee.entity.po.SuggestMessage;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
- * @author huxiong
+ * @author tcyeee
  * @date 2019-07-22 11:27
  */
 @Repository

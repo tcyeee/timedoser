@@ -14,7 +14,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @author huxiong
+ * @author tcyeee
  * @date 2019/11/25 14:58
  */
 @Configuration

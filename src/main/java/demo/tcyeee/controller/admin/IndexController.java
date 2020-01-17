@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import static demo.tcyeee.utils.ResponseUtils.creatJsonResponse;
 
 /**
- * @author huxiong
+ * @author tcyeee
  * @date 2020/1/7 16:52
  */
 @RestController

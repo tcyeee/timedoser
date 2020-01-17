@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * Redis工具类
  * 自带的stringRedisTemplate好看不好用,这里基于redisTemplate做了自定义封装
  *
- * @author huxiong
+ * @author tcyeee
  * @date 2019/11/22 21:02
  */
 @SuppressWarnings("all")
