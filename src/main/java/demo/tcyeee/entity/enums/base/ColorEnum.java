@@ -30,7 +30,6 @@ public enum ColorEnum {
     darkGray(13, "darkGray"),
     gray(14, "gray"),
     ghostWhite(15, "ghostWhite"),
-    white(16, "white"),
 
     /* 浅色 */
     redLight(17, "redLight"),
