@@ -63,6 +63,19 @@ public final class ResponseUtils {
      * @param status 状态信息
      * @return data
      */
+    public static String creatStatusResponse(boolean status) {
+        Map<String, Object> result = new HashMap<>();
+        result.put(STATUS_KEY, status);
+        result.put(CODE_KEY, status ? ReturnCode.SUCCESS.code : ReturnCode.FEAILED.code);
+        return JSON.toJSONString(result);
+    }
+
+    /**
+     * 返回自定义状态数据
+     *
+     * @param status 状态信息
+     * @return data
+     */
     public static String creatStatusResponse(boolean status, String message) {
         Map<String, Object> result = new HashMap<>();
         result.put(STATUS_KEY, status);
