@@ -1,8 +1,10 @@
 package demo.tcyeee.entity.po;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.experimental.Tolerate;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -21,6 +23,7 @@ import static demo.tcyeee.utils.ResponseUtils.PARAMS_ERROR_INFO;
  */
 @Data
 @Entity
+@Builder
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "plan_task")
@@ -59,6 +62,10 @@ public class PlanTask {
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 5")
     private Integer tomatoRistTime;
 
+
+    @Tolerate
+    public PlanTask() {}
+
     @Getter
     @AllArgsConstructor
     public enum typeEnum {
@@ -69,22 +76,5 @@ public class PlanTask {
 
         private int index;
         private String remark;
-    }
-
-    public PlanTask() {
-    }
-
-    public PlanTask(BaseUser baseUser, @NotEmpty(message = PARAMS_ERROR_INFO + "name") String name, String remark, Date createdate, typeEnum type, Integer tomatoWorkTime, Integer tomatoRistTime) {
-        this.baseUser = baseUser;
-        this.name = name;
-        this.remark = remark;
-        this.createdate = createdate;
-        this.type = type;
-        this.tomatoWorkTime = tomatoWorkTime;
-        this.tomatoRistTime = tomatoRistTime;
-    }
-
-    public PlanTask(int id) {
-        this.id = id;
     }
 }

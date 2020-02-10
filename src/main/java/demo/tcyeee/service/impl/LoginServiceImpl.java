@@ -4,10 +4,12 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.codec.Base64;
 import demo.tcyeee.dao.BaseUserDao;
 import demo.tcyeee.dao.PlanTaskDao;
+import demo.tcyeee.dao.ProjectDao;
 import demo.tcyeee.entity.base.FixedInfo;
 import demo.tcyeee.entity.base.WXCheck;
 import demo.tcyeee.entity.po.BaseUser;
 import demo.tcyeee.entity.po.PlanTask;
+import demo.tcyeee.entity.po.Project;
 import demo.tcyeee.entity.vo.LoginInfoVo;
 import demo.tcyeee.entity.vo.WebUserInfoVo;
 import demo.tcyeee.mapper.AclUserRoleMapper;
@@ -47,6 +49,8 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private PlanTaskDao planTaskDao;
 
+    @Resource
+    private ProjectDao projectDao;
     /**
      * 登录接口
      *
@@ -96,7 +100,10 @@ public class LoginServiceImpl implements LoginService {
             BaseUser user = BaseUser.creatBaseUserForOpenId(openId.getOpenid());
             baseUser = baseUserDao.save(user);
 
-            // 新建用户的时候新建一条示例任务
+            /* 新建用户对应的操作
+             * 1.创建实例任务
+             * 2.创建实例项目
+             */
             this.creatDemoTask(baseUser);
         }
 
@@ -106,14 +113,25 @@ public class LoginServiceImpl implements LoginService {
     }
 
 
-    // 创建一个示例任务
+    /**
+     * 新用户创建时候进行的操作
+     *
+     * @param baseUser 用户信息
+     */
     private void creatDemoTask(BaseUser baseUser) {
-        PlanTask planTask = new PlanTask();
-        planTask.setBaseUser(baseUser);
-        planTask.setTomatoWorkTime(25);
-        planTask.setTomatoRistTime(5);
-        planTask.setName("示例任务");
-        planTask.setType(PlanTask.typeEnum.defult);
-        planTaskDao.save(planTask);
+
+        // 1.创建一个示例任务(即将废弃)
+        PlanTask task = PlanTask.builder()
+                .baseUser(baseUser)
+                .name("实例项目").build();
+        planTaskDao.save(task);
+
+        // 2.创建2个默认项目
+        Project project = Project.builder()
+                .name("备战雅思")
+                .remark("考试加油!!")
+                .baseUser(baseUser)
+                .build();
+        projectDao.save(project);
     }
 }
