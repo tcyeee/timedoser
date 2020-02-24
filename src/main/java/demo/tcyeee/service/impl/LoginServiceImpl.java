@@ -51,6 +51,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Resource
     private ProjectDao projectDao;
+
     /**
      * 登录接口
      *
@@ -95,7 +96,7 @@ public class LoginServiceImpl implements LoginService {
         }
 
         // 对比数据库有没有openid,如果有的话获取基础信息和token , 没有就添加一条
-        BaseUser baseUser = baseUserDao.findByOpenid(openId.getOpenid());
+        BaseUser baseUser = baseUserDao.findByOpenidAndEnable(openId.getOpenid(), BaseUser.enableTypeEnum.defult);
         if (baseUser == null) {
             BaseUser user = BaseUser.creatBaseUserForOpenId(openId.getOpenid());
             baseUser = baseUserDao.save(user);
@@ -131,6 +132,7 @@ public class LoginServiceImpl implements LoginService {
                 .name("备战雅思")
                 .remark("考试加油!!")
                 .baseUser(baseUser)
+                .createType(Project.createTypeEnum.auto)
                 .build();
         projectDao.save(project);
     }

@@ -1,7 +1,9 @@
 package demo.tcyeee.entity.po;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.experimental.Tolerate;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -21,6 +23,7 @@ import java.sql.Timestamp;
 public class Project {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     // 项目名称(限定10个字以内)
@@ -55,6 +58,25 @@ public class Project {
     @Column(name = "create_date")
     private Timestamp createDate;
 
+    // 是否可用
+    @Column(name = "create_type")
+    private createTypeEnum createType;
+
+    @Transient
+    private boolean lastProject; // 标记最后一次使用的项目
+
     @Tolerate
-    public Project() {}
+    public Project() {
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum createTypeEnum {
+        err(0, "弃用位置"),
+        defult(1, "手动添加"),
+        auto(2, "新用户注册时候自动新建");
+
+        private int index;
+        private String remark;
+    }
 }

@@ -63,7 +63,7 @@ public class BaseServiceImpl implements BaseService {
         }
 
         BaseInfoVo result = new BaseInfoVo();
-        BaseUser user = userDao.findByOpenid(wxCheck.getOpenid());
+        BaseUser user = userDao.findByOpenidAndEnable(wxCheck.getOpenid(), BaseUser.enableTypeEnum.defult);
         this.copy(result, user);
 
         return result;

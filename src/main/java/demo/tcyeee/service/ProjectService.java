@@ -14,7 +14,12 @@ public interface ProjectService {
 
     boolean save(Project project);
 
-    List<Project> getAll();
+    /**
+     * 查看所有的项目,同时标记处最近一次使用的项目
+     *
+     * @return data
+     */
+    List<Project> findAll();
 
     boolean deleteOne(Integer id);
 }

@@ -25,9 +25,9 @@ public class ProjectController {
         return creatStatusResponse(projectService.save(project));
     }
 
-    @GetMapping("getAll")
-    public String getAll() {
-        return creatJsonResponse(projectService.getAll());
+    @GetMapping("findAll")
+    public String findAll() {
+        return creatJsonResponse(projectService.findAll());
     }
 
     @GetMapping("deleteOne")

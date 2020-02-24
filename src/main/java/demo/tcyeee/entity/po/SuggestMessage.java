@@ -23,6 +23,7 @@ import java.util.Date;
 public class SuggestMessage {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)

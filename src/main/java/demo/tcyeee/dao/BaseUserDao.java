@@ -3,7 +3,6 @@ package demo.tcyeee.dao;
 import demo.tcyeee.entity.po.BaseUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -34,9 +33,10 @@ public interface BaseUserDao extends JpaRepository<BaseUser, String> {
      * 通过openID查找用户基本信息
      *
      * @param openid openid
+     * @param enable status
      * @return data
      */
-    BaseUser findByOpenid(String openid);
+    BaseUser findByOpenidAndEnable(String openid,Enum enable);
 
     /**
      * 通过id查询用户
