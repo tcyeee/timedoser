@@ -1,7 +1,8 @@
-package demo.tcyeee.controller;
+package demo.tcyeee.controller.project;
 
 import demo.tcyeee.entity.po.Project;
 import demo.tcyeee.service.ProjectService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,8 +21,9 @@ public class ProjectController {
     private ProjectService projectService;
 
 
-    @PostMapping("save")
-    public String save(@RequestBody Project project) {
+    @RequestMapping("save")
+    public String save(Project project) {
+        if (StringUtils.isBlank(project.getName())) return creatErrResponse(PARAMS_ERROR_INFO + "name");
         return creatStatusResponse(projectService.save(project));
     }
 
@@ -32,7 +34,7 @@ public class ProjectController {
 
     @GetMapping("deleteOne")
     public String deleteOne(Integer id) {
-        if (id == null) return creatErrResponse(PARAMS_ERROR_INFO);
+        if (id == null) return creatErrResponse(PARAMS_ERROR_INFO + "id");
         return creatStatusResponse(projectService.deleteOne(id));
     }
 }

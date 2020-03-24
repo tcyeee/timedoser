@@ -14,6 +14,7 @@ import demo.tcyeee.entity.vo.LoginInfoVo;
 import demo.tcyeee.entity.vo.WebUserInfoVo;
 import demo.tcyeee.mapper.AclUserRoleMapper;
 import demo.tcyeee.service.LoginService;
+import demo.tcyeee.utils.BaseUtils;
 import demo.tcyeee.utils.ResponseUtils;
 import demo.tcyeee.utils.TokenUtils;
 import demo.tcyeee.utils.WeiXinUtils;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * @author tcyeee
@@ -129,6 +131,7 @@ public class LoginServiceImpl implements LoginService {
 
         // 2.创建2个默认项目
         Project project = Project.builder()
+                .id(UUID.randomUUID().toString())
                 .name("备战雅思")
                 .remark("考试加油!!")
                 .baseUser(baseUser)

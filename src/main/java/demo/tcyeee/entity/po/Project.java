@@ -23,8 +23,7 @@ import java.sql.Timestamp;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
 
     // 项目名称(限定10个字以内)
     @Column(name = "name")

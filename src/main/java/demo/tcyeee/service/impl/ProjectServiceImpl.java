@@ -30,6 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public boolean save(Project project) {
+        project.setBaseUser(tokenUtils.getUserInfo());
         Project save = projectDao.save(project);
         return save != null;
     }
@@ -38,9 +39,12 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> findAll() {
         BaseUser userInfo = tokenUtils.getUserInfo();
         List<Project> result = projectDao.findAllByBaseUser(userInfo);
+        if (result == null || result.size() == 0) {
+            return null;
+        }
 
         // 1.找到最近一次项目,如果为空则选取最近的一个项目
-        int lastProjectId;
+        String lastProjectId;
         TomatoHistory history = tomatoHistoryMapper.getLastHistory(userInfo.getId());
         if (history == null) {
             lastProjectId = result.get(0).getId();
@@ -50,7 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         // 2.标记最近一次项目
         for (Project project : result) {
-            project.setLastProject(project.getId() == lastProjectId);
+            project.setLastProject(project.getId().equals(lastProjectId));
         }
         return result;
     }
