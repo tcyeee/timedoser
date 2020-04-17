@@ -60,7 +60,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public boolean deleteOne(Integer id) {
+    public boolean deleteOne(String id) {
         projectDao.deleteById(id);
         return true;
     }

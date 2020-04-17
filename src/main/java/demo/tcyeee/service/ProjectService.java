@@ -21,5 +21,5 @@ public interface ProjectService {
      */
     List<Project> findAll();
 
-    boolean deleteOne(Integer id);
+    boolean deleteOne(String id);
 }

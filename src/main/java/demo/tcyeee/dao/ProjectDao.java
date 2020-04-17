@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2020/1/20 23:10
  */
 @Repository
-public interface ProjectDao extends JpaRepository<Project, Integer> {
+public interface ProjectDao extends JpaRepository<Project, String> {
 
     /**
      * find all

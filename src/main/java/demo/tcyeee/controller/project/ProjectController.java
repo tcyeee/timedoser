@@ -33,7 +33,7 @@ public class ProjectController {
     }
 
     @GetMapping("deleteOne")
-    public String deleteOne(Integer id) {
+    public String deleteOne(String id) {
         if (id == null) return creatErrResponse(PARAMS_ERROR_INFO + "id");
         return creatStatusResponse(projectService.deleteOne(id));
     }
