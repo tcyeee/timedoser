@@ -5,6 +5,7 @@ import demo.tcyeee.entity.vo.addPlanTaskVo;
 import demo.tcyeee.service.PlanTaskService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -94,7 +95,7 @@ public class PlanTaskController {
      * @param task 修改的任务信息
      * @return status
      */
-    @RequestMapping("updateTask")
+    @PostMapping("updateTask")
     public String updateTask(PlanTask task) {
         if (task == null || task.getId() == null) {
             return creatErrResponse(PARAMS_ERROR_INFO);

@@ -44,6 +44,6 @@ public interface PlanTaskDao extends JpaRepository<PlanTask, Integer> {
      */
     @Modifying
     @Transactional
-    @Query(value = "UPDATE time_doser.plan_task SET type = ?2, createdate = if(?2=1,current_timestamp,createdate) WHERE id = ?1", nativeQuery = true)
+    @Query(value = "UPDATE time_doser.plan_task SET type = ?2, createdate = if(?2=2,current_timestamp,createdate),sum_time = if(?2=2,(sum_time + tomato_work_time),sum_time) WHERE id = ?1", nativeQuery = true)
     int diyUpdataTask(String taskId, int type);
 }

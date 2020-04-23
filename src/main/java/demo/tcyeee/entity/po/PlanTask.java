@@ -52,19 +52,23 @@ public class PlanTask {
 
     // 是否可用
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
-    private typeEnum type;
+    private typeEnum type = typeEnum.defult;
 
     // 番茄时长(工作时长)
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 25")
-    private Integer tomatoWorkTime;
+    private Integer tomatoWorkTime = 25;
 
     // 番茄时长(休息时长)
     @Column(nullable = false, columnDefinition = "int(4) DEFAULT 5")
-    private Integer tomatoRistTime;
+    private Integer tomatoRistTime = 5;
 
+    // 累计学习时长
+    private Integer sumTime = 0;
+    private String icon = "squarecheck"; // 番茄图标
 
     @Tolerate
-    public PlanTask() {}
+    public PlanTask() {
+    }
 
     @Getter
     @AllArgsConstructor

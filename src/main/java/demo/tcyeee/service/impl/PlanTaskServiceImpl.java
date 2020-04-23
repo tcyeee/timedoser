@@ -85,6 +85,7 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean update(PlanTask task) {
+        task.setBaseUser(tokenUtils.getUserInfo());
         PlanTask update = planTaskDao.save(task);
         return task.getId().equals(update.getId());
     }
