@@ -11,6 +11,7 @@ import demo.tcyeee.mapper.PlanTaskMapper;
 import demo.tcyeee.service.PlanTaskService;
 import demo.tcyeee.utils.BaseUtils;
 import demo.tcyeee.utils.TokenUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -85,9 +86,13 @@ public class PlanTaskServiceImpl implements PlanTaskService {
      */
     @Override
     public boolean update(PlanTask task) {
-        task.setBaseUser(tokenUtils.getUserInfo());
-        PlanTask update = planTaskDao.save(task);
-        return task.getId().equals(update.getId());
+        PlanTask save = planTaskDao.getOne(task.getId());
+        save.setBaseUser(tokenUtils.getUserInfo());
+        save.setIcon(StringUtils.isNotBlank(task.getIcon()) ? task.getIcon() : save.getIcon());
+        save.setName(StringUtils.isNotBlank(task.getName()) ? task.getName() : save.getName());
+        save.setTomatoWorkTime(task.getTomatoWorkTime() != null ? task.getTomatoWorkTime() : save.getTomatoWorkTime());
+
+        return planTaskDao.save(save) != null;
     }
 
 
@@ -120,8 +125,9 @@ public class PlanTaskServiceImpl implements PlanTaskService {
         history.setTomatoWorkTime(planTask.getTomatoWorkTime());
         historyDao.save(history);
 
-        // 2.修改当前任务状态
-        return planTaskDao.diyUpdataTask(taskId, PlanTask.typeEnum.clean.getIndex()) >= 1;
+        PlanTask task = planTaskDao.getOne(Integer.valueOf(taskId));
+        task.setType(PlanTask.typeEnum.clean);
+        return planTaskDao.save(task) != null;
     }
 
 
