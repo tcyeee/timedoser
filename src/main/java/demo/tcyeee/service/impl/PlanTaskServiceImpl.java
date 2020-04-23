@@ -69,8 +69,8 @@ public class PlanTaskServiceImpl implements PlanTaskService {
         BaseUser baseUser = tokenUtils.getUserInfo();
         PlantaskList result = planTaskMapper.getTaskCount(baseUser.getId());
 
-        List<PlanTask> waitTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, PlanTask.typeEnum.defult);
-        List<PlanTask> clenTask = planTaskDao.findAllByBaseUserAndTypeOrderByCreatedateDesc(baseUser, PlanTask.typeEnum.clean);
+        List<PlanTask> waitTask = planTaskDao.findAllByBaseUserAndTypeOrderBySumTimeDesc(baseUser, PlanTask.typeEnum.defult);
+        List<PlanTask> clenTask = planTaskDao.findAllByBaseUserAndTypeOrderBySumTimeDesc(baseUser, PlanTask.typeEnum.clean);
 
         result.setWaitTask(waitTask);
         result.setFinishTask(clenTask);

@@ -24,7 +24,7 @@ public interface PlanTaskDao extends JpaRepository<PlanTask, Integer> {
      * @param type     type
      * @return data
      */
-    List<PlanTask> findAllByBaseUserAndTypeOrderByCreatedateDesc(BaseUser baseUser, PlanTask.typeEnum type);
+    List<PlanTask> findAllByBaseUserAndTypeOrderBySumTimeDesc(BaseUser baseUser, PlanTask.typeEnum type);
 
     /**
      * 统计用户创建的任务数量
