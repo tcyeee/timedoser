@@ -49,6 +49,7 @@ public class PlanTaskServiceImpl implements PlanTaskService {
 
         PlanTask task = new PlanTask();
         task.setName(vo.getName());
+        task.setIcon(vo.getIcon());
         task.setBaseUser(baseInfoVo);
         task.setType(PlanTask.typeEnum.defult);
         task.setTomatoRistTime(5);

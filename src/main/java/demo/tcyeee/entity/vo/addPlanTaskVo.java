@@ -10,4 +10,5 @@ import lombok.Data;
 public class addPlanTaskVo {
     private String name;
     private String minute;
+    private String icon;
 }
