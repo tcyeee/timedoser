@@ -9,5 +9,6 @@
     <modules>
         <module>microservice-discovery-eureka</module>
         <module>microservice-user_tmp</module>
+        <module>microservice-user</module>
     </modules>
 </project>
