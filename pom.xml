@@ -8,6 +8,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>microservice-discovery-eureka</module>
+        <module>microservice-gateway-zuul</module>
+        <module>microservice-hystrix-turbine</module>
         <module>microservice-user_tmp</module>
         <module>microservice-user</module>
     </modules>

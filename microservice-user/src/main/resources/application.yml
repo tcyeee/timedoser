@@ -1,0 +1,28 @@
+server:
+  port: 1901  # 服务器访问端口
+  servlet:
+    context-path: /timeDoser/user # 现在有多个项目,用于区分, 则加上名称空间
+spring:
+  application:
+    name: microservice-user
+  datasource:
+    url: jdbc:mysql://47.107.52.39:3306/time_doser_user?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: tcyeeeTimeDoser;
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: MYSQL
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://cy:123@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+logging:
+  level:
+    root: info
