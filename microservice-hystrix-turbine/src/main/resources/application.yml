@@ -1,12 +1,12 @@
 server:
-  port: 8031
+  port: 2120
 spring:
   application:
     name: microservice-hystrix-turbine
 eureka:
   client:
     service-url:
-      defaultZone: http://peer1:8761/eureka/,http://peer2:8762/eureka/
+      defaultZone: http://peer1:2100/eureka/,http://peer2:2100/eureka/
   instance:
     prefer-ip-address: true
 turbine:

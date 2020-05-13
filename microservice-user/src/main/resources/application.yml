@@ -20,9 +20,33 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://cy:123@localhost:8761/eureka/
+      defaultZone: http://cy:123@localhost:2100/eureka/
   instance:
     prefer-ip-address: true
 logging:
   level:
     root: info
+
+
+# Mybatis配置
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: false
+    auto-mapping-behavior: partial
+    cache-enabled: true
+    lazy-loading-enabled: true
+    multiple-result-sets-enabled: true
+    use-column-label: true
+    use-generated-keys: false
+    default-executor-type: simple
+    default-statement-timeout: 25
+    safe-row-bounds-enabled: false
+    local-cache-scope: session
+    jdbc-type-for-null: other
+    lazy-load-trigger-methods: equals,clone,hashCode,toString
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
