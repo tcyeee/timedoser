@@ -8,6 +8,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>microservice-discovery-eureka</module>
-        <module>microservice-user</module>
+        <module>microservice-user_tmp</module>
     </modules>
 </project>
