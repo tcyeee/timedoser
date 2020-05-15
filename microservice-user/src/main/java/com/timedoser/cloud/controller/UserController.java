@@ -1,6 +1,6 @@
 package com.timedoser.cloud.controller;
 
-import org.apache.commons.lang.StringUtils;
+import com.timedoser.cloud.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +18,9 @@ import static com.timedoser.cloud.utils.ResponseUtils.creatJsonResponse;
 @RequestMapping("user")
 public class UserController {
 
-//    @Resource
-//    private UserService userService;
-//
+    @Resource
+    private UserService userService;
+
 //    /**
 //     * 小程序用户通过授权以后,更新数据库中基础用户数据
 //     *
@@ -33,8 +33,8 @@ public class UserController {
 //    }
 
 
-    @GetMapping("findOne")
-    public String findOneById(String userId) {
-        return null;
+    @GetMapping("findUserByPhone")
+    public String findByMobilephone(String phoneNumber) {
+        return creatJsonResponse(userService.findByMobilephone(phoneNumber));
     }
 }
