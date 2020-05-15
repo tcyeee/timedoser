@@ -1,0 +1,34 @@
+version: "3"
+services:
+
+  # spring eureka 集群节点1
+  peer1:
+    image: tcyeee/microservice-discovery-eureka:0.0.1-SNAPSHOT
+    hostname: peer1
+    ports:
+      - "2100:2100"
+    environment:
+      - spring.profiles.active=peer1
+
+  # spring eureka 集群节点2
+  peer2:
+    image: tcyeee/microservice-discovery-eureka:0.0.1-SNAPSHOT
+    hostname: peer2
+    ports:
+      - "2101:2101"
+    environment:
+      - spring.profiles.active=peer2
+
+  # 网关
+  microservice-gateway-zuul:
+    image: tcyeee/microservice-gateway-zuul:0.0.1-SNAPSHOT
+    ports:
+      - "2110:2110"
+
+
+#  microservice-provider-user:
+#    image: tcyeee/microservice-provider-user:0.0.1-SNAPSHOT
+#  microservice-consumer-movie-ribbon-hystrix:
+#    image: tcyeee/microservice-consumer-movie-ribbon-hystrix:0.0.1-SNAPSHOT
+#  microservice-hystrix-turbine:
+#    image: tcyeee/microservice-hystrix-turbine:0.0.1-SNAPSHOT

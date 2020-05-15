@@ -1,8 +1,26 @@
+spring:
+  application:
+    name: microservice-discovery-eureka
+---
+spring:
+  profiles: peer1                                 # 指定profile=peer1
 server:
-  port: 2100                    # 指定该Eureka实例的端口
+  port: 2100
 eureka:
+  instance:
+    hostname: peer1                               # 指定当profile=peer1时，主机名是peer1
   client:
-    registerWithEureka: false
-    fetchRegistry: false
     serviceUrl:
-      defaultZone: http://cy:123@localhost:2100/eureka/
+      defaultZone: http://cy:123@peer2:2101/eureka/      # 将自己注册到peer2这个Eureka上面去
+
+---
+spring:
+  profiles: peer2
+server:
+  port: 2101
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    serviceUrl:
+      defaultZone: http://cy:123@peer1:2100/eureka/
