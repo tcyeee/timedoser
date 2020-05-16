@@ -3,24 +3,24 @@ spring:
     name: microservice-discovery-eureka
 ---
 spring:
-  profiles: peer1                                 # 指定profile=peer1
+  profiles: server-ali                                             # 指定profile=peer1
 server:
   port: 2100
 eureka:
   instance:
-    hostname: peer1                               # 指定当profile=peer1时，主机名是peer1
+    hostname: server-ali                                               # 指定当profile=peer1时，主机名是peer1
   client:
     serviceUrl:
-      defaultZone: http://cy:123@peer2:2101/eureka/      # 将自己注册到peer2这个Eureka上面去
+      defaultZone: http://cy:123@134.175.157.42:2100/eureka/      # 将自己注册到peer2这个Eureka上面去
 
 ---
 spring:
-  profiles: peer2
+  profiles: server-tx
 server:
-  port: 2101
+  port: 2100
 eureka:
   instance:
-    hostname: peer2
+    hostname: server-tx
   client:
     serviceUrl:
-      defaultZone: http://cy:123@peer1:2100/eureka/
+      defaultZone: http://cy:123@47.107.52.39:2100/eureka/

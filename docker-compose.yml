@@ -3,21 +3,19 @@ services:
 
   # spring eureka 集群节点1
   peer1:
-    image: tcyeee/microservice-discovery-eureka:0.0.1-SNAPSHOT
-    hostname: peer1
+    image: tcyeee/microservice-discovery-eureka:0.0.1
     ports:
       - "2100:2100"
     environment:
-      - spring.profiles.active=peer1
+      - spring.profiles.active=server-ali
 
   # spring eureka 集群节点2
   peer2:
-    image: tcyeee/microservice-discovery-eureka:0.0.1-SNAPSHOT
-    hostname: peer2
+    image: tcyeee/microservice-discovery-eureka:0.0.1
     ports:
-      - "2101:2101"
+      - "2100:2100"
     environment:
-      - spring.profiles.active=peer2
+      - spring.profiles.active=server-tx
 
   # 网关
   microservice-gateway-zuul:
