@@ -3,7 +3,8 @@ services:
 
   # 如果是阿里节点
   peer1:
-    image: tcyeee/microservice-discovery-eureka:0.0.1
+    image: tcyeee/microservice-discovery-eureka:0.0.3
+    hostname: server-ali
     ports:
       - "2100:2100"
     environment:
@@ -11,7 +12,8 @@ services:
 
   # 如果是腾讯节点
   peer2:
-    image: tcyeee/microservice-discovery-eureka:0.0.1
+    image: tcyeee/microservice-discovery-eureka:0.0.3
+    hostname: server-tx
     ports:
       - "2100:2100"
     environment:

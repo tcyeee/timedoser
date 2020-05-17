@@ -16,7 +16,7 @@ eureka:
     hostname: server-ali                                               # 指定当profile=peer1时，主机名是peer1
   client:
     serviceUrl:
-      defaultZone: http://cy:123:134.175.157.42:2100/eureka/      # 将自己注册到peer2这个Eureka上面去
+      defaultZone: http://cy:123@134.175.157.42:2100/eureka/      # 将自己注册到peer2这个Eureka上面去
 ---
 spring:
   profiles: server-tx
