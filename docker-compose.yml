@@ -1,7 +1,7 @@
 version: "3"
 services:
 
-  # spring eureka 集群节点1
+  # 如果是阿里节点
   peer1:
     image: tcyeee/microservice-discovery-eureka:0.0.1
     ports:
@@ -9,7 +9,7 @@ services:
     environment:
       - spring.profiles.active=server-ali
 
-  # spring eureka 集群节点2
+  # 如果是腾讯节点
   peer2:
     image: tcyeee/microservice-discovery-eureka:0.0.1
     ports:
@@ -19,7 +19,7 @@ services:
 
   # 网关
   microservice-gateway-zuul:
-    image: tcyeee/microservice-gateway-zuul:0.0.1-SNAPSHOT
+    image: tcyeee/microservice-gateway-zuul:0.0.1
     ports:
       - "2110:2110"
 

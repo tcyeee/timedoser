@@ -1,6 +1,11 @@
 spring:
   application:
     name: microservice-discovery-eureka
+  security:
+    user:
+      name: cy                  # 配置登录的账号是cy
+      password: 123             # 配置登录的密码是123
+
 ---
 spring:
   profiles: server-ali                                             # 指定profile=peer1
@@ -11,8 +16,7 @@ eureka:
     hostname: server-ali                                               # 指定当profile=peer1时，主机名是peer1
   client:
     serviceUrl:
-      defaultZone: http://cy:123@134.175.157.42:2100/eureka/      # 将自己注册到peer2这个Eureka上面去
-
+      defaultZone: http://cy:123:134.175.157.42:2100/eureka/      # 将自己注册到peer2这个Eureka上面去
 ---
 spring:
   profiles: server-tx
