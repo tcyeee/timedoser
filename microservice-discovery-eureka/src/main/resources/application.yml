@@ -5,26 +5,32 @@ spring:
     user:
       name: cy                  # 配置登录的账号是cy
       password: 123             # 配置登录的密码是123
-
----
-spring:
-  profiles: server-ali                                             # 指定profile=peer1
 server:
   port: 2100
+---
+spring:
+  profiles: server-ali
 eureka:
   instance:
-    hostname: server-ali                                               # 指定当profile=peer1时，主机名是peer1
+    hostname: server-ali    # 显示在eureka上的名称
   client:
     serviceUrl:
-      defaultZone: http://cy:123@134.175.157.42:2100/eureka/      # 将自己注册到peer2这个Eureka上面去
+      defaultZone: http://cy:123@134.175.157.42:2100/eureka/
 ---
 spring:
   profiles: server-tx
-server:
-  port: 2100
 eureka:
   instance:
     hostname: server-tx
   client:
     serviceUrl:
       defaultZone: http://cy:123@47.107.52.39:2100/eureka/
+---
+spring:
+  profiles: server-local
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://cy:123@localhost:2100/eureka/

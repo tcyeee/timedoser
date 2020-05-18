@@ -6,6 +6,13 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://134.175.157.42:2100/eureka/,http://47.107.52.39:2100/eureka/
+      defaultZone: http://cy:123@134.175.157.42:2100/eureka/,http://cy:123@47.107.52.39:2100/eureka/
   instance:
     prefer-ip-address: true
+---
+spring:
+  profiles: server-local
+eureka:
+  client:
+    service-url:
+      defaultZone: http://cy:123@localhost:2100/eureka/
