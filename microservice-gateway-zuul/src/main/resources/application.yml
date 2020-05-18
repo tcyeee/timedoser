@@ -1,6 +1,8 @@
 server:
   port: 2110
+---
 spring:
+  profiles: server-online
   application:
     name: microservice-gateway-zuul
 eureka:
@@ -10,9 +12,14 @@ eureka:
   instance:
     prefer-ip-address: true
 ---
+# 本地启动有某种bug,在本地docker中无法连接到uereka, 但是在idea中启动却可以,所以我在本地docker中,使用tag为0.0.0-local的镜像进行启动
 spring:
   profiles: server-local
+  application:
+    name: microservice-gateway-zuul
 eureka:
   client:
     service-url:
       defaultZone: http://cy:123@localhost:2100/eureka/
+  instance:
+    prefer-ip-address: true
