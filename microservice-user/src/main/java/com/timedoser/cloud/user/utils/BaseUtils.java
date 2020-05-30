@@ -1,6 +1,6 @@
-package com.timedoser.cloud.utils;
+package com.timedoser.cloud.eureka.utils;
 
-import com.timedoser.cloud.entity.po.AclUser;
+import com.timedoser.cloud.eureka.entity.po.AclUser;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.context.request.RequestContextHolder;

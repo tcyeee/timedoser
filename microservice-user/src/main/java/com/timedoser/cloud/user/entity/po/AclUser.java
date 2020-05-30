@@ -1,6 +1,6 @@
-package com.timedoser.cloud.entity.po;
+package com.timedoser.cloud.user.entity.po;
 
-import com.timedoser.cloud.utils.BaseUtils;
+import com.timedoser.cloud.eureka.utils.BaseUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

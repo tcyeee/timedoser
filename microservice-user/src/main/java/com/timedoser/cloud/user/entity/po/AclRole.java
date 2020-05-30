@@ -1,4 +1,4 @@
-package com.timedoser.cloud.entity.po;
+package com.timedoser.cloud.user.entity.po;
 
 import lombok.Data;
 

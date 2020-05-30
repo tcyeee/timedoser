@@ -1,4 +1,4 @@
-package com.timedoser.cloud.utils;
+package com.timedoser.cloud.eureka.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;

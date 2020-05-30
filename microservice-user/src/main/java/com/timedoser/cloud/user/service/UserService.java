@@ -1,6 +1,6 @@
-package com.timedoser.cloud.service;
+package com.timedoser.cloud.user.service;
 
-import com.timedoser.cloud.entity.po.AclUser;
+import com.timedoser.cloud.user.entity.po.AclUser;
 import org.springframework.stereotype.Service;
 
 /**

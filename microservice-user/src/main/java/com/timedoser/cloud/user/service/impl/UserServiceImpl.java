@@ -1,8 +1,8 @@
-package com.timedoser.cloud.service.impl;
+package com.timedoser.cloud.user.service.impl;
 
-import com.timedoser.cloud.dao.AclUserDao;
-import com.timedoser.cloud.entity.po.AclUser;
-import com.timedoser.cloud.service.UserService;
+import com.timedoser.cloud.user.dao.AclUserDao;
+import com.timedoser.cloud.user.entity.po.AclUser;
+import com.timedoser.cloud.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
