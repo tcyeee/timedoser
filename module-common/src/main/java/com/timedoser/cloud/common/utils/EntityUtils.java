@@ -1,4 +1,4 @@
-package com.timedoser.cloud.eureka.utils;
+package com.timedoser.cloud.common.utils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

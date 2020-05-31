@@ -2,7 +2,6 @@ package com.timedoser.cloud.user.entity.po;
 
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**

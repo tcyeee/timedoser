@@ -1,7 +1,6 @@
-package com.timedoser.cloud.eureka.utils;
+package com.timedoser.cloud.common.utils;
 
-
-import org.apache.commons.lang.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -81,7 +80,7 @@ public final class CheckUtils {
      * @return boolean （合法：true，不合法：false）
      */
     public static boolean checkAppCode(String appCode) {
-        return StringUtils.isNotBlank(appCode) && appCode.length() > 20;
+        return StrUtil.isNotBlank(appCode) && appCode.length() > 20;
     }
 
     // 手机号中间加密
