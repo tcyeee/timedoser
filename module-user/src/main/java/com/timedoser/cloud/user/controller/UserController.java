@@ -1,7 +1,7 @@
 package com.timedoser.cloud.user.controller;
 
+import com.timedoser.cloud.common.entity.po.User;
 import com.timedoser.cloud.user.service.UserService;
-import com.timedoser.cloud.common.utils.ResponseUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +33,7 @@ public class UserController {
 
 
     @GetMapping("findUserByPhone")
-    public String findByMobilephone(String phoneNumber) {
-        return ResponseUtils.creatJsonResponse(userService.findByMobilephone(phoneNumber));
+    public User findByMobilephone(String phoneNumber) {
+        return userService.findByMobilephone(phoneNumber);
     }
 }

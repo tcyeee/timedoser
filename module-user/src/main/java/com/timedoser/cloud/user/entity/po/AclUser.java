@@ -1,16 +1,8 @@
 package com.timedoser.cloud.user.entity.po;
 
 import cn.hutool.core.util.IdUtil;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.experimental.Tolerate;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Proxy;
+import lombok.*;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,54 +13,28 @@ import java.util.Date;
  * @author tcyeee
  */
 @Data
-@Entity
 @Builder
-@DynamicInsert
-@DynamicUpdate
-@Proxy(lazy = false)
-@Table(name = "acl_user")
+@AllArgsConstructor
+@NoArgsConstructor
 public class AclUser implements Serializable {
     private static final long serialVersionUID = 7080456749403365766L;
-
-    @Id
-    @Column(unique = true, nullable = false, length = 100, updatable = false)
     private String id;
+    private String email;                  // 邮箱
+    private String openid;                 // [小程序]唯一id
+    private enableTypeEnum enable;         // 账户状态
+    private String mobilephone;            // 手机号
+    private Date createdate;               // 创建时间
+    private accountTypeEnum accountType;   // 用户类型
+    private String username;               // 昵称
+    private String avatarUrl;              // 头像地址
+    private String password;               // 密码
+    private Date lastPasswordReset;        // 用户上次登录时间
+    private Integer gender;                // 性别
+    private String country;                // 国家
+    private String province;               // 省
+    private String city;                   // 市
 
-    // 邮箱
-    @Column(unique = true, length = 30)
-    private String email;
 
-    // [小程序]唯一id
-    @Column(unique = true, length = 100)
-    private String openid;
-
-    // 账户状态
-    @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
-    private enableTypeEnum enable;
-
-    // 手机号
-    @Column(unique = true, length = 11)
-    private String mobilephone;
-
-    // 创建时间
-    @Column(columnDefinition = "timestamp DEFAULT current_timestamp")
-    private Date createdate;
-
-    // 用户类型
-    @Column(nullable = false, columnDefinition = "int(4) DEFAULT 1")
-    private accountTypeEnum accountType;
-
-    private String username;            // 昵称
-    private String avatarUrl;           // 头像地址
-    private String password;            // 密码
-    private Date lastPasswordReset;     // 用户上次登录时间
-
-    private Integer gender;             // 性别
-    private String country;             // 国家
-    private String province;            // 省
-    private String city;                // 市
-
-    @Transient
     private String authoritiesString;   // 角色列表
 
 
@@ -80,8 +46,8 @@ public class AclUser implements Serializable {
         defult(1, "可以正常使用"),
         two(2, "账号已经注销,现在不可用");
 
-        private int index;
-        private String remark;
+        private final int index;
+        private final String remark;
     }
 
     // 账户注册类型
@@ -94,13 +60,10 @@ public class AclUser implements Serializable {
         author(3, "作者账户"),
         Administrator(4, "管理员账户");
 
-        private int index;
-        private String remark;
+        private final int index;
+        private final String remark;
     }
 
-    @Tolerate
-    public AclUser() {
-    }
 
 
     /**
