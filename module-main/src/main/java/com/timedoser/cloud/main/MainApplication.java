@@ -1,13 +1,12 @@
-package com.timedoser.cloud.maim;
+package com.timedoser.cloud.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ModuleMaimApplication {
-
+public class MainApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ModuleMaimApplication.class, args);
+        SpringApplication.run(MainApplication.class, args);
     }
 
 }

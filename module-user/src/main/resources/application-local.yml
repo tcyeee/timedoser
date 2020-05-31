@@ -1,6 +1,8 @@
 eureka:
   client:
     service-url:
+      # 如果是docker启动的话,需要修改localhost为local-eureka,因为在docker的每个实例中localhost解析出来都是不一样的
+      # defaultZone: http://cy:123@local-eureka:2100/eureka/
       defaultZone: http://cy:123@localhost:2100/eureka/
   instance:
     prefer-ip-address: true
