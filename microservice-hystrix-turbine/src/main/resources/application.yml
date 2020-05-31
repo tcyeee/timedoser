@@ -1,15 +1,27 @@
 server:
   port: 2120
+turbine:
+  appConfig: module-mail,module-user
+  clusterNameExpression: "'default'"
+---
 spring:
+  profiles: server-online
   application:
     name: microservice-hystrix-turbine
 eureka:
   client:
     service-url:
-#      defaultZone: http://peer1:2100/eureka/,http://peer2:2100/eureka/
-      defaultZone: http://localhost:2100/eureka/
+      defaultZone: http://cy:123@134.175.157.42:2100/eureka/,http://cy:123@47.107.52.39:2100/eureka/
   instance:
     prefer-ip-address: true
-turbine:
-  appConfig: microservice-consumer-movie,microservice-consumer-movie-feign-hystrix-fallback-stream
-  clusterNameExpression: "'default'"
+---
+spring:
+  profiles: server-local
+  application:
+    name: microservice-hystrix-turbine
+eureka:
+  client:
+    service-url:
+      defaultZone: http://cy:123@localhost:2100/eureka/
+  instance:
+    prefer-ip-address: true

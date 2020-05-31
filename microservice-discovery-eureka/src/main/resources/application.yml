@@ -29,8 +29,10 @@ eureka:
 spring:
   profiles: server-local
 eureka:
+  instance:
+    hostname: server-local
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://cy:123@localhost:2100/eureka/
+      defaultZone: http://cy:123@server-local:2100/eureka/

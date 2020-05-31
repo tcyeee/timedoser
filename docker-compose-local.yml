@@ -1,0 +1,28 @@
+version: "3"
+services:
+
+  # 服务发现 eureka
+  local-eureka:
+    image: tcyeee/microservice-discovery-eureka:0.0.5
+    ports:
+      - "2100:2100"
+    environment:
+      - spring.profiles.active=server-local
+
+  # 网关 zuul
+  microservice-gateway-zuul:
+    image: tcyeee/microservice-gateway-zuul:0.0.7
+    hostname: local
+    ports:
+      - "2110:2110"
+    environment:
+      - spring.profiles.active=server-local
+
+
+
+#  microservice-provider-user:
+#    image: tcyeee/microservice-provider-user:0.0.1-SNAPSHOT
+#  microservice-consumer-movie-ribbon-hystrix:
+#    image: tcyeee/microservice-consumer-movie-ribbon-hystrix:0.0.1-SNAPSHOT
+#  microservice-hystrix-turbine:
+#    image: tcyeee/microservice-hystrix-turbine:0.0.1-SNAPSHOT
