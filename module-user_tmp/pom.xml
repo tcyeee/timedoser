@@ -6,7 +6,7 @@
     <artifactId>timeDoser</artifactId>
     <version>1.2.01</version>
     <packaging>jar</packaging>
-    <name>microservice-user_tmp</name>
+    <name>module-user_tmp</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
