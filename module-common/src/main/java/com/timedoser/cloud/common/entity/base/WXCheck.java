@@ -9,12 +9,9 @@ import lombok.Data;
  * @since 2019-05-04 10:06
  */
 @Data
-@SuppressWarnings("all")
 public class WXCheck {
-
     private int errcode;
     private String errmsg;
     private String session_key;
     private String openid;
-
 }

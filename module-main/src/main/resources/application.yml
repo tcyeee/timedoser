@@ -1,10 +1,10 @@
 server:
-  port: 1901
+  port: 1902
   servlet:
-    context-path: /user
+    context-path: /main
 spring:
   application:
-    name: module-user
+    name: module-main
   datasource:
     url: jdbc:mysql://47.107.52.39:3306/time_doser_user?useUnicode=true&characterEncoding=UTF-8
     username: root

@@ -33,14 +33,6 @@
 //        return (AclUser) userInfo;
 //    }
 //
-//    /**
-//     * 获取一个32位的UUID
-//     *
-//     * @return uuid
-//     */
-//    public static String getUuid() {
-//        return UUID.randomUUID().toString().replaceAll("-", "");
-//    }
 //
 //    // 生成signature
 //    public static String getSignature() {

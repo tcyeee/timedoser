@@ -1,7 +1,7 @@
 package com.timedoser.cloud.user.controller;
 
 import com.timedoser.cloud.user.service.UserService;
-import com.timedoser.cloud.eureka.utils.ResponseUtils;
+import com.timedoser.cloud.common.utils.ResponseUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

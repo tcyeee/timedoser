@@ -1,0 +1,6 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://cy:123@localhost:2100/eureka/
+  instance:
+    prefer-ip-address: true

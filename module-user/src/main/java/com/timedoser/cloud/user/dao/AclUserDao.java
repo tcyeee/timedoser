@@ -1,6 +1,6 @@
 package com.timedoser.cloud.user.dao;
 
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.user.entity.po.AclUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

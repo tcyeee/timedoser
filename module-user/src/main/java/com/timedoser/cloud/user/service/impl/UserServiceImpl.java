@@ -1,7 +1,7 @@
 package com.timedoser.cloud.user.service.impl;
 
 import com.timedoser.cloud.user.dao.AclUserDao;
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.user.entity.po.AclUser;
 import com.timedoser.cloud.user.service.UserService;
 import org.springframework.stereotype.Service;
 

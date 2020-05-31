@@ -1,6 +1,6 @@
 package com.timedoser.cloud.user.entity.po;
 
-import com.timedoser.cloud.eureka.utils.BaseUtils;
+import cn.hutool.core.util.IdUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -61,7 +61,6 @@ public class AclUser implements Serializable {
     private String username;            // 昵称
     private String avatarUrl;           // 头像地址
     private String password;            // 密码
-    private String signature;           // 签名
     private Date lastPasswordReset;     // 用户上次登录时间
 
     private Integer gender;             // 性别
@@ -114,8 +113,7 @@ public class AclUser implements Serializable {
         return AclUser.builder()
                 .openid(openid)
                 .createdate(new Date())
-                .id(BaseUtils.getUuid())
-                .signature(BaseUtils.getSignature())
+                .id(IdUtil.fastSimpleUUID())
                 .accountType(accountTypeEnum.defult)
                 .enable(enableTypeEnum.defult).build();
     }

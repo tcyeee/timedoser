@@ -17,9 +17,9 @@
         <module>microservice-gateway-zuul</module>
         <module>microservice-hystrix-turbine</module>
 
+        <module>module-common</module>
         <module>module-user_tmp</module>
         <module>module-user</module>
-        <module>module-common</module>
         <module>module-main</module>
     </modules>
 </project>
