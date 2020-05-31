@@ -1,24 +1,14 @@
 server:
   port: 1901
-  servlet:
-    context-path: /user
 spring:
   application:
     name: module-user
-  datasource:
-    url: jdbc:mysql://47.107.52.39:3306/time_doser_user?useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: tcyeeeTimeDoser;
-    driver-class-name: com.mysql.jdbc.Driver
   jpa:
     database: MYSQL
     generate-ddl: false
     show-sql: true
     hibernate:
       ddl-auto: none
-logging:
-  level:
-    root: info
 # Mybatis配置
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml

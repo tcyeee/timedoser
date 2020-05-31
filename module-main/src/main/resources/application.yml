@@ -1,7 +1,5 @@
 server:
   port: 1902
-  servlet:
-    context-path: /main
 spring:
   main:
     allow-bean-definition-overriding: true
