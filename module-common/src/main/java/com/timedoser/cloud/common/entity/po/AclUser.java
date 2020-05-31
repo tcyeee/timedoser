@@ -1,4 +1,4 @@
-package com.timedoser.cloud.user.entity.po;
+package com.timedoser.cloud.common.entity.po;
 
 import cn.hutool.core.util.IdUtil;
 import lombok.*;
@@ -21,10 +21,10 @@ public class AclUser implements Serializable {
     private String id;
     private String email;                  // 邮箱
     private String openid;                 // [小程序]唯一id
-    private enableTypeEnum enable;         // 账户状态
+    private Integer enable;                // 账户状态
     private String mobilephone;            // 手机号
     private Date createdate;               // 创建时间
-    private accountTypeEnum accountType;   // 用户类型
+    private Integer accountType;           // 用户类型
     private String username;               // 昵称
     private String avatarUrl;              // 头像地址
     private String password;               // 密码
@@ -33,6 +33,7 @@ public class AclUser implements Serializable {
     private String country;                // 国家
     private String province;               // 省
     private String city;                   // 市
+    private String personalizedSignature;  // 个性签名
 
 
     private String authoritiesString;   // 角色列表
@@ -64,8 +65,6 @@ public class AclUser implements Serializable {
         private final String remark;
     }
 
-
-
     /**
      * 微信首次登录通过appcode添加一条用户记录
      *
@@ -77,7 +76,7 @@ public class AclUser implements Serializable {
                 .openid(openid)
                 .createdate(new Date())
                 .id(IdUtil.fastSimpleUUID())
-                .accountType(accountTypeEnum.defult)
-                .enable(enableTypeEnum.defult).build();
+                .accountType(accountTypeEnum.defult.index)
+                .enable(enableTypeEnum.defult.index).build();
     }
 }

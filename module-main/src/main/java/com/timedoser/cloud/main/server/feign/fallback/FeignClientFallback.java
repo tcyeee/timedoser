@@ -1,6 +1,6 @@
 package com.timedoser.cloud.main.server.feign.fallback;
 
-import com.timedoser.cloud.common.entity.po.User;
+import com.timedoser.cloud.common.entity.po.AclUser;
 import com.timedoser.cloud.main.server.feign.UserFeignClient;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FeignClientFallback implements UserFeignClient {
     @Override
-    public User findUserByPhone(String phoneNubmer) {
+    public AclUser findUserByPhone(String phoneNubmer) {
         return null;
     }
 }

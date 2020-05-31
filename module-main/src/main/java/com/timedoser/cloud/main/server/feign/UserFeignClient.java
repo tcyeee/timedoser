@@ -1,6 +1,6 @@
 package com.timedoser.cloud.main.server.feign;
 
-import com.timedoser.cloud.common.entity.po.User;
+import com.timedoser.cloud.common.entity.po.AclUser;
 import com.timedoser.cloud.main.server.feign.fallback.FeignClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,5 +15,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserFeignClient {
 
     @RequestMapping(value = "/user/findUserByPhone", method = RequestMethod.GET)
-    User findUserByPhone(@RequestParam("phoneNumber") String phoneNumber);
+    AclUser findUserByPhone(@RequestParam("phoneNumber") String phoneNumber);
 }

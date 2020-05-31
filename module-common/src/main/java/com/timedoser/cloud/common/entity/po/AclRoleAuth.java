@@ -1,4 +1,4 @@
-package com.timedoser.cloud.user.entity.po;
+package com.timedoser.cloud.common.entity.po;
 
 import lombok.Data;
 import java.util.Date;

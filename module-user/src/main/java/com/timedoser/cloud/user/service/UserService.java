@@ -1,6 +1,6 @@
 package com.timedoser.cloud.user.service;
 
-import com.timedoser.cloud.common.entity.po.User;
+import com.timedoser.cloud.common.entity.po.AclUser;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface UserService {
-    User findByMobilephone(String userId);
+    AclUser findByMobilephone(String userId);
 }

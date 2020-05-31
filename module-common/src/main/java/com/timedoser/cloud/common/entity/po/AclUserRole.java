@@ -1,6 +1,7 @@
-package com.timedoser.cloud.user.entity.po;
+package com.timedoser.cloud.common.entity.po;
 
 import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -8,9 +9,9 @@ import java.util.Date;
  * @since 2019/12/1 17:46
  */
 @Data
-public class AclRole {
+public class AclUserRole {
     private int id;
-    private String name;
-    private String remark;
+    private AclUser baseUser;
+    private AclRole aclRole;
     private Date createTime;
 }
