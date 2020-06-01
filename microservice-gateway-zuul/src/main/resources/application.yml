@@ -1,5 +1,9 @@
 server:
   port: 2110
+zuul:
+  routes:
+    module-user: /user/**
+    module-main: /main/**
 ---
 spring:
   profiles: server-online
@@ -19,6 +23,8 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://cy:123@local-eureka:2100/eureka/
+      # 如果在docker运行请修改localhost为eureka的docker服务名, docker中localhost无法被解析
+      # defaultZone: http://cy:123@local-eureka:2100/eureka/
+      defaultZone: http://cy:123@localhost:2100/eureka/
   instance:
     prefer-ip-address: true
