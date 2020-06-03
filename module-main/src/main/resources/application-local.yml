@@ -12,4 +12,4 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 logging:
   level:
-    root: info
+    root: error
