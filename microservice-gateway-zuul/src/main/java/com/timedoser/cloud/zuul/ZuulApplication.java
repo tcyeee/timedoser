@@ -1,6 +1,6 @@
 package com.timedoser.cloud.zuul;
 
-import com.timedoser.cloud.zuul.filter.pre.PreRequestLogFilter;
+import com.timedoser.cloud.zuul.config.filter.pre.PreRequestLogFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;

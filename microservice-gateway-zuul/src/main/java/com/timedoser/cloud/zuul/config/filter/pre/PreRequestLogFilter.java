@@ -1,4 +1,4 @@
-package com.timedoser.cloud.zuul.filter.pre;
+package com.timedoser.cloud.zuul.config.filter.pre;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -30,6 +30,7 @@ public class PreRequestLogFilter extends ZuulFilter {
         return true;
     }
 
+    // 请求的时候, 记录一条日志
     @Override
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
