@@ -9,5 +9,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface UserService {
-    AclUser findByMobilephone(String userId);
+
+    /**
+     * 通过手机号查看用户信息
+     *
+     * @param phoneNumber 手机号
+     * @return userInfo
+     */
+    AclUser findUserByPhone(String phoneNumber);
 }

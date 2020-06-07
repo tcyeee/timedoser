@@ -1,6 +1,6 @@
 package com.timedoser.cloud.user.controller;
 
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.user.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +32,14 @@ public class UserController {
 //    }
 
 
+    /**
+     * 通过手机号查看用户信息
+     *
+     * @param phoneNumber 手机号
+     * @return userInfo
+     */
     @GetMapping("findUserByPhone")
-    public AclUser findByMobilephone(String phoneNumber) {
-        return userService.findByMobilephone(phoneNumber);
+    public Result findUserByPhone(String phoneNumber) {
+        return Result.ok(userService.findUserByPhone(phoneNumber));
     }
 }
