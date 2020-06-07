@@ -36,6 +36,10 @@ public class Result extends HashMap<String, Object> {
         return error(HttpStatus.INTERNAL_SERVER_ERROR.value(), ERROR);
     }
 
+    public static Result error(HttpStatus status) {
+        return error(status.value(), status.getReasonPhrase());
+    }
+
     public static Result error(String msg) {
         return error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
     }
