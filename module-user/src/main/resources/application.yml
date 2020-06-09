@@ -5,29 +5,10 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: module-user
-  jpa:
-    database: MYSQL
-    generate-ddl: false
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-# Mybatis配置
-mybatis:
-  mapper-locations: classpath*:mapper/**/*.xml
-  configuration:
-    map-underscore-to-camel-case: false
-    auto-mapping-behavior: partial
-    cache-enabled: true
-    lazy-loading-enabled: true
-    multiple-result-sets-enabled: true
-    use-column-label: true
-    use-generated-keys: false
-    default-executor-type: simple
-    default-statement-timeout: 25
-    safe-row-bounds-enabled: false
-    local-cache-scope: session
-    jdbc-type-for-null: other
-    lazy-load-trigger-methods: equals,clone,hashCode,toString
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+
 pagehelper:
   helperDialect: mysql
   reasonable: true
