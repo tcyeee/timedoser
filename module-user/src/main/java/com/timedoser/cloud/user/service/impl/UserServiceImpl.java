@@ -1,5 +1,8 @@
 package com.timedoser.cloud.user.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.timedoser.cloud.common.entity.base.StatusDto;
 import com.timedoser.cloud.common.entity.po.AclUser;
 import com.timedoser.cloud.user.mapper.AclUserMapper;
 import com.timedoser.cloud.user.service.UserService;
@@ -32,5 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public AclUser getInfo(String id) {
         return userMapper.selectById(id);
+    }
+
+    @Override
+    public IPage<AclUser> selectPageVo(StatusDto param) {
+        Page<AclUser> aclUserPage = new Page<>(param.getCurrentPage(), param.getPageSize());
+        return userMapper.selectPageVo(aclUserPage);
     }
 }

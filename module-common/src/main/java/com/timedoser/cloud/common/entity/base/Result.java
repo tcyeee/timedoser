@@ -1,7 +1,6 @@
 package com.timedoser.cloud.common.entity.base;
 
-//import com.github.pagehelper.PageInfo;
-
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.timedoser.cloud.common.entity.enums.StatusCode;
 import org.springframework.http.HttpStatus;
 
@@ -20,6 +19,7 @@ public class Result extends HashMap<String, Object> {
     private static final String CODE = "code";
     private static final String DATA = "data";
     private static final String TOTAL = "total";
+    private static final String CURRENT = "currentPage";
 
     public Result() {
         put(STATUS, true);
@@ -74,12 +74,13 @@ public class Result extends HashMap<String, Object> {
     }
 
     //-------------------------------- 创建分页模板 ------------
-//    public static Result page(PageInfo<Object> data) {
-//        Result result = new Result();
-//        result.put(TOTAL, data.getTotal());
-//        result.put(DATA, data.getList());
-//        return result;
-//    }
+    public static <T> Result page(IPage<T> data) {
+        Result result = new Result();
+        result.put(DATA, data.getRecords());
+        result.put(CURRENT, data.getCurrent());
+        result.put(TOTAL, data.getTotal());
+        return result;
+    }
 
     @Override
     public Result put(String key, Object value) {

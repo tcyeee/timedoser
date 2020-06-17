@@ -1,5 +1,7 @@
 package com.timedoser.cloud.user.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.timedoser.cloud.common.entity.base.StatusDto;
 import com.timedoser.cloud.common.entity.po.AclUser;
 import org.springframework.stereotype.Service;
 
@@ -19,4 +21,6 @@ public interface UserService {
     AclUser findUserByPhone(String phoneNumber);
 
     AclUser getInfo(String id);
+
+    IPage<AclUser> selectPageVo(StatusDto param);
 }
