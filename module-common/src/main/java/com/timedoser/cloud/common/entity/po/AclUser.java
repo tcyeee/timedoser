@@ -1,6 +1,7 @@
 package com.timedoser.cloud.common.entity.po;
 
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.*;
 
 import java.io.Serializable;
@@ -35,7 +36,7 @@ public class AclUser implements Serializable {
     private String city;                   // 市
     private String personalizedSignature;  // 个性签名
 
-
+    @TableField(exist = false)
     private String authoritiesString;   // 角色列表
 
 

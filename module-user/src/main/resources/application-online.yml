@@ -13,4 +13,5 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 logging:
   level:
-    root: error
+    com.baomidou.mybatisplus.samples.quickstart: debug
+    root: info

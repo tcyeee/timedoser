@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private AclUserMapper userMapper;
 
+
     /**
      * 通过手机号查看用户信息
      *
@@ -26,5 +27,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public AclUser findUserByPhone(String phoneNumber) {
         return userMapper.findUserByPhone(phoneNumber);
+    }
+
+    @Override
+    public AclUser getInfo(String id) {
+        return userMapper.selectById(id);
     }
 }

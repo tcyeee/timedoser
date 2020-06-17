@@ -10,8 +10,8 @@ import java.util.Date;
  */
 @Data
 public class AclUserRole {
-    private int id;
-    private AclUser baseUser;
-    private AclRole aclRole;
+    private Long id;
+    private String userId;
+    private Integer roleId;
     private Date createTime;
 }

@@ -17,4 +17,6 @@ public interface UserService {
      * @return userInfo
      */
     AclUser findUserByPhone(String phoneNumber);
+
+    AclUser getInfo(String id);
 }

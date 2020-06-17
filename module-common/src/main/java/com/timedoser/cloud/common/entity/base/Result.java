@@ -1,6 +1,8 @@
 package com.timedoser.cloud.common.entity.base;
 
-import com.github.pagehelper.PageInfo;
+//import com.github.pagehelper.PageInfo;
+
+import com.timedoser.cloud.common.entity.enums.StatusCode;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
@@ -19,29 +21,23 @@ public class Result extends HashMap<String, Object> {
     private static final String DATA = "data";
     private static final String TOTAL = "total";
 
-
-    //  ----------------  错误提示  -----------------    
-    public static final String ERROR = "未知异常，请联系管理员!!";
-    public static final String SUCCESS = "操作成功!!";
-
-
     public Result() {
         put(STATUS, true);
-        put(MSG, SUCCESS);
+        put(MSG, StatusCode.SUCCESS.getReasonPhrase());
         put(CODE, HttpStatus.OK.value());
     }
 
     //-------------------------------- 创建错误模板 ------------
     public static Result error() {
-        return error(HttpStatus.INTERNAL_SERVER_ERROR.value(), ERROR);
+        return error(StatusCode.FEAILED);
     }
 
-    public static Result error(HttpStatus status) {
+    public static Result error(StatusCode status) {
         return error(status.value(), status.getReasonPhrase());
     }
 
     public static Result error(String msg) {
-        return error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
+        return error(StatusCode.FEAILED.value(), msg);
     }
 
     public static Result error(int code, String msg) {
@@ -78,12 +74,12 @@ public class Result extends HashMap<String, Object> {
     }
 
     //-------------------------------- 创建分页模板 ------------
-    public static Result page(PageInfo<Object> data) {
-        Result result = new Result();
-        result.put(TOTAL, data.getTotal());
-        result.put(DATA, data.getList());
-        return result;
-    }
+//    public static Result page(PageInfo<Object> data) {
+//        Result result = new Result();
+//        result.put(TOTAL, data.getTotal());
+//        result.put(DATA, data.getList());
+//        return result;
+//    }
 
     @Override
     public Result put(String key, Object value) {
