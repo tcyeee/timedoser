@@ -1,10 +1,10 @@
 package com.timedoser.cloud.zuul.config.filter;
 
 import com.timedoser.cloud.common.entity.base.Result;
-import com.timedoser.cloud.common.entity.base.TokenDetail;
 import com.timedoser.cloud.common.entity.enums.StatusCode;
 import com.timedoser.cloud.common.entity.po.AclUser;
 import com.timedoser.cloud.common.utils.BaseUtils;
+import com.timedoser.cloud.zuul.common.entity.TokenDetail;
 import com.timedoser.cloud.zuul.common.utils.TokenUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

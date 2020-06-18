@@ -1,4 +1,4 @@
-package com.timedoser.cloud.common.entity.base;
+package com.timedoser.cloud.zuul.common.entity;
 
 import com.timedoser.cloud.common.entity.po.AclUser;
 import lombok.Getter;
