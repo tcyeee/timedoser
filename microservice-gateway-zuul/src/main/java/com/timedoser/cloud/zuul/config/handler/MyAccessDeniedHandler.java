@@ -1,5 +1,6 @@
 package com.timedoser.cloud.zuul.config.handler;
 
+import cn.hutool.json.JSONUtil;
 import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.enums.StatusCode;
 import org.springframework.security.access.AccessDeniedException;
@@ -20,8 +21,9 @@ import java.io.IOException;
 @Component
 public class MyAccessDeniedHandler implements AccessDeniedHandler {
     @Override
-    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException {
-        httpServletResponse.getWriter().println(Result.error(StatusCode.NO_ACCESS));
-        httpServletResponse.getWriter().flush();
+    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse response, AccessDeniedException e) throws IOException {
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().println(JSONUtil.toJsonStr(Result.error(StatusCode.NO_ACCESS)));
+        response.getWriter().flush();
     }
 }
