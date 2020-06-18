@@ -24,8 +24,6 @@ public class LoginServerImpl implements LoginServer {
 
     @Resource
     private AclUserMapper aclUserMapper;
-    @Resource
-    private AclRoleMapper roleMapper;
 
     /**
      * 通过账号密码登录
@@ -35,16 +33,8 @@ public class LoginServerImpl implements LoginServer {
      */
     @Override
     public UserPasswordVo userPassword(UserPasswordDto param) {
-
-        // base info
-        UserPasswordVo result = new UserPasswordVo();
         String basePassword = Base64.decodeStr(param.getPassword());
         String password = DigestUtils.md5DigestAsHex(basePassword.getBytes()).toUpperCase();
-        AclUser user = aclUserMapper.userPassword(param.getPhoneNumber(), password);
-        BeanUtil.copyProperties(user, result);
-
-        // auth
-        List<AclRole> roleList = roleMapper.findByUserId(user.getId());
-        return result;
+        return aclUserMapper.userPassword(param.getPhoneNumber(), password);
     }
 }

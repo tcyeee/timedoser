@@ -2,6 +2,7 @@ package com.timedoser.cloud.main.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -14,8 +15,8 @@ public interface AclUserMapper extends BaseMapper<AclUser> {
      * 通过手机号查询
      *
      * @param phoneNumber phoneNumber
-     * @param password password
+     * @param password    password
      * @return data
      */
-    AclUser userPassword(@Param("phoneNumber") String phoneNumber, @Param("password") String password);
+    UserPasswordVo userPassword(@Param("phoneNumber") String phoneNumber, @Param("password") String password);
 }

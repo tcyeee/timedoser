@@ -2,30 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.timedoser.cloud.main.mapper.AclUserMapper">
     <resultMap id="BaseResultMap" type="com.timedoser.cloud.common.entity.po.AclUser">
-        <id column="id" jdbcType="VARCHAR" property="id" />
-        <result column="username" jdbcType="VARCHAR" property="username" />
-        <result column="mobilephone" jdbcType="VARCHAR" property="mobilephone" />
-        <result column="password" jdbcType="VARCHAR" property="password" />
-        <result column="gender" jdbcType="INTEGER" property="gender" />
-        <result column="email" jdbcType="VARCHAR" property="email" />
-        <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
-        <result column="enable" jdbcType="INTEGER" property="enable" />
-        <result column="account_type" jdbcType="INTEGER" property="accountType" />
-        <result column="openid" jdbcType="VARCHAR" property="openid" />
-        <result column="country" jdbcType="VARCHAR" property="country" />
-        <result column="province" jdbcType="VARCHAR" property="province" />
-        <result column="city" jdbcType="VARCHAR" property="city" />
-        <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
-        <result column="last_password_reset" jdbcType="TIMESTAMP" property="lastPasswordReset" />
-        <result column="personalized_signature" jdbcType="VARCHAR" property="personalizedSignature" />
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="mobilephone" jdbcType="VARCHAR" property="mobilephone"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="gender" jdbcType="INTEGER" property="gender"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="enable" jdbcType="INTEGER" property="enable"/>
+        <result column="account_type" jdbcType="INTEGER" property="accountType"/>
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="createdate" jdbcType="TIMESTAMP" property="createdate"/>
+        <result column="last_password_reset" jdbcType="TIMESTAMP" property="lastPasswordReset"/>
+        <result column="personalized_signature" jdbcType="VARCHAR" property="personalizedSignature"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, username, mobilephone, `password`, gender, email, avatar_url, `enable`, account_type,
     openid, country, province, city, createdate, last_password_reset, personalized_signature
     </sql>
-    <select id="userPassword" resultType="com.timedoser.cloud.common.entity.po.AclUser">
-        select
-        <include refid="Base_Column_List" />
-        from time_doser_user.acl_user where mobilephone = #{phoneNumber} and password = #{password}
+    <select id="userPassword" resultType="com.timedoser.cloud.main.common.entity.vo.UserPasswordVo">
+        select a.id                     as id,
+               a.email                  as email,
+               a.mobilephone            as mobilephone,
+               a.username               as username,
+               a.personalized_signature as personalizedSignature,
+               (select group_concat(b.name) as rol
+                from time_doser_user.acl_user_role c
+                         left join time_doser_user.acl_role b on c.role_id = b.id
+                where c.user_id = a.id) as authoritiesString
+        from time_doser_user.acl_user a
+        where a.mobilephone = #{phoneNumber}
+          and a.password = #{password}
     </select>
 </mapper>
