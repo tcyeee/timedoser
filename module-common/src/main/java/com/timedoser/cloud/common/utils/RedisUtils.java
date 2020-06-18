@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
  * @author tcyeee
  * @date 2019/11/22 21:02
  */
-@SuppressWarnings("all")
 public class RedisUtils {
 
     private RedisTemplate<String, Object> redisTemplate;

@@ -13,8 +13,8 @@ import javax.annotation.Resource;
  * @since 2020/5/31 3:08 下午
  */
 @RestController
-@RequestMapping("user")
-public class UserController {
+@RequestMapping("account")
+public class AccountController {
 
     @Resource
     private UserFeignClient userFeignClient;

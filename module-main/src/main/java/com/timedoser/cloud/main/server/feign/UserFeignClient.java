@@ -16,4 +16,5 @@ public interface UserFeignClient {
 
     @RequestMapping(value = "/user/findUserByPhone", method = RequestMethod.GET)
     AclUser findUserByPhone(@RequestParam("phoneNumber") String phoneNumber);
+
 }
