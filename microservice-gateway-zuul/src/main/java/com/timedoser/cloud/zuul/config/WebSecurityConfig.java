@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * <p>
      * 后期如果出现了设备同时登录数量限制 或者记住密码之类的需求可以直接在这里配置
      */
-    @Bean()
+    @Bean
     public AuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
         AuthenticationTokenFilter authenticationTokenFilter = new AuthenticationTokenFilter();
         authenticationTokenFilter.setAuthenticationManager(authenticationManagerBean());
@@ -69,13 +69,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          * 在 Spring Security 开始判断本次会话是否有权限时的前一瞬间
          * 通过添加过滤器将 token 解析，将用户所有的权限写入本次会话
          */
-        http
-                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
         /*
          *  禁用缓存
          */
-        http
-                .headers().cacheControl();
+        http.headers().cacheControl();
     }
 }

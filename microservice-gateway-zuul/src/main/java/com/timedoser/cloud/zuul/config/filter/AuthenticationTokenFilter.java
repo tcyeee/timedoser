@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
@@ -29,7 +28,6 @@ import java.io.IOException;
  * @author tcyeee
  * @date 2020年06月06日
  */
-@Component
 public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFilter {
     final private String tokenHeader = "token";
 
