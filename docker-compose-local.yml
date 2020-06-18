@@ -21,12 +21,12 @@ services:
 
   # 网关 zuul
   microservice-gateway-zuul:
-    image: tcyeee/microservice-gateway-zuul:0.0.7
+    image: tcyeee/microservice-gateway-zuul:0.0.9
     hostname: local
     ports:
       - "2110:2110"
     environment:
-      - spring.profiles.active=server-local
+      - spring.profiles.active=local
 
 
 
