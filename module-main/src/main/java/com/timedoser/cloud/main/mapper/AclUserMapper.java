@@ -14,7 +14,8 @@ public interface AclUserMapper extends BaseMapper<AclUser> {
      * 通过手机号查询
      *
      * @param phoneNumber phoneNumber
+     * @param password password
      * @return data
      */
-    AclUser findByPhone(@Param("phoneNumber") String phoneNumber);
+    AclUser userPassword(@Param("phoneNumber") String phoneNumber, @Param("password") String password);
 }

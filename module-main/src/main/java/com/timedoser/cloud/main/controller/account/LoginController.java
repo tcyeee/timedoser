@@ -1,7 +1,7 @@
 package com.timedoser.cloud.main.controller.account;
 
 import com.timedoser.cloud.common.entity.base.Result;
-import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
+import com.timedoser.cloud.main.common.entity.dto.UserPasswordDto;
 import com.timedoser.cloud.main.server.LoginServer;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +30,7 @@ public class LoginController {
      * @return {@link Result
      */
     @PostMapping("userPassword")
-    public Result userPassword(@Validated UserPasswordVo param) {
+    public Result userPassword(@Validated UserPasswordDto param) {
         return Result.ok(loginServer.userPassword(param));
     }
 }

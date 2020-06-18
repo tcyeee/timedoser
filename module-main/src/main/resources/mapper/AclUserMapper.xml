@@ -23,9 +23,9 @@
         id, username, mobilephone, `password`, gender, email, avatar_url, `enable`, account_type,
     openid, country, province, city, createdate, last_password_reset, personalized_signature
     </sql>
-    <select id="findByPhone" resultType="com.timedoser.cloud.common.entity.po.AclUser">
+    <select id="userPassword" resultType="com.timedoser.cloud.common.entity.po.AclUser">
         select
         <include refid="Base_Column_List" />
-        from time_doser_user.acl_user where mobilephone = #{phoneNumber}
+        from time_doser_user.acl_user where mobilephone = #{phoneNumber} and password = #{password}
     </select>
 </mapper>
