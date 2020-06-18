@@ -1,19 +1,14 @@
 package com.timedoser.cloud.main.server.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.codec.Base64;
-import com.timedoser.cloud.common.entity.po.AclRole;
-import com.timedoser.cloud.common.entity.po.AclUser;
 import com.timedoser.cloud.main.common.entity.dto.UserPasswordDto;
 import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
-import com.timedoser.cloud.main.mapper.AclRoleMapper;
 import com.timedoser.cloud.main.mapper.AclUserMapper;
 import com.timedoser.cloud.main.server.LoginServer;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author huxiong
