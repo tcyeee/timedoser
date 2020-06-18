@@ -4,6 +4,7 @@ import com.timedoser.cloud.common.entity.FlxedData;
 import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.enums.StatusCode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -39,5 +40,20 @@ public class GlobalException {
         log.error(FlxedData.PARAM_EXCEPTION_INFO, request.getRequestURI());
         log.error(msg);
         return Result.error(StatusCode.PARAMS_ERROR.value(), msg);
+    }
+
+    /**
+     * 参数校验异常
+     *
+     * @param e       exception
+     * @param request request
+     * @return {@link Result
+     */
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public Result requestMethodExceptionHandler(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
+        String msg = StatusCode.REQUEST_METHOD_ERROR.getReasonPhrase() + " " + e.getMessage();
+        log.error(FlxedData.PARAM_EXCEPTION_INFO, request.getRequestURI());
+        log.error(msg);
+        return Result.error(StatusCode.REQUEST_METHOD_ERROR.value(), msg);
     }
 }

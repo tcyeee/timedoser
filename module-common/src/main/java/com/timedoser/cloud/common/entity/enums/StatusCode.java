@@ -24,6 +24,7 @@ public enum StatusCode {
     PARAMS_ERROR(1300, "参数异常"),
     PARAMS_Empty(1301, "请求参数为空"),
     ELECTION_VALUE_LENGTH_ERROR(1302, "参数字段长度超出限制"),
+    REQUEST_METHOD_ERROR(1303, "请求方式错误"),
 
     // ------ 权限 ---------
     SIGN_ERROR(1400, "数据签名错误!"),

@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 //                .antMatchers("/message").hasAuthority("admin")         // 需拥有 admin 这个权限
 //                .antMatchers("/message").hasRole("admin")              // 需拥有 ADMIN 这个身份
-                .antMatchers("/main/account/**").permitAll()  // login目录下可以访问
+                .antMatchers("/main/login/**").permitAll()  // login目录下可以访问
                 .anyRequest().authenticated()                            // 允许所有认证请求通过
                 .and().exceptionHandling()                               // 配置被拦截时的处理
                 .authenticationEntryPoint(this.unauthorizedHandler)      // 添加 token 无效或者没有携带 token 时的处理
