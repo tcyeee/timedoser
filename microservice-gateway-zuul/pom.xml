@@ -55,10 +55,13 @@
     <build>
         <plugins>
             <plugin>
+                <!-- 添加spring-boot的maven插件 -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.timedoser.cloud.zuul.ZuulApplication</mainClass>
+                </configuration>
             </plugin>
-
             <!-- 添加docker-maven插件 -->
             <plugin>
                 <groupId>com.spotify</groupId>
