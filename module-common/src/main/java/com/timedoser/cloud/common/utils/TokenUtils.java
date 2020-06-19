@@ -1,12 +1,15 @@
 package com.timedoser.cloud.common.utils;
 
-import cn.hutool.core.map.MapUtil;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
+import com.timedoser.cloud.common.config.exception.MethodException;
+import com.timedoser.cloud.common.entity.FlxedData;
 import com.timedoser.cloud.common.entity.base.BaseUserInfo;
-import com.timedoser.cloud.common.entity.po.AclUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -14,6 +17,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -24,12 +29,13 @@ import java.util.Objects;
  *
  * @author tcyeee
  */
+@Slf4j
 @Component
 public final class TokenUtils {
 
     private static final String SECRET = "MTIzNDU2";      // token盐
-    private static final String TOKEN_HEADER = "token";   // 请求头中token的key
-    private static final String SESSON_KEY = "baseInfo";  // session中存储userinfo的key
+    public static final String TOKEN_HEADER = "token";   // 请求头中token的key
+    public static final String SESSON_KEY = "baseInfo";  // session中存储userinfo的key
     private static final Long EXPIRATION = 604800L;       // token过期时间
 
 
@@ -40,48 +46,54 @@ public final class TokenUtils {
      */
     public static BaseUserInfo baseInfo() {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-        return (BaseUserInfo) request.getSession().getAttribute(TokenUtils.SESSON_KEY);
+        String authToken = request.getHeader(TokenUtils.TOKEN_HEADER);
+        return parseToken(authToken);
     }
 
     /**
      * 根据userInfo设置token
      */
-    public String generateToken(BaseUserInfo user) {
-        Object userStr = JSONUtil.toJsonStr(user);
+    public static String generateToken(BaseUserInfo user) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(Claims.ISSUER, JSONUtil.toJsonStr(user));         // userInfo
+        claims.put(Claims.ISSUED_AT, System.currentTimeMillis());    // 创建时间
+
         return Jwts.builder()
-                .setClaims(MapUtil.builder("user", userStr).build())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION * 1000))
-                .signWith(SignatureAlgorithm.HS512, SECRET.getBytes(StandardCharsets.UTF_8))
+                .setClaims(claims)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION * 1000))     // 设置过期时间
+                .signWith(SignatureAlgorithm.HS512, SECRET.getBytes(StandardCharsets.UTF_8)) // 设置签名
                 .compact();
     }
 
-
     /**
-     * 获得当前时间
+     * 从token中解析出BaseUserInfo
+     *
+     * @param token token信息
+     * @return user info
      */
-    private Date generateCurrentDate() {
-        return new Date(System.currentTimeMillis());
+    public static BaseUserInfo parseToken(String token) {
+        if (StringUtils.isBlank(token)) return null;
+        String jsonStr = getClaims(token).get(Claims.ISSUER).toString();
+        return JSON.parseObject(jsonStr, BaseUserInfo.class);
     }
 
 
     /**
-     * 从 token 中拿到 userId
+     * token检查
+     * 1. 检查token是否过期
+     * 2. 暂时还没想好
      */
-    public String getIdFromToken(String token) {
-        String userId;
-        try {
-            final Claims claims = this.getClaimsFromToken(token);
-            userId = claims.getId();
-        } catch (Exception e) {
-            userId = null;
-        }
-        return userId;
+    public static Boolean validateToken(String token) {
+        Claims claims = getClaims(token);
+        Date created = new Date((Long) claims.get(Claims.ISSUED_AT));
+
+        // 1.检查token是否过期
+        return new Date().after(created);
     }
 
-    /**
-     * 解析 token 的主体 Claims
-     */
-    private Claims getClaimsFromToken(String token) {
+
+    // 获取 Claims 信息
+    private static Claims getClaims(String token) {
         Claims claims;
         try {
             claims = Jwts.parser()
@@ -89,60 +101,9 @@ public final class TokenUtils {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
-            claims = null;
+            throw new MethodException(FlxedData.TOKEN_ERROR);
         }
         return claims;
     }
 
-    /**
-     * 检查 token 是否处于有效期内
-     */
-    public Boolean validateToken(String token, AclUser baseUser) {
-        final Date created = this.getCreatedDateFromToken(token);
-        return (this.isTokenExpired(token))
-                && (this.isCreatedBeforeLastPasswordReset(created, baseUser.getLastPasswordReset()));
-    }
-
-    /**
-     * 获得我们封装在 token 中的 token 创建时间
-     */
-    private Date getCreatedDateFromToken(String token) {
-        Date created;
-        try {
-            final Claims claims = this.getClaimsFromToken(token);
-            created = new Date((Long) claims.get("created"));
-        } catch (Exception e) {
-            created = null;
-        }
-        return created;
-    }
-
-    /**
-     * 获得我们封装在 token 中的 token 过期时间
-     */
-    private Date getExpirationDateFromToken(String token) {
-        Date expiration;
-        try {
-            final Claims claims = this.getClaimsFromToken(token);
-            expiration = claims.getExpiration();
-        } catch (Exception e) {
-            expiration = null;
-        }
-        return expiration;
-    }
-
-    /**
-     * 检查当前时间是否在封装在 token 中的过期时间之后，若是，则判定为 token 过期
-     */
-    private Boolean isTokenExpired(String token) {
-        final Date expiration = this.getExpirationDateFromToken(token);
-        return this.generateCurrentDate().before(expiration);
-    }
-
-    /**
-     * 检查 token 是否是在最后一次修改密码之前创建的（账号修改密码之后之前生成的 token 即使没过期也判断为无效）
-     */
-    private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
-        return (lastPasswordReset != null && created.after(lastPasswordReset));
-    }
 }

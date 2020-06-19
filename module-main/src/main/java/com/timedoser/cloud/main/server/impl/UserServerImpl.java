@@ -1,7 +1,9 @@
 package com.timedoser.cloud.main.server.impl;
 
+import com.timedoser.cloud.common.entity.base.BaseUserInfo;
 import com.timedoser.cloud.common.entity.base.StatusDto;
 import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.common.utils.TokenUtils;
 import com.timedoser.cloud.main.mapper.UserMapper;
 import com.timedoser.cloud.main.server.UserServer;
 import org.springframework.stereotype.Service;
@@ -21,5 +23,11 @@ public class UserServerImpl implements UserServer {
     @Override
     public List<AclUser> findAll(StatusDto param) {
         return null;
+    }
+
+    @Override
+    public AclUser info() {
+        BaseUserInfo baseUserInfo = TokenUtils.baseInfo();
+        return userMapper.selectById(baseUserInfo.getId());
     }
 }

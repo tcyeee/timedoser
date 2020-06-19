@@ -16,4 +16,5 @@ public class UserPasswordVo {
 
     private String authoritiesString;      // 角色列表
     private String token;                  // 角色列表
+    private Integer enable;                // 账户状态
 }

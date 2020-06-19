@@ -1,6 +1,7 @@
 package com.timedoser.cloud.main.controller.account;
 
 import com.timedoser.cloud.common.entity.base.Result;
+import com.timedoser.cloud.main.server.UserServer;
 import com.timedoser.cloud.main.server.feign.UserFeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,21 @@ public class AccountController {
     @Resource
     private UserFeignClient userFeignClient;
 
+    @Resource
+    private UserServer userServer;
+
     @GetMapping("findUserByPhone")
     public Result findUserByPhone(String phoneNumber) {
         return Result.ok(userFeignClient.findUserByPhone(phoneNumber));
     }
 
+    /**
+     * 获取用户信息
+     *
+     * @return userinfo
+     */
+    @GetMapping("info")
+    public Result info() {
+        return Result.ok(userServer.info());
+    }
 }

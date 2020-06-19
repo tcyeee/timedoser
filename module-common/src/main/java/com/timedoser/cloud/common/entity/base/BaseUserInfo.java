@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class BaseUserInfo {
     private String id;
+    private Integer enable;                // 账户状态
     private String mobilephone;            // 手机号
     private String authoritiesString;      // 角色列表
 }

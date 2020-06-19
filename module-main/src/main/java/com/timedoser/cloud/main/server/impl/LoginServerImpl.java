@@ -23,9 +23,6 @@ public class LoginServerImpl implements LoginServer {
     @Resource
     private AclUserMapper aclUserMapper;
 
-    @Resource
-    private TokenUtils tokenUtils;
-
     /**
      * 通过账号密码登录
      *
@@ -41,7 +38,7 @@ public class LoginServerImpl implements LoginServer {
         // 设置token
         BaseUserInfo baseUserInfo = new BaseUserInfo();
         BeanUtil.copyProperties(result, baseUserInfo);
-        result.setToken(tokenUtils.generateToken(baseUserInfo));
+        result.setToken(TokenUtils.generateToken(baseUserInfo));
         return result;
     }
 }

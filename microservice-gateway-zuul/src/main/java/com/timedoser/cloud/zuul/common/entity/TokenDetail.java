@@ -1,14 +1,14 @@
 package com.timedoser.cloud.zuul.common.entity;
 
+import com.timedoser.cloud.common.entity.base.BaseUserInfo;
 import com.timedoser.cloud.common.entity.po.AclUser;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Date;
 
 /**
  * 1. 实现了 UserDetails 接口的模型类
@@ -19,30 +19,21 @@ import java.util.Date;
  * @author tcyeee
  * @since 2019-05-08 10:53
  */
-@Getter
-@Setter
-@SuppressWarnings("unused")
-public class TokenDetail extends AclUser implements UserDetails {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class TokenDetail extends BaseUserInfo implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
-    private Boolean enabled;
-
     // 定义 UserDetails 必要的属性，因为不打算启用这些限制条件，所以不对这些条件做限制，全部设置为 true （通过）
+    private Boolean enabled;
     private Boolean accountNonExpired = true;
     private Boolean accountNonLocked = true;
     private Boolean credentialsNonExpired = true;
-
-    TokenDetail(String id, String username, String password, Date lastPasswordReset, Collection<? extends GrantedAuthority> authorities, Boolean enabled) {
-        this.setId(id);
-        this.setUsername(username);
-        this.setPassword(password);
-        this.setLastPasswordReset(lastPasswordReset);
-        this.setAuthorities(authorities);
-        this.enabled = enabled;
-    }
+    private String username;
+    private String password;
 
 
-    public TokenDetail(AclUser user) {
+    public TokenDetail(BaseUserInfo user) {
         Collection<? extends GrantedAuthority> authorities;
         try {
             authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getAuthoritiesString());
@@ -50,15 +41,10 @@ public class TokenDetail extends AclUser implements UserDetails {
             authorities = null;
         }
 
-        Date lastPasswordReset = new Date();
-        lastPasswordReset.setTime(user.getLastPasswordReset() == null ? System.currentTimeMillis() : user.getLastPasswordReset().getTime());
-
         this.setId(user.getId());
         this.setMobilephone(user.getMobilephone());
-        this.setPassword(user.getPassword());
         this.authorities = authorities;
-        this.enabled = user.getEnable() == enableTypeEnum.defult.getIndex();
-        this.setLastPasswordReset(lastPasswordReset);
+        this.enabled = user.getEnable() == AclUser.enableTypeEnum.defult.getIndex();
     }
 
 

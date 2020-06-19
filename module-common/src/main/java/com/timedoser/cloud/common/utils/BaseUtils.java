@@ -1,10 +1,5 @@
 package com.timedoser.cloud.common.utils;
 
-import com.timedoser.cloud.common.entity.po.AclUser;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
 
 /**
@@ -15,20 +10,6 @@ import java.util.Random;
  */
 @SuppressWarnings("all")
 public final class BaseUtils {
-
-    /**
-     * 获取当前登录人信息
-     *
-     * @return userInfo
-     */
-    @SuppressWarnings("all")
-    public static AclUser userInfo() {
-        //获取到当前线程绑定的请求对象
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        //已经拿到session,就可以拿到session中保存的用户信息了。
-        Object userInfo = request.getSession().getAttribute("userInfo");
-        return (AclUser) userInfo;
-    }
 
     // 随机字符串生成
     public static String getRandomString(int length) {
@@ -42,6 +23,5 @@ public final class BaseUtils {
         }
         return sb.toString();
     }
-
 
 }

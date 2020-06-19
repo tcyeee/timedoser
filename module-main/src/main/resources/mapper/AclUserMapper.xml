@@ -29,6 +29,7 @@
                a.mobilephone            as mobilephone,
                a.username               as username,
                a.personalized_signature as personalizedSignature,
+               a.enable                 as enable,
                (select group_concat(b.name) as rol
                 from time_doser_user.acl_user_role c
                          left join time_doser_user.acl_role b on c.role_id = b.id

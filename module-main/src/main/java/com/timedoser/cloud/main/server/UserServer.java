@@ -13,4 +13,6 @@ import java.util.List;
 @Service
 public interface UserServer {
     List<AclUser> findAll(StatusDto param);
+
+    AclUser info();
 }

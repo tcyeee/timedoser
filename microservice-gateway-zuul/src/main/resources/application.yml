@@ -17,3 +17,9 @@ spring:
     username: root
     password: tcyeeeTimeDoser;
     driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    database: 0
+    host: 134.175.157.42
+    port: 6379
+    password: cyRdis;TimeDoer123
+    timeout: 6000ms
