@@ -1,6 +1,9 @@
 package com.timedoser.cloud.main.server.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.codec.Base64;
+import com.timedoser.cloud.common.entity.base.BaseUserInfo;
+import com.timedoser.cloud.common.utils.TokenUtils;
 import com.timedoser.cloud.main.common.entity.dto.UserPasswordDto;
 import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
 import com.timedoser.cloud.main.mapper.AclUserMapper;
@@ -20,6 +23,9 @@ public class LoginServerImpl implements LoginServer {
     @Resource
     private AclUserMapper aclUserMapper;
 
+    @Resource
+    private TokenUtils tokenUtils;
+
     /**
      * 通过账号密码登录
      *
@@ -30,6 +36,12 @@ public class LoginServerImpl implements LoginServer {
     public UserPasswordVo userPassword(UserPasswordDto param) {
         String basePassword = Base64.decodeStr(param.getPassword());
         String password = DigestUtils.md5DigestAsHex(basePassword.getBytes()).toUpperCase();
-        return aclUserMapper.userPassword(param.getPhoneNumber(), password);
+        UserPasswordVo result = aclUserMapper.userPassword(param.getPhoneNumber(), password);
+
+        // 设置token
+        BaseUserInfo baseUserInfo = new BaseUserInfo();
+        BeanUtil.copyProperties(result, baseUserInfo);
+        result.setToken(tokenUtils.generateToken(baseUserInfo));
+        return result;
     }
 }
