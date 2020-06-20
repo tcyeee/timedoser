@@ -1,0 +1,6 @@
+eureka:
+  instance:
+    hostname: server-tx
+  client:
+    serviceUrl:
+      defaultZone: http://cy:123@47.107.52.39:2100/eureka/

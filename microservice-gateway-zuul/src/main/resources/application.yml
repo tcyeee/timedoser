@@ -1,8 +1,5 @@
 server:
   port: 2110
-eureka:
-  instance:
-    prefer-ip-address: true
 zuul:
   routes:
     module-user: /user/**
