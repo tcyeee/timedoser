@@ -8,11 +8,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://cy:123@134.175.157.42:2100/eureka/,http://cy:123@47.107.52.39:2100/eureka/
-  instance:
-    hostname: auto
-module-user:
-  ribbon:
-    listOfServers: http://134.175.157.42:1901/,http://47.107.52.39:1901/
 logging:
   level:
     com.baomidou.mybatisplus.samples.quickstart: debug

@@ -5,6 +5,8 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: module-main
-
+eureka:
+  instance:
+    prefer-ip-address: true
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
