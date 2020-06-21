@@ -13,6 +13,7 @@ public class UserPasswordVo {
     private String mobilephone;            // 手机号
     private String username;               // 昵称
     private String personalizedSignature;  // 个性签名
+    private String avatar;                 // 头像地址
 
     private String authoritiesString;      // 角色列表
     private String token;                  // 角色列表

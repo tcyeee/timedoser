@@ -2,6 +2,7 @@ package com.timedoser.cloud.main.server;
 
 import com.timedoser.cloud.common.entity.base.StatusDto;
 import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,5 +15,5 @@ import java.util.List;
 public interface UserServer {
     List<AclUser> findAll(StatusDto param);
 
-    AclUser info();
+    UserPasswordVo info();
 }
