@@ -15,5 +15,5 @@ import java.util.List;
 public interface UserServer {
     List<AclUser> findAll(StatusDto param);
 
-    UserPasswordVo info();
+    UserPasswordVo userInfo();
 }

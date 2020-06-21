@@ -27,7 +27,7 @@ public class UserServerImpl implements UserServer {
     }
 
     @Override
-    public UserPasswordVo info() {
+    public UserPasswordVo userInfo() {
         BaseUserInfo baseUserInfo = TokenUtils.baseInfo();
         return userMapper.info(baseUserInfo.getId());
     }
