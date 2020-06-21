@@ -1,7 +1,7 @@
 package com.timedoser.cloud.main.server;
 
+import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.main.common.entity.dto.UserPasswordDto;
-import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,5 +17,5 @@ public interface LoginServer {
      * @param param param登录参数
      * @return 账号信息
      */
-    UserPasswordVo userPassword(UserPasswordDto param);
+    Result userPassword(UserPasswordDto param);
 }
