@@ -75,7 +75,9 @@ public final class TokenUtils {
      * @return user info
      */
     public static BaseUserInfo parseToken(String token) {
-        if (StringUtils.isBlank(token)) return null;
+        if (StringUtils.isBlank(token) || "undefined".equals(token)) {
+            return null;
+        }
         String jsonStr = getClaims(token).get(Claims.ISSUER).toString();
         return JSON.parseObject(jsonStr, BaseUserInfo.class);
     }

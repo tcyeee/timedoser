@@ -73,6 +73,7 @@ public class UserServerImpl implements IUserServer {
     @Override
     public AclUser userInfo() {
         BaseUserInfo baseUserInfo = TokenUtils.baseInfo();
-        return userMapper.selectById(baseUserInfo.getId());
+//        return userMapper.selectById(baseUserInfo.getId());
+        return null;
     }
 }

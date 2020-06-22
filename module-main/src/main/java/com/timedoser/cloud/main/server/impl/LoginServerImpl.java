@@ -9,7 +9,7 @@ import com.timedoser.cloud.common.utils.TokenUtils;
 import com.timedoser.cloud.main.common.entity.dto.UserPasswordDto;
 import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
 import com.timedoser.cloud.main.mapper.AclUserMapper;
-import com.timedoser.cloud.main.server.LoginServer;
+import com.timedoser.cloud.main.server.ILoginServer;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * @date 2020/6/18 16:17
  */
 @Service
-public class LoginServerImpl implements LoginServer {
+public class LoginServerImpl implements ILoginServer {
 
     @Resource
     private AclUserMapper aclUserMapper;
