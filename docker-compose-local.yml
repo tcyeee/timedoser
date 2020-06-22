@@ -16,12 +16,13 @@ services:
     image: tcyeee/microservice-discovery-eureka:0.0.5
     ports:
       - "2100:2100"
+    restart: always
     environment:
       - spring.profiles.active=server-local
 
   # 网关 zuul
   microservice-gateway-zuul:
-    image: tcyeee/microservice-gateway-zuul:0.0.9
+    image: tcyeee/microservice-gateway-zuul:0.1.0
     hostname: local
     ports:
       - "2110:2110"
