@@ -22,7 +22,7 @@ services:
 
   # 网关 zuul
   microservice-gateway-zuul:
-    image: tcyeee/microservice-gateway-zuul:0.1.0
+    image: tcyeee/microservice-gateway-zuul:0.1.1
     hostname: local
     ports:
       - "2110:2110"
