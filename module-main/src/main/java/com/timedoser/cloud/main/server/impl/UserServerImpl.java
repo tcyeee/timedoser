@@ -39,8 +39,7 @@ public class UserServerImpl implements IUserServer {
      */
     @Override
     public AclUser getOne(Integer id) {
-        BaseUserInfo baseUserInfo = TokenUtils.baseInfo();
-        return userMapper.selectById(baseUserInfo.getId());
+        return null;
     }
 
     /**
@@ -63,5 +62,17 @@ public class UserServerImpl implements IUserServer {
     @Override
     public StatusDto addOne(AclUser params) {
         return null;
+    }
+
+
+    /**
+     * 获取个人信息
+     *
+     * @return userinfo
+     */
+    @Override
+    public AclUser userInfo() {
+        BaseUserInfo baseUserInfo = TokenUtils.baseInfo();
+        return userMapper.selectById(baseUserInfo.getId());
     }
 }

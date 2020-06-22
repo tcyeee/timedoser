@@ -44,4 +44,11 @@ public interface IUserServer {
      * @return status
      */
     StatusDto addOne(AclUser params);
+
+    /**
+     * 获取个人信息
+     *
+     * @return userinfo
+     */
+    AclUser userInfo();
 }

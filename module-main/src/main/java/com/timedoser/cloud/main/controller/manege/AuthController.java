@@ -2,7 +2,7 @@ package com.timedoser.cloud.main.controller.manege;
 
 import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.base.StatusDto;
-import com.timedoser.cloud.common.entity.po.AclRole;
+import com.timedoser.cloud.common.entity.po.AclAuth;
 import com.timedoser.cloud.main.server.IAuthServer;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +49,7 @@ public class AuthController {
      * @return status
      */
     @PostMapping("updateOne")
-    public Result updateOne(@RequestBody AclRole params) {
+    public Result updateOne(@RequestBody AclAuth params) {
         return Result.ok(authServer.updateOne(params));
     }
 
@@ -60,7 +60,7 @@ public class AuthController {
      * @return status
      */
     @PostMapping("addOne")
-    public Result addOne(@RequestBody AclRole params) {
+    public Result addOne(@RequestBody AclAuth params) {
         return Result.ok(authServer.addOne(params));
     }
 

@@ -29,12 +29,12 @@ public class AccountController {
     }
 
     /**
-     * 获取用户信息
+     * 获取个人信息
      *
      * @return userinfo
      */
-    @GetMapping("info")
-    public Result info() {
-        return Result.ok(userServer.info());
+    @GetMapping("userInfo")
+    public Result userInfo() {
+        return Result.ok(userServer.userInfo());
     }
 }
