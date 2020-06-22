@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @date 2020/6/18 16:17
  */
 @Service
-public interface LoginServer {
+public interface ILoginServer {
 
     /**
      * 通过账号密码登录

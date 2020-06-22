@@ -2,7 +2,7 @@ package com.timedoser.cloud.main.controller.account;
 
 import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.main.common.entity.dto.UserPasswordDto;
-import com.timedoser.cloud.main.server.LoginServer;
+import com.timedoser.cloud.main.server.ILoginServer;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 public class LoginController {
 
     @Resource
-    private LoginServer loginServer;
+    private ILoginServer loginServer;
 
     /**
      * 通过账号密码登录

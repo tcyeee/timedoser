@@ -14,4 +14,5 @@ import lombok.EqualsAndHashCode;
 public class StatusDto extends PageBean {
     private Integer status;
     private Integer type;
+    private String msg;
 }

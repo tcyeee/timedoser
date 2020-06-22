@@ -2,66 +2,66 @@ package com.timedoser.cloud.main.controller.manege;
 
 import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.base.StatusDto;
-import com.timedoser.cloud.common.entity.po.AclUser;
-import com.timedoser.cloud.main.server.IUserServer;
+import com.timedoser.cloud.common.entity.po.AclRole;
+import com.timedoser.cloud.main.server.IAuthServer;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 /**
  * @author huxiong
- * @date 2020/6/17 15:47
+ * @date 2020/6/22 16:08
  */
 @RestController
-@RequestMapping("manage/user")
-public class UserController {
+@RequestMapping("manage/auth")
+public class AuthController {
 
     @Resource
-    private IUserServer userServer;
+    private IAuthServer authServer;
 
 
     /**
-     * 查看所有的用户
+     * 查看所有的权限
      *
      * @param param 1：可用，2：禁用
      * @return data
      */
     @PostMapping("getAll")
     public Result getAll(@RequestBody StatusDto param) {
-        return Result.ok(userServer.getAll(param));
+        return Result.ok(authServer.getAll(param));
     }
 
     /**
-     * 查看一个用户
+     * 查看一个权限
      *
-     * @param id 用户ID
+     * @param id 权限ID
      * @return status
      */
     @GetMapping("getOne")
     public Result getOne(Integer id) {
-        return Result.ok(userServer.getOne(id));
+        return Result.ok(authServer.getOne(id));
     }
 
     /**
-     * 修改用户信息
+     * 修改权限信息
      *
-     * @param params 用户信息
+     * @param params 权限信息
      * @return status
      */
     @PostMapping("updateOne")
-    public Result updateOne(@RequestBody AclUser params) {
-        return Result.ok(userServer.updateOne(params));
+    public Result updateOne(@RequestBody AclRole params) {
+        return Result.ok(authServer.updateOne(params));
     }
 
     /**
-     * 添加用户
+     * 添加权限
      *
-     * @param params 用户信息
+     * @param params 权限信息
      * @return status
      */
     @PostMapping("addOne")
-    public Result addOne(@RequestBody AclUser params) {
-        return Result.ok(userServer.addOne(params));
+    public Result addOne(@RequestBody AclRole params) {
+        return Result.ok(authServer.addOne(params));
     }
 
 }
