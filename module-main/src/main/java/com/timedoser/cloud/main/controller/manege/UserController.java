@@ -28,7 +28,7 @@ public class UserController {
      */
     @PostMapping("getAll")
     public Result getAll(@RequestBody StatusDto param) {
-        return Result.ok(userServer.getAll(param));
+        return Result.page(userServer.getAll(param));
     }
 
     /**

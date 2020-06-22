@@ -1,8 +1,7 @@
 package com.timedoser.cloud.main.server.impl;
 
-import cn.hutool.core.codec.Base64;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.timedoser.cloud.common.entity.base.BaseUserInfo;
-import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.base.StatusDto;
 import com.timedoser.cloud.common.entity.po.BaseUser;
 import com.timedoser.cloud.common.utils.TokenUtils;
@@ -10,7 +9,6 @@ import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
 import com.timedoser.cloud.main.mapper.UserMapper;
 import com.timedoser.cloud.main.server.IUserServer;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -31,8 +29,9 @@ public class UserServerImpl implements IUserServer {
      * @return data
      */
     @Override
-    public List<BaseUser> getAll(StatusDto param) {
-        return null;
+    public Page<BaseUser> getAll(StatusDto param) {
+        Page<BaseUser> page = new Page<>(param.getCurrentPage(), param.getPageSize());
+        return userMapper.getAll(page, param.getStatus());
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.timedoser.cloud.main.server;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.base.StatusDto;
 import com.timedoser.cloud.common.entity.po.BaseUser;
@@ -22,7 +23,7 @@ public interface IUserServer {
      * @param param 1：可用，2：禁用
      * @return data
      */
-    List<BaseUser> getAll(StatusDto param);
+    Page<BaseUser> getAll(StatusDto param);
 
     /**
      * 查看一个用户
