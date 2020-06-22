@@ -5,6 +5,5 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: module-main
-
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml

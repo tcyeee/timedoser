@@ -5,6 +5,7 @@ import com.timedoser.cloud.main.common.entity.dto.UserPasswordDto;
 import com.timedoser.cloud.main.server.ILoginServer;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,12 +26,12 @@ public class LoginController {
 
     /**
      * 通过账号密码登录
-     *
+     *¥
      * @param param param登录参数
      * @return {@link Result
      */
     @PostMapping("userPassword")
-    public Result userPassword(@Validated UserPasswordDto param) {
-        return Result.ok(loginServer.userPassword(param));
+    public Result userPassword(@Validated @RequestBody UserPasswordDto param) {
+        return loginServer.userPassword(param);
     }
 }

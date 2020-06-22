@@ -47,6 +47,9 @@ public final class TokenUtils {
     public static BaseUserInfo baseInfo() {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         String authToken = request.getHeader(TokenUtils.TOKEN_HEADER);
+        if (StringUtils.isBlank(authToken)) {
+            throw new MethodException(FlxedData.TOKEN_ERROR);
+        }
         return parseToken(authToken);
     }
 
