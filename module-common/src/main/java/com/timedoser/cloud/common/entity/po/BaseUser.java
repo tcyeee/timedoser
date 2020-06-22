@@ -17,7 +17,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AclUser implements Serializable {
+public class BaseUser implements Serializable {
     private static final long serialVersionUID = 7080456749403365766L;
     private String id;
     private String email;                  // 邮箱
@@ -72,8 +72,8 @@ public class AclUser implements Serializable {
      * @param openid openId
      * @return data
      */
-    public static AclUser creatBaseUserForOpenId(String openid) {
-        return AclUser.builder()
+    public static BaseUser creatBaseUserForOpenId(String openid) {
+        return BaseUser.builder()
                 .openid(openid)
                 .createdate(new Date())
                 .id(IdUtil.fastSimpleUUID())

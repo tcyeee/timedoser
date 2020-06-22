@@ -1,7 +1,10 @@
 package com.timedoser.cloud.main.server;
 
+import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.base.StatusDto;
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.common.entity.po.BaseUser;
+import com.timedoser.cloud.main.common.entity.dto.UserPasswordDto;
+import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +22,7 @@ public interface IUserServer {
      * @param param 1：可用，2：禁用
      * @return data
      */
-    List<AclUser> getAll(StatusDto param);
+    List<BaseUser> getAll(StatusDto param);
 
     /**
      * 查看一个用户
@@ -27,7 +30,7 @@ public interface IUserServer {
      * @param id 用户ID
      * @return status
      */
-    AclUser getOne(Integer id);
+    BaseUser getOne(Integer id);
 
     /**
      * 修改用户信息
@@ -35,7 +38,7 @@ public interface IUserServer {
      * @param params 用户信息
      * @return status
      */
-    StatusDto updateOne(AclUser params);
+    StatusDto updateOne(BaseUser params);
 
     /**
      * 添加用户
@@ -43,12 +46,12 @@ public interface IUserServer {
      * @param params 用户信息
      * @return status
      */
-    StatusDto addOne(AclUser params);
+    StatusDto addOne(BaseUser params);
 
     /**
      * 获取个人信息
      *
      * @return userinfo
      */
-    AclUser userInfo();
+    UserPasswordVo userInfo();
 }

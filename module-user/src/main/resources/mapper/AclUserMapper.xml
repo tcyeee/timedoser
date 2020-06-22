@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.timedoser.cloud.user.mapper.AclUserMapper">
-    <select id="findUserByPhone" resultType="com.timedoser.cloud.common.entity.po.AclUser">
+    <select id="findUserByPhone" resultType="com.timedoser.cloud.common.entity.po.BaseUser">
         select group_concat(c.name) as authoritiesString, a.*
         from time_doser_user.acl_user a
                  left join time_doser_user.acl_user_role b on a.id = b.user_id
@@ -10,7 +10,7 @@
         group by a.id;
     </select>
 
-    <select id="selectPageVo" resultType="com.timedoser.cloud.common.entity.po.AclUser">
+    <select id="selectPageVo" resultType="com.timedoser.cloud.common.entity.po.BaseUser">
         select *
         from time_doser_user.acl_user
     </select>

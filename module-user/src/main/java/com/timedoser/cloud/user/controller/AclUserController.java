@@ -2,7 +2,7 @@ package com.timedoser.cloud.user.controller;
 
 import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.base.StatusDto;
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.common.entity.po.BaseUser;
 import com.timedoser.cloud.user.service.UserService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +30,7 @@ public class AclUserController {
      * @return userInfo
      */
     @GetMapping("findUserByPhone")
-    public AclUser findUserByPhone(@NotBlank String phoneNumber) {
+    public BaseUser findUserByPhone(@NotBlank String phoneNumber) {
         return userService.findUserByPhone(phoneNumber);
     }
 

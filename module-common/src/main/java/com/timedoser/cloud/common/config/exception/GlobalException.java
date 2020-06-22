@@ -6,6 +6,7 @@ import com.timedoser.cloud.common.entity.enums.StatusCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -52,6 +53,21 @@ public class GlobalException {
     @ExceptionHandler(BindException.class)
     public Result businessExceptionHandler(BindException e, HttpServletRequest request) {
         String msg = StatusCode.PARAMS_ERROR.getReasonPhrase() + " " + e.getMessage();
+        log.error(FlxedData.PARAM_EXCEPTION_INFO, request.getRequestURI());
+        log.error(msg);
+        return Result.error(StatusCode.PARAMS_ERROR.value(), e.getBindingResult().getFieldError().getDefaultMessage());
+    }
+
+    /**
+     * post参数校验异常
+     *
+     * @param e       exception
+     * @param request request
+     * @return {@link Result
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Result postExceptionHandler(MethodArgumentNotValidException e, HttpServletRequest request) {
+        String msg = StatusCode.PARAMS_ERROR.getReasonPhrase() + " " + e.getBindingResult().getFieldError().getDefaultMessage();
         log.error(FlxedData.PARAM_EXCEPTION_INFO, request.getRequestURI());
         log.error(msg);
         return Result.error(StatusCode.PARAMS_ERROR.value(), e.getBindingResult().getFieldError().getDefaultMessage());

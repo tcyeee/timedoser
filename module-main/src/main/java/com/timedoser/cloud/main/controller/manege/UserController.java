@@ -2,7 +2,7 @@ package com.timedoser.cloud.main.controller.manege;
 
 import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.base.StatusDto;
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.common.entity.po.BaseUser;
 import com.timedoser.cloud.main.server.IUserServer;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +49,7 @@ public class UserController {
      * @return status
      */
     @PostMapping("updateOne")
-    public Result updateOne(@RequestBody AclUser params) {
+    public Result updateOne(@RequestBody BaseUser params) {
         return Result.ok(userServer.updateOne(params));
     }
 
@@ -60,7 +60,7 @@ public class UserController {
      * @return status
      */
     @PostMapping("addOne")
-    public Result addOne(@RequestBody AclUser params) {
+    public Result addOne(@RequestBody BaseUser params) {
         return Result.ok(userServer.addOne(params));
     }
 

@@ -1,7 +1,7 @@
 package com.timedoser.cloud.zuul.common.entity;
 
 import com.timedoser.cloud.common.entity.base.BaseUserInfo;
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.common.entity.po.BaseUser;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,7 +44,7 @@ public class TokenDetail extends BaseUserInfo implements UserDetails {
         this.setId(user.getId());
         this.setMobilephone(user.getMobilephone());
         this.authorities = authorities;
-        this.enabled = user.getEnable() == AclUser.enableTypeEnum.defult.getIndex();
+        this.enabled = user.getEnable() == BaseUser.enableTypeEnum.defult.getIndex();
     }
 
 

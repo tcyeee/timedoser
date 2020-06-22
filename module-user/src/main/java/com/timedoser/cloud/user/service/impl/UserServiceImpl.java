@@ -3,7 +3,7 @@ package com.timedoser.cloud.user.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.timedoser.cloud.common.entity.base.StatusDto;
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.common.entity.po.BaseUser;
 import com.timedoser.cloud.user.mapper.AclUserMapper;
 import com.timedoser.cloud.user.service.UserService;
 import org.springframework.stereotype.Service;
@@ -28,18 +28,18 @@ public class UserServiceImpl implements UserService {
      * @return userInfo
      */
     @Override
-    public AclUser findUserByPhone(String phoneNumber) {
+    public BaseUser findUserByPhone(String phoneNumber) {
         return userMapper.findUserByPhone(phoneNumber);
     }
 
     @Override
-    public AclUser getInfo(String id) {
+    public BaseUser getInfo(String id) {
         return userMapper.selectById(id);
     }
 
     @Override
-    public IPage<AclUser> selectPageVo(StatusDto param) {
-        Page<AclUser> aclUserPage = new Page<>(param.getCurrentPage(), param.getPageSize());
+    public IPage<BaseUser> selectPageVo(StatusDto param) {
+        Page<BaseUser> aclUserPage = new Page<>(param.getCurrentPage(), param.getPageSize());
         return userMapper.selectPageVo(aclUserPage);
     }
 }

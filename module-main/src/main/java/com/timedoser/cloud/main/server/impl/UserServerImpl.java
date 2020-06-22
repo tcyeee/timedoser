@@ -1,12 +1,16 @@
 package com.timedoser.cloud.main.server.impl;
 
+import cn.hutool.core.codec.Base64;
 import com.timedoser.cloud.common.entity.base.BaseUserInfo;
+import com.timedoser.cloud.common.entity.base.Result;
 import com.timedoser.cloud.common.entity.base.StatusDto;
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.common.entity.po.BaseUser;
 import com.timedoser.cloud.common.utils.TokenUtils;
+import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
 import com.timedoser.cloud.main.mapper.UserMapper;
 import com.timedoser.cloud.main.server.IUserServer;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,7 +31,7 @@ public class UserServerImpl implements IUserServer {
      * @return data
      */
     @Override
-    public List<AclUser> getAll(StatusDto param) {
+    public List<BaseUser> getAll(StatusDto param) {
         return null;
     }
 
@@ -38,7 +42,7 @@ public class UserServerImpl implements IUserServer {
      * @return status
      */
     @Override
-    public AclUser getOne(Integer id) {
+    public BaseUser getOne(Integer id) {
         return null;
     }
 
@@ -49,7 +53,7 @@ public class UserServerImpl implements IUserServer {
      * @return status
      */
     @Override
-    public StatusDto updateOne(AclUser params) {
+    public StatusDto updateOne(BaseUser params) {
         return null;
     }
 
@@ -60,7 +64,7 @@ public class UserServerImpl implements IUserServer {
      * @return status
      */
     @Override
-    public StatusDto addOne(AclUser params) {
+    public StatusDto addOne(BaseUser params) {
         return null;
     }
 
@@ -71,9 +75,8 @@ public class UserServerImpl implements IUserServer {
      * @return userinfo
      */
     @Override
-    public AclUser userInfo() {
+    public UserPasswordVo userInfo() {
         BaseUserInfo baseUserInfo = TokenUtils.baseInfo();
-//        return userMapper.selectById(baseUserInfo.getId());
-        return null;
+        return userMapper.info(baseUserInfo.getId());
     }
 }

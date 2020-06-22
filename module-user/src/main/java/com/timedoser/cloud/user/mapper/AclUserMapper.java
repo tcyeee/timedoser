@@ -3,10 +3,10 @@ package com.timedoser.cloud.user.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.timedoser.cloud.common.entity.po.AclUser;
+import com.timedoser.cloud.common.entity.po.BaseUser;
 import org.apache.ibatis.annotations.Param;
 
-public interface AclUserMapper extends BaseMapper<AclUser> {
+public interface AclUserMapper extends BaseMapper<BaseUser> {
 
     /**
      * 通过phoneNumber获得用户信息
@@ -14,7 +14,7 @@ public interface AclUserMapper extends BaseMapper<AclUser> {
      * @param phoneNumber 手机号
      * @return userInfo
      */
-    AclUser findUserByPhone(@Param("phoneNumber") String phoneNumber);
+    BaseUser findUserByPhone(@Param("phoneNumber") String phoneNumber);
 
-    IPage<AclUser> selectPageVo(Page<?> page);
+    IPage<BaseUser> selectPageVo(Page<?> page);
 }

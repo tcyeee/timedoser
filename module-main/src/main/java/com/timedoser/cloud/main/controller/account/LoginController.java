@@ -26,7 +26,7 @@ public class LoginController {
 
     /**
      * 通过账号密码登录
-     *¥
+     *
      * @param param param登录参数
      * @return {@link Result
      */
