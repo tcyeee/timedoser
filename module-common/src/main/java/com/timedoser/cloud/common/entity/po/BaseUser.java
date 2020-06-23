@@ -22,10 +22,16 @@ public class BaseUser implements Serializable {
     private String id;
     private String email;                  // 邮箱
     private String openid;                 // [小程序]唯一id
-    private Integer enable;                // 账户状态
+    private Integer enable;
+    /**
+     * {@link enableTypeEnum} 账户状态
+     */
     private String mobilephone;            // 手机号
     private Date createdate;               // 创建时间
-    private Integer accountType;           // 用户类型
+    private Integer createType;
+    /**
+     * {@link createTypeEnum} 用户创建类型
+     */
     private String username;               // 昵称
     private String avatarUrl;              // 头像地址
     private String password;               // 密码
@@ -55,12 +61,10 @@ public class BaseUser implements Serializable {
     // 账户注册类型
     @Getter
     @AllArgsConstructor
-    public enum accountTypeEnum {
+    public enum createTypeEnum {
         err(0, "弃用位置"),
         defult(1, "小程序用户, 只有openid, 没有注册"),
-        two(2, "手机号注册用户"),
-        author(3, "作者账户"),
-        Administrator(4, "管理员账户");
+        two(2, "手机号注册用户");
 
         private final int index;
         private final String remark;
@@ -77,7 +81,7 @@ public class BaseUser implements Serializable {
                 .openid(openid)
                 .createdate(new Date())
                 .id(IdUtil.fastSimpleUUID())
-                .accountType(accountTypeEnum.defult.index)
+                .createType(createTypeEnum.defult.index)
                 .enable(enableTypeEnum.defult.index).build();
     }
 }

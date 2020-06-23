@@ -10,4 +10,11 @@ public final class FlxedData {
     public static final String TOKEN_ERROR = "token解析失败!";
 
     public static final String LOGIN_ERROR = "账号或者密码错误!!";
+    public static final String USER_UPDATE_SUCCESS = "用户信息修改成功!!";
+    public static final String USER_UPDATE_ERROR = "用户信息修改成功!!";
+
+
+    public static String userUpdate(boolean status) {
+        return status ? USER_UPDATE_SUCCESS : USER_UPDATE_ERROR;
+    }
 }

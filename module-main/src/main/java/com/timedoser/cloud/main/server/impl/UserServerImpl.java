@@ -1,6 +1,7 @@
 package com.timedoser.cloud.main.server.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.timedoser.cloud.common.entity.FlxedData;
 import com.timedoser.cloud.common.entity.base.BaseUserInfo;
 import com.timedoser.cloud.common.entity.base.StatusDto;
 import com.timedoser.cloud.common.entity.po.BaseUser;
@@ -41,8 +42,8 @@ public class UserServerImpl implements IUserServer {
      * @return status
      */
     @Override
-    public BaseUser getOne(Integer id) {
-        return null;
+    public BaseUser getOne(String id) {
+        return userMapper.selectById(id);
     }
 
     /**
@@ -53,7 +54,8 @@ public class UserServerImpl implements IUserServer {
      */
     @Override
     public StatusDto updateOne(BaseUser params) {
-        return null;
+        boolean status = userMapper.updateById(params) > 0;
+        return new StatusDto(status, FlxedData.userUpdate(status));
     }
 
     /**

@@ -31,7 +31,7 @@ public interface IUserServer {
      * @param id 用户ID
      * @return status
      */
-    BaseUser getOne(Integer id);
+    BaseUser getOne(String id);
 
     /**
      * 修改用户信息

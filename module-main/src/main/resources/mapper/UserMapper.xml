@@ -20,7 +20,7 @@
     <select id="getAll" resultType="com.timedoser.cloud.common.entity.po.BaseUser">
         select *,
         a.avatar_url as avatarUrl,
-        a.account_type as accountType,
+        a.create_type as createType,
         a.last_password_reset as lastPasswordReset,
         a.personalized_signature as personalizedSignature
         from time_doser.base_user a

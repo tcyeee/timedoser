@@ -73,6 +73,20 @@ public class Result extends HashMap<String, Object> {
         return result;
     }
 
+
+    /**
+     * 返回状态信息
+     *
+     * @param status 状态信息
+     * @return status info
+     */
+    public static Result status(StatusDto status) {
+        Result result = status.getSta() ? ok() : error();
+        result.put(MSG, status.getMsg());
+        return result;
+    }
+
+
     //-------------------------------- 创建分页模板 ------------
     public static <T> Result page(IPage<T> data) {
         Result result = new Result();

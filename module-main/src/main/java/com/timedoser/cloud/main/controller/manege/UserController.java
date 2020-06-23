@@ -38,7 +38,7 @@ public class UserController {
      * @return status
      */
     @GetMapping("getOne")
-    public Result getOne(Integer id) {
+    public Result getOne(String id) {
         return Result.ok(userServer.getOne(id));
     }
 
@@ -50,7 +50,7 @@ public class UserController {
      */
     @PostMapping("updateOne")
     public Result updateOne(@RequestBody BaseUser params) {
-        return Result.ok(userServer.updateOne(params));
+        return Result.status(userServer.updateOne(params));
     }
 
     /**

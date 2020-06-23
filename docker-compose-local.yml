@@ -29,8 +29,6 @@ services:
     environment:
       - spring.profiles.active=local
 
-  requested access to the resource is denied
-
 
 #  microservice-provider-user:
 #    image: tcyeee/microservice-provider-user:0.0.1-SNAPSHOT
