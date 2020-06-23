@@ -13,22 +13,23 @@ services:
 
   # 服务发现 eureka
   local-eureka:
-    image: tcyeee/microservice-discovery-eureka:0.0.5
+    image: tcyeee/microservice-discovery-eureka:0.0.6
     ports:
-      - "2100:2100"
+      - 2100:2100
     restart: always
     environment:
-      - spring.profiles.active=server-local
+      - spring.profiles.active=local
 
   # 网关 zuul
   microservice-gateway-zuul:
     image: tcyeee/microservice-gateway-zuul:0.1.1
     hostname: local
     ports:
-      - "2110:2110"
+      - 2110:2110
     environment:
       - spring.profiles.active=local
 
+  requested access to the resource is denied
 
 
 #  microservice-provider-user:
