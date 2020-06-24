@@ -12,7 +12,6 @@ import com.timedoser.cloud.main.server.IUserServer;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author huxiong
@@ -66,7 +65,8 @@ public class UserServerImpl implements IUserServer {
      */
     @Override
     public StatusDto addOne(BaseUser params) {
-        return null;
+        boolean status = userMapper.insert(params) > 0;
+        return new StatusDto(status, FlxedData.userUpdate(status));
     }
 
 

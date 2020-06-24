@@ -1,6 +1,7 @@
 package com.timedoser.cloud.common.entity.po;
 
 import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -13,4 +14,5 @@ public class AclRole {
     private String name;
     private String remark;
     private Date createTime;
+    private int enable;
 }

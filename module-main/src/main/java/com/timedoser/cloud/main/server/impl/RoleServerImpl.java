@@ -1,10 +1,15 @@
 package com.timedoser.cloud.main.server.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.timedoser.cloud.common.entity.FlxedData;
 import com.timedoser.cloud.common.entity.base.StatusDto;
 import com.timedoser.cloud.common.entity.po.AclRole;
+import com.timedoser.cloud.common.entity.po.BaseUser;
+import com.timedoser.cloud.main.mapper.AclRoleMapper;
 import com.timedoser.cloud.main.server.IRoleServer;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -13,6 +18,9 @@ import java.util.List;
  */
 @Service
 public class RoleServerImpl implements IRoleServer {
+    @Resource
+    private AclRoleMapper roleMapper;
+
     /**
      * 查看所有的角色
      *
@@ -21,7 +29,8 @@ public class RoleServerImpl implements IRoleServer {
      */
     @Override
     public List<AclRole> getAll(StatusDto param) {
-        return null;
+        Page<BaseUser> page = new Page<>(param.getCurrentPage(), param.getPageSize());
+        return roleMapper.getAll(page, param.getStatus());
     }
 
     /**
@@ -32,7 +41,7 @@ public class RoleServerImpl implements IRoleServer {
      */
     @Override
     public AclRole getOne(Integer id) {
-        return null;
+        return roleMapper.selectById(id);
     }
 
     /**
@@ -43,7 +52,8 @@ public class RoleServerImpl implements IRoleServer {
      */
     @Override
     public StatusDto updateOne(AclRole params) {
-        return null;
+        boolean status = roleMapper.updateById(params) > 0;
+        return new StatusDto(status, FlxedData.roleUpdate(status));
     }
 
     /**
@@ -54,6 +64,7 @@ public class RoleServerImpl implements IRoleServer {
      */
     @Override
     public StatusDto addOne(AclRole params) {
-        return null;
+        boolean status = roleMapper.insert(params) > 0;
+        return new StatusDto(status, FlxedData.roleUpdate(status));
     }
 }

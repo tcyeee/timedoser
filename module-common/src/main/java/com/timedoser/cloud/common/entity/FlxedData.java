@@ -10,11 +10,26 @@ public final class FlxedData {
     public static final String TOKEN_ERROR = "token解析失败!";
 
     public static final String LOGIN_ERROR = "账号或者密码错误!!";
-    public static final String USER_UPDATE_SUCCESS = "用户信息修改成功!!";
-    public static final String USER_UPDATE_ERROR = "用户信息修改成功!!";
 
 
+    /* 用户信息修改 */
     public static String userUpdate(boolean status) {
-        return status ? USER_UPDATE_SUCCESS : USER_UPDATE_ERROR;
+        final String success = "用户信息修改成功!!";
+        final String error = "用户信息修改失败!!";
+        return status ? success : error;
+    }
+
+    /* 角色信息修改 */
+    public static String roleUpdate(boolean status) {
+        final String success = "角色信息修改成功!!";
+        final String error = "角色信息修改失败!!";
+        return status ? success : error;
+    }
+
+    /* 权限信息修改 */
+    public static String authUpdate(boolean status) {
+        final String success = "权限信息修改成功!!";
+        final String error = "权限信息修改失败!!";
+        return status ? success : error;
     }
 }

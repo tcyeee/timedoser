@@ -16,4 +16,12 @@
                  left join time_doser_user.acl_role b on a.role_id = b.id
         where a.user_id = #{id};
     </select>
+    <select id="getAll" resultType="com.timedoser.cloud.common.entity.po.AclRole">
+        select *
+        from time_doser.acl_role a
+        <if test="status != null">
+            where a.enable = #{status}
+        </if>
+        order by a.id
+    </select>
 </mapper>
