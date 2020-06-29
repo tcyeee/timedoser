@@ -24,6 +24,7 @@ services:
   microservice-gateway-zuul:
     image: tcyeee/microservice-gateway-zuul:0.1.1
     hostname: local
+    restart: always
     ports:
       - 2110:2110
     environment:
