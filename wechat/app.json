@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/tmp/tmp",
+    "pages/my/home/home",
+    "pages/index/index",
+    "pages/my/other/other",
+    "pages/todoList/todoList",
+    "pages/timeDoser/timeDoser",
+    "pages/my/upList/upList"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "TimeDoser",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

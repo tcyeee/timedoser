@@ -1,0 +1,41 @@
+@import "/app.wxss";
+
+.setting-head-box {
+    height: 400 rpx;
+    width: 100%;
+}
+
+.pageBac {
+    height: 1000px;
+    width: 100%;
+    background: #EFEFEF;
+}
+
+.avatar-diy {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.avatar-name-diy {
+    width: 70%;
+}
+
+.avatar-name-head-diy {
+    font-family: "Andale Mono";
+    font-weight: bold;
+    font-size: 27px;
+}
+
+.avatar-name-remark-diy {
+    margin-top: 5px;
+    font-size: 12px;
+    color: grey;
+}
+
+.my-line {
+    border: 0.5px dashed grey;
+}

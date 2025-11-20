@@ -1,0 +1,21 @@
+<view id="body" style="height:{{windowHeight}}px;filter: grayscale(100%)">
+    <view style="height:{{CustomBar-StatusBar}}px;margin-top:{{StatusBar}}px;">
+        <view class="home-avatar">
+            <open-data class="cu-avatar round sm margin-sm" type="userAvatarUrl" style="overflow:hidden"/>
+            <open-data type="userNickName"/>
+        </view>
+    </view>
+    <!--  分割线  -->
+    <view class="tmp-line margin-lr"/>
+
+
+    <view id="main" style="height: 350px;margin-top: 120rpx"
+          class="flex justify-center align-center main margin">
+    </view>
+
+
+    <view class="tmp-setting flex justify-center align-center" bindtap="start">
+        <button class="cu-btn bg-green response margin shadow" style="opacity: 0.7" bindtap="endWranClose">START
+        </button>
+    </view>
+</view>

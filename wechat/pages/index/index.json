@@ -1,0 +1,7 @@
+{
+  "disableScroll": true,
+  "usingComponents": {
+    "todoList": "/pages/todoList/todoList",
+    "my": "/pages/my/home/home"
+  }
+}

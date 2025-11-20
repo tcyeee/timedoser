@@ -1,0 +1,31 @@
+@import "/app.wxss";
+
+.tmp-line {
+    border: 0.5px dashed grey;
+}
+
+.tmp-setting {
+    min-height: 100 rpx;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.main {
+    background: linear-gradient(to bottom right, aquamarine, #e4ff88);
+    border: 1px solid grey;
+}
+
+#body {
+    animation: startSetting 2s both;
+}
+
+@keyframes startSetting {
+    from {
+        filter: grayscale(0%);
+    }
+
+    to {
+        filter: grayscale(100%);
+    }
+}
