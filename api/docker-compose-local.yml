@@ -1,0 +1,39 @@
+version: "3"
+services:
+
+  # redis
+  redis:
+    image: redis:latest
+    hostname: cy_redis
+    ports:
+      - 6379:6379
+    restart: always
+    command:
+      redis-server --requirepass u^U6+5oXrQ6a})v
+
+  # 服务发现 eureka
+  local-eureka:
+    image: tcyeee/microservice-discovery-eureka:0.0.6
+    ports:
+      - 2100:2100
+    restart: always
+    environment:
+      - spring.profiles.active=local
+
+  # 网关 zuul
+  microservice-gateway-zuul:
+    image: tcyeee/microservice-gateway-zuul:0.1.1
+    hostname: local
+    restart: always
+    ports:
+      - 2110:2110
+    environment:
+      - spring.profiles.active=local
+
+
+#  microservice-provider-user:
+#    image: tcyeee/microservice-provider-user:0.0.1-SNAPSHOT
+#  microservice-consumer-movie-ribbon-hystrix:
+#    image: tcyeee/microservice-consumer-movie-ribbon-hystrix:0.0.1-SNAPSHOT
+#  microservice-hystrix-turbine:
+#    image: tcyeee/microservice-hystrix-turbine:0.0.1-SNAPSHOT

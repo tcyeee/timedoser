@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
+
+    <link rel="stylesheet" href="//unpkg.com/docsify/themes/vue.css">
+    <style>
+        /* ... */
+        :root {
+            --zoomimage-overlay-background: rgba(0, 0, 0, 0.875);
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    window.$docsify = {
+        //...
+        name: 'TimeDoser',
+        loadNavbar: true,
+        coverpage: true,
+        themeable: {
+            readyTransition: true, // default
+            responsiveTables: true  // default
+        }
+    }
+</script>
+<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+</body>
+</html>
+
+

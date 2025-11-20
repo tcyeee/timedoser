@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.tcyeee.mapper.PlanTaskMapper">
+    <select id="getTaskCount" resultType="demo.tcyeee.entity.vo.PlantaskList">
+        select (select count(a.id)
+                from time_doser.plan_task a
+                where a.base_user_id = '0978e7c21ea741daa5aadb032e1709c6'
+                  and type = 1) as waitTaskCount,
+               (select count(a.id)
+                from time_doser.plan_task a
+                where a.base_user_id = '0978e7c21ea741daa5aadb032e1709c6'
+                  and type = 2) as finishTaskCount
+    </select>
+</mapper>

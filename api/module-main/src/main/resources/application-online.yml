@@ -1,0 +1,17 @@
+eureka:
+  client:
+    serviceUrl:
+#      defaultZone: http://cy:123@134.175.157.42:2100/eureka/,http://cy:123@47.107.52.39:2100/eureka/
+      defaultZone: http://cy:123@134.175.157.42:2100/eureka/
+      register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+spring:
+  datasource:
+    url: jdbc:mysql://47.107.52.39:3306/time_doser?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: tcyeeeTimeDoser;
+    driver-class-name: com.mysql.jdbc.Driver
+logging:
+  level:
+    root: error

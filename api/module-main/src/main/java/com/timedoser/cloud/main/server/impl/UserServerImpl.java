@@ -1,0 +1,83 @@
+package com.timedoser.cloud.main.server.impl;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.timedoser.cloud.common.entity.FlxedData;
+import com.timedoser.cloud.common.entity.base.BaseUserInfo;
+import com.timedoser.cloud.common.entity.base.StatusDto;
+import com.timedoser.cloud.common.entity.po.BaseUser;
+import com.timedoser.cloud.common.utils.TokenUtils;
+import com.timedoser.cloud.main.common.entity.vo.UserPasswordVo;
+import com.timedoser.cloud.main.mapper.UserMapper;
+import com.timedoser.cloud.main.server.IUserServer;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+/**
+ * @author huxiong
+ * @date 2020/6/22 16:17
+ */
+@Service
+public class UserServerImpl implements IUserServer {
+    @Resource
+    private UserMapper userMapper;
+
+    /**
+     * 查看所有的用户
+     *
+     * @param param 1：可用，2：禁用
+     * @return data
+     */
+    @Override
+    public Page<BaseUser> getAll(StatusDto param) {
+        Page<BaseUser> page = new Page<>(param.getCurrentPage(), param.getPageSize());
+        return userMapper.getAll(page, param.getStatus());
+    }
+
+    /**
+     * 查看一个用户
+     *
+     * @param id 用户ID
+     * @return status
+     */
+    @Override
+    public BaseUser getOne(String id) {
+        return userMapper.selectById(id);
+    }
+
+    /**
+     * 修改用户信息
+     *
+     * @param params 用户信息
+     * @return status
+     */
+    @Override
+    public StatusDto updateOne(BaseUser params) {
+        boolean status = userMapper.updateById(params) > 0;
+        return new StatusDto(status, FlxedData.userUpdate(status));
+    }
+
+    /**
+     * 添加用户
+     *
+     * @param params 用户信息
+     * @return status
+     */
+    @Override
+    public StatusDto addOne(BaseUser params) {
+        boolean status = userMapper.insert(params) > 0;
+        return new StatusDto(status, FlxedData.userUpdate(status));
+    }
+
+
+    /**
+     * 获取个人信息
+     *
+     * @return userinfo
+     */
+    @Override
+    public UserPasswordVo userInfo() {
+        BaseUserInfo baseUserInfo = TokenUtils.baseInfo();
+        return userMapper.info(baseUserInfo.getId());
+    }
+}

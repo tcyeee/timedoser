@@ -1,0 +1,6 @@
+eureka:
+  instance:
+    hostname: server-ali
+  client:
+    serviceUrl:
+      defaultZone: http://cy:123@134.175.157.42:2100/eureka/

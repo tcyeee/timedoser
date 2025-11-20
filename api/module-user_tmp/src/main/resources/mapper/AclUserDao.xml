@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.tcyeee.mapper.AdminIndexMapper">
+    <select id="getCount" resultType="demo.tcyeee.entity.vo.AdminIndexCountVo">
+        select (select count(id) from time_doser.base_user)            as allUserSum, # 总用户数量
+
+               (select count(id)
+                from time_doser.base_user
+                where createdate between DATE_ADD(current_date, INTERVAL -1 DAY)
+                          and current_date)                            as userAdd,    # 昨日新增用户
+
+               (select count(id)
+                from time_doser.base_user
+                where createdate between DATE_ADD(current_date, INTERVAL -2 DAY)
+                          and DATE_ADD(current_date, INTERVAL -1 DAY)) as exUserAdd,  # 前天新增用户
+
+               (select count(distinct base_user_id)
+                from time_doser.plan_task_history a
+                         left join time_doser.base_user b on a.base_user_id = b.id
+                where b.createdate between DATE_ADD(current_date, INTERVAL -1 DAY)
+                          and current_date)                            as userAdd,    # 昨日活跃账号统计
+
+               (select count(distinct base_user_id)
+                from time_doser.plan_task_history a
+                         left join time_doser.base_user b on a.base_user_id = b.id
+                where b.createdate between DATE_ADD(current_date, INTERVAL -2 DAY)
+                          and DATE_ADD(current_date, INTERVAL -1 DAY)) as userAdd,    # 前天活跃账号统计
+
+               (select sum(tomato_work_time)
+                from time_doser.plan_task_history
+                where creat_time between DATE_ADD(current_date, INTERVAL -1 DAY)
+                          and current_date)                            as workSum,    # 昨日学习时间统计
+
+               (select sum(tomato_work_time)
+                from time_doser.plan_task_history
+                where creat_time between DATE_ADD(current_date, INTERVAL -2 DAY)
+                          and DATE_ADD(current_date, INTERVAL -1 DAY)) as exWorkSum; # 前天学习时间统计
+    </select>
+</mapper>

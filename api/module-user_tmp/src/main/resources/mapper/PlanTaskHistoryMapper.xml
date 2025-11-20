@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.tcyeee.mapper.PlanTaskHistoryMapper">
+    <select id="pageData" resultType="demo.tcyeee.entity.vo.ReportPageDataVo">
+        select (select sum(tomato_work_time)
+                from time_doser.plan_task_history
+                where base_user_id = #{userId}
+                  and date(creat_time) = current_date)                                            as dayCount,
+               (select sum(tomato_work_time)
+                from time_doser.plan_task_history
+                where base_user_id = #{userId}
+                  and date_format(creat_time, '%Y-%m') = date_format(current_timestamp, '%Y-%m')) as weekCount,
+               sum(tomato_work_time)                                                              as allCount
+        from time_doser.plan_task_history
+        where base_user_id = #{userId}
+    </select>
+</mapper>

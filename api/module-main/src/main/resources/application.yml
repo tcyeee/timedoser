@@ -1,0 +1,9 @@
+server:
+  port: 1902
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: module-main
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml

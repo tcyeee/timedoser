@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: microservice-discovery-eureka
+  security:
+    user:
+      name: cy                  # 配置登录的账号是cy
+      password: 123             # 配置登录的密码是123
+server:
+  port: 2100

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.timedoser.cloud.main.mapper.UserMapper">
+    <select id="info" resultType="com.timedoser.cloud.main.common.entity.vo.UserPasswordVo"
+            parameterType="java.lang.String">
+        select a.id                     as id,
+               a.email                  as email,
+               a.mobilephone            as mobilephone,
+               a.username               as username,
+               a.personalized_signature as personalizedSignature,
+               a.enable                 as enable,
+               a.avatar_url             as avatar,
+               (select group_concat(b.name) as rol
+                from time_doser.acl_user_role c
+                         left join time_doser.acl_role b on c.role_id = b.id
+                where c.user_id = a.id) as authoritiesString
+        from time_doser.base_user a
+        where a.id = #{id}
+    </select>
+    <select id="getAll" resultType="com.timedoser.cloud.common.entity.po.BaseUser">
+        select *,
+        a.avatar_url as avatarUrl,
+        a.create_type as createType,
+        a.last_password_reset as lastPasswordReset,
+        a.personalized_signature as personalizedSignature
+        from time_doser.base_user a
+        <if test="status != null">
+            where a.enable = #{status}
+        </if>
+        order by a.createdate desc
+    </select>
+</mapper>
